@@ -1,0 +1,3020 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahmed Hamed El-shrabasy | AI Automation Specialist & Systems Developer</title>
+  <meta name="description" content="Personal portfolio of Ahmed Hamed El-shrabasy: AI Automation Specialist, DEPI Fellow, and Health-Tech Systems Developer specializing in n8n, Make, REST APIs, and embedded IoT.">
+  <meta name="keywords" content="Ahmed Hamed El-shrabasy, AI Automation, n8n, Make, Integromat, Prompt Engineering, ESP32, Biomedical Engineering, Kafr El-Sheikh, DEPI, Portfolio">
+  <meta name="author" content="Ahmed Hamed El-shrabasy">
+  <link rel="canonical" href="https://ahmed-elshrabasy-portfolio.web.app/">
+
+  <!-- Google Fonts: Outfit, Plus Jakarta Sans, Tajawal, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Portfolio Config -->
+  <script src="config.js"></script>
+
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS & ROBUST AESTHETICS
+       ========================================================================== */
+    :root {
+      --bg-base: #060913;
+      --bg-surface: #0c1222;
+      --bg-surface-elevated: #131d36;
+      --bg-glass: rgba(12, 18, 34, 0.85);
+      --bg-glass-card: rgba(19, 29, 54, 0.7);
+      
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-card: rgba(255, 255, 255, 0.12);
+      --border-focus: rgba(99, 102, 241, 0.6);
+
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-tertiary: #64748b;
+
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --primary-glow: rgba(99, 102, 241, 0.35);
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --gradient-accent: linear-gradient(135deg, #6366f1 0%, #06b6d4 50%, #10b981 100%);
+      --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+
+      --font-display: 'Outfit', sans-serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+      --shadow-glow: 0 0 35px var(--primary-glow);
+
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html.light {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #f1f5f9;
+      --bg-glass: rgba(255, 255, 255, 0.88);
+      --bg-glass-card: rgba(255, 255, 255, 0.8);
+      
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-card: rgba(0, 0, 0, 0.1);
+      --border-focus: rgba(99, 102, 241, 0.7);
+
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-tertiary: #64748b;
+
+      --primary: #4f46e5;
+      --primary-light: #6366f1;
+      --primary-glow: rgba(79, 70, 229, 0.2);
+      --accent-cyan: #0891b2;
+      --accent-emerald: #059669;
+      --gradient-accent: linear-gradient(135deg, #4f46e5 0%, #0891b2 50%, #059669 100%);
+      --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 100%);
+
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+
+    html[dir="rtl"] {
+      font-family: 'Tajawal', var(--font-sans);
+    }
+
+    /* Ambient Glow & Grid */
+    .ambient-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ambient-blob-1 {
+      position: absolute;
+      top: -15%;
+      left: -10%;
+      width: 60vw;
+      height: 60vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
+      filter: blur(80px);
+    }
+    .ambient-blob-2 {
+      position: absolute;
+      top: 30%;
+      right: -15%;
+      width: 50vw;
+      height: 50vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(6, 182, 212, 0) 70%);
+      filter: blur(90px);
+    }
+    .bg-grid-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    html.light .bg-grid-pattern {
+      background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+    .text-gradient {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all var(--transition-normal);
+    }
+    .btn-primary {
+      background: var(--gradient-accent);
+      color: #ffffff;
+      box-shadow: 0 4px 20px var(--primary-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(99, 102, 241, 0.5);
+    }
+    .btn-glass {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-card);
+      color: var(--text-primary);
+      backdrop-filter: blur(12px);
+    }
+    .btn-glass:hover {
+      background: var(--bg-surface-elevated);
+      border-color: var(--primary);
+      color: var(--primary-light);
+      transform: translateY(-2px);
+    }
+    .btn-sm {
+      padding: 0.45rem 1rem;
+      font-size: 0.85rem;
+    }
+    .btn-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: 0;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Top Navigation */
+    .site-header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 100;
+      transition: background-color var(--transition-normal);
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.5rem;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+    .brand-avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+    .brand-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+    .nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      position: relative;
+      padding: 0.25rem 0;
+      transition: color var(--transition-fast);
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-primary);
+    }
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--gradient-accent);
+      border-radius: var(--radius-full);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-shrink: 0;
+    }
+    .mobile-menu-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-card);
+      color: var(--text-primary);
+      cursor: pointer;
+      padding: 0;
+      transition: all var(--transition-fast);
+    }
+    .mobile-menu-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary-light);
+    }
+    @media (max-width: 1180px) {
+      .nav-links {
+        display: none !important;
+      }
+      .mobile-menu-btn {
+        display: inline-flex !important;
+      }
+    }
+    @media (max-width: 900px) {
+      .btn-get-in-touch {
+        display: none !important;
+      }
+    }
+    @media (max-width: 640px) {
+      .nav-container {
+        height: 3.8rem;
+        gap: 0.4rem;
+      }
+      .brand-avatar {
+        width: 2.1rem;
+        height: 2.1rem;
+      }
+      .brand-logo span {
+        font-size: 1rem;
+      }
+      .nav-actions {
+        gap: 0.25rem;
+      }
+      #topCvDownloadBtn {
+        padding: 0.35rem 0.5rem;
+        font-size: 0.75rem;
+      }
+      #topCvDownloadBtn .cv-text-long {
+        display: none !important;
+      }
+      #topCvDownloadBtn .cv-text-short {
+        display: inline !important;
+      }
+      #langToggleBtn {
+        padding: 0.35rem 0.5rem;
+        font-size: 0.75rem;
+      }
+      #langToggleBtn .lang-text-long {
+        display: none !important;
+      }
+      #langToggleBtn .lang-text-short {
+        display: inline !important;
+      }
+      #themeToggleBtn {
+        width: 2rem;
+        height: 2rem;
+      }
+      .mobile-menu-btn {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+    @media (max-width: 420px) {
+      .brand-logo span {
+        display: none;
+      }
+    }
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 4.5rem;
+      left: 0;
+      width: 100%;
+      background: var(--bg-surface-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1.5rem;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 99;
+      box-shadow: var(--shadow-lg);
+    }
+    .mobile-drawer.open {
+      display: flex;
+    }
+
+    /* Page Sections */
+    .page-section {
+      padding: 5rem 0;
+      position: relative;
+    }
+    .section-border-top {
+      border-top: 1px solid var(--border-subtle);
+    }
+    .section-title-wrap {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 3.5rem auto;
+    }
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-cyan);
+      margin-bottom: 0.75rem;
+      padding: 0.35rem 0.85rem;
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      border-radius: var(--radius-full);
+    }
+    .section-heading {
+      font-size: 2.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .section-subheading {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       HERO SECTION (THE BELOVED CAMERA CARD WITH STATS & SAFE FLOATING BADGES)
+       ========================================================================== */
+    .hero-section {
+      padding: 4.5rem 0 3.5rem 0;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+    .hero-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--accent-emerald);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+      animation: pulseAnim 2s infinite;
+    }
+    @keyframes pulseAnim {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .hero-title {
+      font-size: 3.25rem;
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+    .hero-headline {
+      font-size: 1.25rem;
+      color: var(--primary-light);
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      line-height: 1.4;
+    }
+    .hero-intro {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      max-width: 580px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+    .hero-socials {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .social-icon-btn {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-card);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+      text-decoration: none;
+    }
+    .social-icon-btn:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* THE HERO CARD */
+    .hero-visual-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 520px;
+    }
+    .hero-main-card {
+      position: relative;
+      z-index: 2;
+      background: var(--bg-glass-card);
+      border: 1px solid var(--border-card);
+      border-radius: 28px;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .hero-avatar-frame {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      margin: 0 auto 1.25rem auto;
+      position: relative;
+      padding: 5px;
+      background: var(--gradient-accent);
+      box-shadow: 0 0 35px var(--primary-glow);
+    }
+    .hero-avatar-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      background: var(--bg-surface);
+    }
+    .hero-online-status {
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      border: 3px solid var(--bg-surface);
+    }
+    .card-hero-name {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .card-hero-title {
+      font-size: 0.875rem;
+      color: var(--accent-cyan);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .card-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      margin-bottom: 1.25rem;
+    }
+    .hero-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-top: 1rem;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 1.25rem;
+    }
+    .stat-pill {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 0.5rem;
+      text-align: center;
+      transition: all var(--transition-fast);
+    }
+    .stat-pill:hover {
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.08);
+      transform: translateY(-2px);
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+      line-height: 1.3;
+    }
+
+    /* CLOSER INTERACTIVE FLOATING BADGES (NEVER OVERLAPS CARD PHOTO/TEXT) */
+    #heroFloatingBadgesContainer {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .floating-badge {
+      pointer-events: auto;
+      position: absolute;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 0.65rem 1rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      white-space: nowrap;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: floatBadge 6s ease-in-out infinite;
+    }
+    .floating-badge:hover {
+      transform: translateY(-4px) scale(1.05) !important;
+      border-color: var(--primary-light);
+      box-shadow: 0 16px 36px var(--primary-glow);
+      background: var(--bg-surface-elevated);
+    }
+    .floating-badge:hover .badge-arrow {
+      transform: translate(2px, -2px);
+      opacity: 1 !important;
+      color: var(--primary-light);
+    }
+    html.light .floating-badge {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      color: #0f172a;
+    }
+    html.light .floating-badge .badge-cat {
+      color: #64748b !important;
+    }
+    html.light .floating-badge .badge-title {
+      color: #0f172a !important;
+    }
+    html.light .floating-badge:hover {
+      border-color: var(--primary);
+      box-shadow: 0 14px 32px rgba(99, 102, 241, 0.25);
+    }
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    /* DESKTOP (1200px+): Badges hug the card closely (12px-14px from card border) */
+    @media (min-width: 1200px) {
+      /* LTR */
+      html[dir="ltr"] .badge-pos-0 {
+        top: 25px;
+        left: calc(100% + 14px);
+        right: auto;
+        animation-delay: 0s;
+      }
+      html[dir="ltr"] .badge-pos-1 {
+        bottom: 35px;
+        right: calc(100% + 14px);
+        left: auto;
+        animation-delay: 2.5s;
+      }
+      html[dir="ltr"] .badge-pos-2 {
+        top: 25px;
+        right: calc(100% + 14px);
+        left: auto;
+        animation-delay: 1.2s;
+      }
+      html[dir="ltr"] .badge-pos-3 {
+        bottom: 35px;
+        left: calc(100% + 14px);
+        right: auto;
+        animation-delay: 3.7s;
+      }
+      html[dir="ltr"] .badge-pos-4 {
+        top: 48%;
+        right: calc(100% + 14px);
+        left: auto;
+      }
+      html[dir="ltr"] .badge-pos-5 {
+        top: 48%;
+        left: calc(100% + 14px);
+        right: auto;
+      }
+
+      /* RTL (Arabic) Outside Placement */
+      html[dir="rtl"] .badge-pos-0 {
+        top: 25px;
+        right: calc(100% + 14px);
+        left: auto;
+        animation-delay: 0s;
+      }
+      html[dir="rtl"] .badge-pos-1 {
+        bottom: 35px;
+        left: calc(100% + 14px);
+        right: auto;
+        animation-delay: 2.5s;
+      }
+      html[dir="rtl"] .badge-pos-2 {
+        top: 25px;
+        left: calc(100% + 14px);
+        right: auto;
+        animation-delay: 1.2s;
+      }
+      html[dir="rtl"] .badge-pos-3 {
+        bottom: 35px;
+        right: calc(100% + 14px);
+        left: auto;
+        animation-delay: 3.7s;
+      }
+      html[dir="rtl"] .badge-pos-4 {
+        top: 48%;
+        left: calc(100% + 14px);
+        right: auto;
+      }
+      html[dir="rtl"] .badge-pos-5 {
+        top: 48%;
+        right: calc(100% + 14px);
+        left: auto;
+      }
+    }
+
+    /* SCREENS UNDER 1200px: Badges neatly sit underneath the card in an organized row */
+    /* MOBILE & TABLET HERO (<= 1199px): Hero Card First, Badges Below in Clean 2x2 Grid */
+    @media (max-width: 1199px) {
+      .hero-visual-wrap {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        min-height: auto !important;
+        width: 100% !important;
+        overflow: visible !important;
+      }
+      .hero-main-card {
+        order: 1 !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 400px !important;
+      }
+      #heroFloatingBadgesContainer {
+        order: 2 !important;
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.65rem !important;
+        margin: 1.5rem auto 0 auto !important;
+        width: 100% !important;
+        max-width: 400px !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+      }
+      .floating-badge {
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        animation: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        white-space: normal !important;
+        padding: 0.65rem 0.85rem !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        justify-content: flex-start !important;
+      }
+      .floating-badge .badge-arrow {
+        margin-left: auto !important;
+      }
+      html[dir="rtl"] .floating-badge .badge-arrow {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+      }
+    }
+    @media (max-width: 440px) {
+      #heroFloatingBadgesContainer {
+        grid-template-columns: 1fr !important;
+        max-width: 330px !important;
+      }
+      .hero-main-card {
+        padding: 1.5rem 1.15rem !important;
+      }
+    }
+
+    /* ==========================================================================
+       ABOUT SECTION & 5 PROFESSIONAL SUMMARY ITEMS
+       ========================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: flex-start;
+    }
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .about-text p {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .key-facts-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+    .fact-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .fact-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .fact-icon {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      background: rgba(99, 102, 241, 0.12);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .fact-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-tertiary);
+      margin-bottom: 0.25rem;
+    }
+    .fact-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       SKILLS SECTION (RESPONSIVE: 4 -> 3 -> 2 -> 1 WITH COMPLETE DESCRIPTIONS)
+       ========================================================================== */
+    .skills-categories-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    @media (max-width: 1099px) and (min-width: 840px) {
+      .skills-categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 839px) and (min-width: 580px) {
+      .skills-categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 579px) {
+      .skills-categories-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .skill-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-normal);
+    }
+    .skill-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .skill-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .skill-card-header h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .skill-item {
+      margin-bottom: 1.25rem;
+    }
+    .skill-item:last-child {
+      margin-bottom: 0;
+    }
+    .skill-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .skill-badge {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: var(--radius-full);
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--primary-light);
+      margin-left: 0.4rem;
+    }
+    html[dir="rtl"] .skill-badge {
+      margin-left: 0;
+      margin-right: 0.4rem;
+    }
+    .skill-progress-bar {
+      width: 100%;
+      height: 6px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+    .skill-progress-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      background: var(--gradient-accent);
+      transition: width 1s ease-in-out;
+    }
+    .skill-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin-top: 0.4rem;
+    }
+
+    /* ==========================================================================
+       ADDED VALUE & ROI MATRIX
+       ========================================================================== */
+    .roi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 900px) {
+      .roi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .roi-model-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition-normal);
+    }
+    .roi-model-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.45);
+    }
+    .roi-model-card.featured {
+      border-color: var(--accent-emerald);
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.15);
+    }
+    .roi-model-card.featured::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-accent);
+    }
+    .roi-tag-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 0.75rem;
+    }
+    .roi-item-row {
+      border-top: 1px solid var(--border-subtle);
+      padding: 0.85rem 0;
+    }
+    .roi-item-label {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+    .roi-item-val {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+    .roi-item-sub {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+    .roi-metrics-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    @media (max-width: 768px) {
+      .roi-metrics-summary {
+        grid-template-columns: 1fr;
+      }
+    }
+    .roi-summary-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .roi-summary-num {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--accent-emerald);
+    }
+
+    /* ==========================================================================
+       PROJECTS SECTION
+       ========================================================================== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 2rem;
+    }
+    @media (max-width: 600px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .project-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-normal);
+      cursor: pointer;
+    }
+    .project-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .project-header-banner {
+      height: 130px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(6, 182, 212, 0.3) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-header-banner.has-custom-image {
+      height: 170px;
+      background-size: cover;
+      background-position: center;
+    }
+    .project-header-banner.has-custom-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(6,9,19,0.1) 0%, rgba(12,18,34,0.88) 100%);
+    }
+    .project-img-pill {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(12, 18, 34, 0.8);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      padding: 4px 8px;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      z-index: 2;
+    }
+    .project-header-banner i {
+      width: 48px;
+      height: 48px;
+      color: #ffffff;
+      opacity: 0.85;
+    }
+    .project-card-body {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .project-category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .project-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .project-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .project-tag {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-tertiary);
+    }
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 1rem;
+    }
+
+    /* ==========================================================================
+       TIMELINE & EXPERIENCE
+       ========================================================================== */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 2rem;
+      width: 2px;
+      background: var(--border-card);
+    }
+    html[dir="rtl"] .timeline::before {
+      left: auto;
+      right: 2rem;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+      padding-left: 5rem;
+    }
+    html[dir="rtl"] .timeline-item {
+      padding-left: 0;
+      padding-right: 5rem;
+    }
+    .timeline-marker {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.35rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 4px solid var(--bg-base);
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+    html[dir="rtl"] .timeline-marker {
+      left: auto;
+      right: 1.35rem;
+    }
+    .timeline-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .timeline-bullets {
+      list-style: none;
+      margin-top: 1rem;
+    }
+    .timeline-bullets li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+    html[dir="rtl"] .timeline-bullets li {
+      padding-left: 0;
+      padding-right: 1.5rem;
+    }
+    .timeline-bullets li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+    html[dir="rtl"] .timeline-bullets li::before {
+      left: auto;
+      right: 0;
+    }
+
+    /* ==========================================================================
+       EDUCATION & CERTIFICATIONS
+       ========================================================================== */
+    .edu-cert-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    @media (max-width: 900px) {
+      .edu-cert-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .cert-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .cert-icon {
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 50%;
+      background: rgba(6, 182, 212, 0.1);
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       CONTACT SECTION
+       ========================================================================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3.5rem;
+    }
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .contact-method-card {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all var(--transition-fast);
+    }
+    .contact-method-card:hover {
+      border-color: var(--primary);
+      transform: translateX(4px);
+    }
+    html[dir="rtl"] .contact-method-card:hover {
+      transform: translateX(-4px);
+    }
+    .contact-icon-box {
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--radius-md);
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color var(--transition-fast);
+    }
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(6, 9, 19, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .modal-content {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      max-width: 650px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+    html[dir="rtl"] .modal-close-btn {
+      right: auto;
+      left: 1.25rem;
+    }
+
+    /* Print Styles */
+    @media print {
+      @page { margin: 1cm; size: A4 portrait; }
+      body { background: #fff !important; color: #000 !important; }
+      .site-header, .ambient-glow, .bg-grid-pattern, .hero-actions, .hero-socials, 
+      .btn, #heroFloatingBadgesContainer, .modal-overlay { display: none !important; }
+      .page-section { padding: 1rem 0 !important; page-break-inside: avoid !important; }
+      .hero-grid { grid-template-columns: 1fr 200px !important; }
+      .hero-main-card { max-width: 200px !important; box-shadow: none !important; border: 1px solid #ccc !important; }
+      .hero-avatar-frame { width: 90px !important; height: 90px !important; }
+      .skill-card, .roi-model-card, .project-card, .timeline-card, .key-facts-card {
+        background: #fff !important; border: 1px solid #ddd !important; box-shadow: none !important; color: #000 !important;
+      }
+      h1, h2, h3, h4, p, span { color: #000 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow">
+    <div class="ambient-blob-1"></div>
+    <div class="ambient-blob-2"></div>
+  </div>
+  <div class="bg-grid-pattern"></div>
+
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo">
+        <div class="brand-avatar">
+          <img src="profile.jpg" alt="Ahmed Hamed El-shrabasy" id="navBrandAvatarImg">
+        </div>
+        <span id="navBrandName">Ahmed Hamed</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active" data-i18n="nav_home">Home</a></li>
+          <li><a href="#about" class="nav-link" data-i18n="nav_about">About</a></li>
+          <li><a href="#skills" class="nav-link" data-i18n="nav_skills">Skills</a></li>
+          <li><a href="#added-value" class="nav-link" data-i18n="nav_added_value">Added Value</a></li>
+          <li><a href="#projects" class="nav-link" data-i18n="nav_projects">Projects</a></li>
+          <li><a href="#experience" class="nav-link" data-i18n="nav_experience">Experience</a></li>
+          <li><a href="#education" class="nav-link" data-i18n="nav_education">Credentials</a></li>
+          <li><a href="#contact" class="nav-link" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Top bar Official CV PDF download -->
+        <a href="Ahmed_Hamed_Elshrabasy_CV.pdf" target="_blank" download="Ahmed_Hamed_Elshrabasy_CV.pdf" class="btn btn-glass btn-sm" id="topCvDownloadBtn" title="Download Official CV (PDF)">
+          <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
+          <span class="cv-text-long" data-i18n="nav_download_cv">Official CV</span>
+          <span class="cv-text-short" style="display:none;">CV</span>
+        </a>
+
+        <!-- Language toggle -->
+        <button id="langToggleBtn" class="btn btn-glass btn-sm" onclick="toggleLanguage()" title="Switch Language">
+          <i data-lucide="globe" style="width: 16px; height: 16px;"></i>
+          <span id="langBtnText">العربية</span>
+        </button>
+
+        <!-- Theme toggle -->
+        <button id="themeToggleBtn" class="btn btn-glass btn-icon" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <i data-lucide="moon" id="themeIcon" style="width: 18px; height: 18px;"></i>
+        </button>
+
+        <a href="#contact" class="btn btn-primary btn-sm btn-get-in-touch">
+          <span data-i18n="btn_get_in_touch">Get in Touch</span>
+          <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+        </a>
+
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+          <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-drawer" id="mobileDrawer">
+      <a href="#hero" class="nav-link" onclick="closeMobileMenu()" data-i18n="nav_home">Home</a>
+      <a href="#about" class="nav-link" onclick="closeMobileMenu()" data-i18n="nav_about">About</a>
+      <a href="#skills" class="nav-link" onclick="closeMobileMenu()" data-i18n="nav_skills">Skills</a>
+      <a href="#added-value" class="nav-link" onclick="closeMobileMenu()" data-i18n="nav_added_value">Added Value</a>
+      <a href="#projects" class="nav-link" onclick="closeMobileMenu()" data-i18n="nav_projects">Projects</a>
+      <a href="#experience" class="nav-link" onclick="closeMobileMenu()" data-i18n="nav_experience">Experience</a>
+      <a href="#education" class="nav-link" onclick="closeMobileMenu()" data-i18n="nav_education">Credentials</a>
+      <a href="#contact" class="nav-link" onclick="closeMobileMenu()" data-i18n="nav_contact">Contact</a>
+      <div style="padding-top: 0.75rem; border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 0.75rem;">
+        <a href="#contact" class="btn btn-primary" onclick="closeMobileMenu()" style="justify-content: center;">
+          <span data-i18n="btn_get_in_touch">Get in Touch</span>
+          <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION (THE BELOVED CAMERA CARD WITH STATS & SAFE FLOATING BADGES) -->
+    <section id="hero" class="page-section hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge-pill">
+            <span class="pulse-dot"></span>
+            <span id="heroAvailabilityPill">Available for High-Impact Projects & Roles</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span data-i18n="hero_greeting">Hi, I'm</span> <span class="text-gradient" id="heroFullName">Ahmed Hamed El-shrabasy</span>
+          </h1>
+
+          <p class="hero-headline" id="heroHeadline">
+            AI Automation Specialist & Systems Developer
+          </p>
+
+          <p class="hero-intro" id="heroIntro">
+            Building and deploying end-to-end automated workflows using n8n, Make, REST APIs, and custom AI agents to eliminate manual friction and streamline business operations.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              <span data-i18n="hero_explore_btn">Explore Projects</span>
+              <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i>
+            </a>
+
+            <!-- Print Clean Portfolio Button in Hero -->
+            <button onclick="window.print()" class="btn btn-glass" title="Print Clean Portfolio PDF">
+              <i data-lucide="printer" style="width: 18px; height: 18px;"></i>
+              <span data-i18n="hero_print_btn">Print Portfolio</span>
+            </button>
+          </div>
+
+          <div class="hero-socials">
+            <a href="https://linkedin.com/in/ahmed-elshrabasy" id="heroSocialLinkedin" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://github.com/ahmedelshrabasy" id="heroSocialGithub" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="GitHub">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+            </a>
+            <a href="https://wa.me/201006193690" id="heroSocialWhatsapp" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Chat on WhatsApp" style="color:#25d366;">
+              <i data-lucide="message-circle" style="width: 18px; height: 18px;"></i>
+            </a>
+            <a href="mailto:Ahmed.edu.pt12@gmail.com" id="heroSocialEmail" class="social-icon-btn" title="Email Direct">
+              <i data-lucide="mail" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- HERO VISUAL PORTRAIT (THE BELOVED CAMERA CARD WITH STATS & SAFE FLOATING BADGES) -->
+        <div class="hero-visual-wrap" id="heroVisualWrap">
+          <!-- Floating Badges dynamically inserted with SAFE classes -->
+          <div id="heroFloatingBadgesContainer"></div>
+
+          <div class="hero-main-card">
+            <div class="hero-avatar-frame">
+              <img src="profile.jpg" alt="Ahmed Hamed El-shrabasy" id="heroAvatarCardImg">
+              <span class="hero-online-status" title="Active & Ready"></span>
+            </div>
+
+            <h3 class="card-hero-name" id="cardHeroName">Ahmed Hamed El-shrabasy</h3>
+            <p class="card-hero-title" id="cardHeroTitle">AI Automation Specialist & Systems Developer</p>
+            <div class="card-location">
+              <i data-lucide="map-pin" style="width:14px; height:14px;"></i>
+              <span id="cardHeroLocation">New Damietta, Damietta, Egypt (Remote Ready)</span>
+            </div>
+
+            <div class="hero-stats-grid" id="cardHeroStatsGrid">
+              <!-- 4 stat pills inside the camera card -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION (WITH 5 PROFESSIONAL SUMMARY KEY FACTS) -->
+    <section id="about" class="page-section section-border-top">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-eyebrow"><i data-lucide="user" style="width: 14px; height: 14px;"></i> <span data-i18n="about_eyebrow">About Me</span></span>
+          <h2 class="section-heading"><span data-i18n="about_heading_1">Engineering Mindset Applied to</span> <span class="text-gradient" data-i18n="about_heading_2">Intelligent Automation</span></h2>
+          <p class="section-subheading" data-i18n="about_subheading">A synthesis of software orchestration, AI models, and biomedical precision.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <h3 style="font-size: 1.75rem; margin-bottom: 1.25rem;" id="aboutHeadlineText">Building Scalable, Zero-Failure Workflows</h3>
+            <p id="aboutMeP1"></p>
+            
+            <div style="margin-top: 2rem; padding: 1.25rem; background: var(--bg-surface-elevated); border-radius: var(--radius-md); border-left: 4px solid var(--primary);">
+              <h4 style="font-size: 0.95rem; text-transform: uppercase; color: var(--primary-light); margin-bottom: 0.35rem;" data-i18n="career_vision_label">Career Vision</h4>
+              <p id="careerObjectiveText" style="font-size: 0.95rem; margin: 0;"></p>
+            </div>
+          </div>
+
+          <!-- Key Facts Card (All 5 Professional Summary items) -->
+          <div class="key-facts-card">
+            <h4 style="font-size: 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="sparkles" style="color: var(--primary); width: 18px; height: 18px;"></i>
+              <span data-i18n="summary_card_title">Professional Summary</span>
+            </h4>
+            
+            <div id="keyFactsList">
+              <!-- 5 synchronized summary items injected here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION (OPTIMIZED: 4 COLUMNS ON DESKTOP, 3 ON MEDIUM, 2 ON TABLET, 1 ON MOBILE) -->
+    <section id="skills" class="page-section section-border-top">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-eyebrow"><i data-lucide="cpu" style="width: 14px; height: 14px;"></i> <span data-i18n="skills_eyebrow">Technical Mastery</span></span>
+          <h2 class="section-heading"><span data-i18n="skills_heading_1">Categorized Technical</span> <span class="text-gradient" data-i18n="skills_heading_2">Competencies</span></h2>
+          <p class="section-subheading" data-i18n="skills_subheading">Structured across workflow automation, backend AI systems, embedded IoT, and operational optimization.</p>
+        </div>
+
+        <div class="skills-categories-grid" id="skillsContainer">
+          <!-- 4 Category skill cards injected dynamically with complete descriptions -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CLIENT ADDED VALUE & ROI MATRIX -->
+    <section id="added-value" class="page-section section-border-top">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-eyebrow"><i data-lucide="trending-up" style="width: 14px; height: 14px;"></i> <span data-i18n="roi_eyebrow">Quantitative Value</span></span>
+          <h2 class="section-heading"><span id="roiMainTitle">Client Added Value & ROI Matrix</span></h2>
+          <p class="section-subheading" id="roiMainSubtitle">Quantitative comparison showing the monumental shift from manual labor to intelligent autonomous workflows.</p>
+        </div>
+
+        <!-- 3 Comparative Models -->
+        <div class="roi-grid" id="roiModelsGrid">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Impact Summary Boxes -->
+        <div class="roi-metrics-summary" id="roiMetricsSummary">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Google Drive Button -->
+        <div style="text-align: center; margin-top: 2.5rem;">
+          <a href="https://drive.google.com/" target="_blank" class="btn btn-primary" id="roiDriveBtn">
+            <i data-lucide="folder" style="width: 18px; height: 18px;"></i>
+            <span data-i18n="roi_drive_text">View Detailed ROI Files & Statistics on Google Drive</span>
+            <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="page-section section-border-top">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-eyebrow"><i data-lucide="folder-git-2" style="width: 14px; height: 14px;"></i> <span data-i18n="projects_eyebrow">Engineering Portfolio</span></span>
+          <h2 class="section-heading"><span data-i18n="projects_heading_1">Featured Systems &</span> <span class="text-gradient" data-i18n="projects_heading_2">Automations</span></h2>
+          <p class="section-subheading" data-i18n="projects_subheading">Real-world production automations, health-tech hardware prototypes, and interactive cloud applications.</p>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Project cards injected dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="page-section section-border-top">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-eyebrow"><i data-lucide="briefcase" style="width: 14px; height: 14px;"></i> <span data-i18n="exp_eyebrow">Work History</span></span>
+          <h2 class="section-heading"><span data-i18n="exp_heading_1">Professional Experience &</span> <span class="text-gradient" data-i18n="exp_heading_2">Fellowships</span></h2>
+          <p class="section-subheading" data-i18n="exp_subheading">Practical track record in enterprise process automation and system deployment.</p>
+        </div>
+
+        <div class="timeline" id="experienceTimeline">
+          <!-- Experience items injected dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION & CERTIFICATIONS -->
+    <section id="education" class="page-section section-border-top">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-eyebrow"><i data-lucide="graduation-cap" style="width: 14px; height: 14px;"></i> <span data-i18n="edu_eyebrow">Academic Foundation</span></span>
+          <h2 class="section-heading"><span data-i18n="edu_heading_1">Education &</span> <span class="text-gradient" data-i18n="edu_heading_2">Certifications</span></h2>
+          <p class="section-subheading" data-i18n="edu_subheading">Rigorous medical-technical foundation coupled with continuous technology upskilling.</p>
+        </div>
+
+        <div class="edu-cert-grid">
+          <div id="educationMainCard">
+            <!-- Education degree card -->
+          </div>
+
+          <div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+              <i data-lucide="award" style="color: var(--accent-cyan); width: 22px; height: 22px;"></i>
+              <span data-i18n="cert_heading">Specialized Certifications</span>
+            </h3>
+            <div id="certificationsList">
+              <!-- Cert cards -->
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+              <a href="https://drive.google.com/" target="_blank" class="btn btn-glass" style="width: 100%; justify-content: center;" id="eduCertFolderBtn">
+                <i data-lucide="folder-check" style="width: 18px; height: 18px;"></i>
+                <span data-i18n="view_certificates_drive">View All Certificate Files in Google Drive</span>
+                <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="page-section section-border-top">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-eyebrow"><i data-lucide="send" style="width: 14px; height: 14px;"></i> <span data-i18n="contact_eyebrow">Direct Outreach</span></span>
+          <h2 class="section-heading"><span data-i18n="contact_heading_1">Let's Discuss Your</span> <span class="text-gradient" data-i18n="contact_heading_2">Next Automation</span></h2>
+          <p class="section-subheading" data-i18n="contact_subheading">Ready to streamline your business pipelines or collaborate on innovative systems.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;" data-i18n="contact_channel_title">Direct Channels</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;" data-i18n="contact_channel_desc">Feel free to connect via WhatsApp, email, or schedule a technical call.</p>
+
+            <a href="https://wa.me/201006193690" target="_blank" rel="noopener noreferrer" class="contact-method-card">
+              <div class="contact-icon-box" style="color:#25d366; background:rgba(37,211,102,0.1);">
+                <i data-lucide="message-circle"></i>
+              </div>
+              <div>
+                <div class="fact-label" data-i18n="contact_whatsapp_label">WhatsApp & Phone</div>
+                <div class="fact-value" id="contactPhoneText">+20 100 619 3690</div>
+              </div>
+            </a>
+
+            <a href="mailto:Ahmed.edu.pt12@gmail.com" class="contact-method-card">
+              <div class="contact-icon-box">
+                <i data-lucide="mail"></i>
+              </div>
+              <div>
+                <div class="fact-label" data-i18n="contact_email_label">Email Address</div>
+                <div class="fact-value" id="contactEmailText">Ahmed.edu.pt12@gmail.com</div>
+              </div>
+            </a>
+
+            <div class="contact-method-card">
+              <div class="contact-icon-box" style="color:var(--accent-cyan); background:rgba(6,182,212,0.1);">
+                <i data-lucide="map-pin"></i>
+              </div>
+              <div>
+                <div class="fact-label" data-i18n="contact_location_label">Location</div>
+                <div class="fact-value" id="contactLocationText">New Damietta, Damietta, Egypt</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="key-facts-card">
+            <h4 style="font-size: 1.25rem; margin-bottom: 1.5rem;" data-i18n="form_title">Send a Direct Message</h4>
+            <form onsubmit="handleContactSubmit(event)">
+              <div class="form-group">
+                <label class="form-label" data-i18n="form_name">Your Name</label>
+                <input type="text" class="form-input" required placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label class="form-label" data-i18n="form_email">Your Email</label>
+                <input type="email" class="form-input" required placeholder="john@example.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label" data-i18n="form_msg">Project Overview / Inquiry</label>
+                <textarea class="form-textarea" rows="4" required placeholder="Describe your automation requirements or inquiry..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                <span data-i18n="form_send">Transmit Message</span>
+                <i data-lucide="send" style="width: 16px; height: 16px;"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 2.5rem 0; background: var(--bg-surface); text-align: center;">
+    <div class="container" style="display:flex; flex-direction:column; align-items:center; gap:1.25rem;">
+      <div class="hero-socials" style="margin-bottom:0;">
+        <a href="https://linkedin.com/in/ahmed-elshrabasy" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://github.com/ahmedelshrabasy" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+        </a>
+        <a href="https://wa.me/201006193690" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Chat on WhatsApp" style="color:#25d366;">
+          <i data-lucide="message-circle" style="width: 18px; height: 18px;"></i>
+        </a>
+        <a href="mailto:Ahmed.edu.pt12@gmail.com" class="social-icon-btn" title="Email Direct">
+          <i data-lucide="mail" style="width: 18px; height: 18px;"></i>
+        </a>
+      </div>
+      <p style="color: var(--text-secondary); font-size: 0.9rem;">
+        © 2026 <span id="footerBrandName">Ahmed Hamed El-shrabasy</span>. <span data-i18n="footer_rights">All rights reserved.</span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- PROJECT MODAL -->
+  <div class="modal-overlay" id="projectModal" onclick="closeProjectModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeProjectModal()">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    const INITIAL_DATA = {
+  "personal": {
+    "fullName": "Ahmed Hamed El-shrabasy",
+    "fullNameAr": "أحمد حامد الشرباصي",
+    "professionalTitle": "AI Automation Specialist & Systems Developer",
+    "professionalTitleAr": "أخصائي أتمتة الذكاء الاصطناعي ومطور أنظمة",
+    "professionalHeadline": "Automating Workflows with n8n, Make & AI Agents | IoT & Health-Tech Developer",
+    "professionalHeadlineAr": "أتمتة مسارات العمل باستخدام n8n و Make ونماذج AI | مطور أنظمة مدمجة وتقنية طبية",
+    "shortIntroduction": "Building and deploying end-to-end automated workflows using n8n, Make, REST APIs, and custom AI agents to eliminate manual friction and streamline business operations.",
+    "shortIntroductionAr": "بناء وتطوير مسارات عمل مؤتمتة متكاملة باستخدام n8n و Make وواجهات REST APIs ونماذج الذكاء الاصطناعي الذكية للقضاء على الاختناقات اليدوية ورفع كفاءة الأعمال.",
+    "aboutMe": "I am an AI Automation Specialist and Health-Tech Developer with practical experience in designing resilient workflows, API integrations, and prompt architectures. Through the Digital Egypt Pioneers Initiative (DEPI - MCIT / eYouth), I build production-ready automation pipelines connecting external APIs, databases, and messaging channels. With my academic background in Physical Therapy (B.Sc., Kafr El-Sheikh University) and hands-on practice in embedded systems (ESP32, C++), I combine rigorous physiological understanding with automation engineering to build intelligent healthcare and business systems.",
+    "aboutMeAr": "أنا أخصائي أتمتة ذكاء اصطناعي ومطور أنظمة طبية وتقنية، أمتلك خبرة عملية في تصميم مسارات العمل المؤتمتة، وربط واجهات البرمجة APIs، وهندسة الأوامر المتقدمة. من خلال مبادرة رواد مصر الرقمية (DEPI - وزارة الاتصالات / eYouth)، أقوم ببناء مسارات أتمتة مؤسسية تربط قواعد البيانات والأنظمة السحابية. وبفضل دراستي الأكاديمية للعلاج الطبيعي وتطبيقي العملي للأنظمة المدمجة (ESP32 و C++)، أدمج الفهم الدقيق مع هندسة الأتمتة لابتكار حلول وأنظمة فائقة الكفاءة.",
+    "careerObjective": "To spearhead scalable automation initiatives, integrate intelligent AI agent loops into business processes, and engineer smart biomedical IoT systems that maximize operational velocity.",
+    "careerObjectiveAr": "قيادة مبادرات الأتمتة المؤسسية، ودمج وكلاء الذكاء الاصطناعي الذاتيين في بيئات العمل، وهندسة أنظمة IoT طبية متقدمة تعظم سرعة وكفاءة العمليات.",
+    "currentLocation": "New Damietta, Damietta, Egypt",
+    "currentLocationAr": "دمياط الجديدة، دمياط، مصر",
+    "nationality": "Egyptian",
+    "availability": "Available for High-Impact Projects & Roles",
+    "availabilityAr": "متاح للمشاريع المتقدمة والفرص الوظيفية",
+    "experienceYears": "2+ Years in Automation & Systems",
+    "profileImage": "profile.jpg",
+    "cvUrl": "Ahmed_Hamed_Elshrabasy_CV.pdf"
+  },
+  "contact": {
+    "email": "Ahmed.edu.pt12@gmail.com",
+    "phone": "+201006193690",
+    "phoneDisplay": "+20 100 619 3690",
+    "whatsappUrl": "https://wa.me/201006193690",
+    "linkedin": "https://linkedin.com/in/ahmed-elshrabasy",
+    "github": "https://github.com/ahmedelshrabasy",
+    "portfolioUrl": "https://ahmed-elshrabasy-portfolio.web.app/"
+  },
+  "stats": [
+    {
+      "id": "s1",
+      "number": "100%",
+      "label": "Automated Reliability",
+      "labelAr": "دقة وموثوقية التشغيل"
+    },
+    {
+      "id": "s2",
+      "number": "3.65",
+      "label": "Academic GPA (Very Good)",
+      "labelAr": "المعدل التراكمي (جيد جداً)"
+    },
+    {
+      "id": "s3",
+      "number": "4+",
+      "label": "Certified AI Tracks",
+      "labelAr": "مسارات ذكاء اصطناعي معتمدة"
+    },
+    {
+      "id": "s4",
+      "number": "2+",
+      "label": "Deployed Systems & MedTech",
+      "labelAr": "أنظمة تشغيلية وأجهزة طبية"
+    }
+  ],
+  "floatingBadges": [
+    {
+      "id": "b1",
+      "icon": "cpu",
+      "category": "Domain",
+      "categoryAr": "المجال",
+      "title": "n8n & AI Workflows",
+      "titleAr": "أتمتة n8n وذكاء اصطناعي",
+      "targetSection": "#skills"
+    },
+    {
+      "id": "b2",
+      "icon": "zap",
+      "category": "Track",
+      "categoryAr": "المسار",
+      "title": "DEPI Fellow (MCIT)",
+      "titleAr": "رواد مصر الرقمية (الاتصالات)",
+      "targetSection": "#experience"
+    },
+    {
+      "id": "b3",
+      "icon": "activity",
+      "category": "Health-Tech",
+      "categoryAr": "تقنية طبية",
+      "title": "TheraDe IoT Device",
+      "titleAr": "نظام TheraDe الطبي",
+      "targetSection": "#projects",
+      "targetId": "therade-stimulation"
+    },
+    {
+      "id": "b4",
+      "icon": "database",
+      "category": "Stack",
+      "categoryAr": "التقنيات",
+      "title": "Firebase & Supabase",
+      "titleAr": "قواعد بيانات سحابية",
+      "targetSection": "#skills"
+    }
+  ],
+  "professionalSummary": [
+    {
+      "id": "ps1",
+      "icon": "map-pin",
+      "label": "Base Location",
+      "labelAr": "الموقع الجغرافي",
+      "value": "New Damietta, Damietta, Egypt",
+      "valueAr": "دمياط الجديدة، دمياط، مصر"
+    },
+    {
+      "id": "ps2",
+      "icon": "graduation-cap",
+      "label": "Academic Degree",
+      "labelAr": "المؤهل الأكاديمي",
+      "value": "B.Sc. in Physical Therapy (Undergraduate, Exp. 2029, GPA: 3.65)",
+      "valueAr": "بكالوريوس العلاج الطبيعي (جامعة كفر الشيخ، متوقع 2029، امتياز 3.65)"
+    },
+    {
+      "id": "ps3",
+      "icon": "award",
+      "label": "Government Fellowship",
+      "labelAr": "المبادرة الحكومية",
+      "value": "DEPI AI Automation Track (MCIT / eYouth)",
+      "valueAr": "مسار أتمتة الذكاء الاصطناعي - رواد مصر الرقمية (وزارة الاتصالات)"
+    },
+    {
+      "id": "ps4",
+      "icon": "languages",
+      "label": "Languages",
+      "labelAr": "اللغات",
+      "value": "Arabic (Native), English (Intermediate B1), French (Beginner A1)",
+      "valueAr": "العربية (اللغة الأم)، الإنجليزية (متوسط B1)، الفرنسية (مبتدئ A1)"
+    },
+    {
+      "id": "ps5",
+      "icon": "calendar-check",
+      "label": "Availability",
+      "labelAr": "حالة التوفر",
+      "value": "Immediate for High-Impact Projects & Automation Roles",
+      "valueAr": "متاح فوراً للمشاريع المتقدمة وعقود الأتمتة"
+    }
+  ],
+  "skillsCategories": [
+    {
+      "categoryName": "Workflow Automation",
+      "categoryNameAr": "أتمتة سير العمل والمزامنة",
+      "icon": "workflow",
+      "skills": [
+        {
+          "name": "n8n",
+          "level": 96,
+          "badge": "Mastery",
+          "desc": "Complex multi-node workflows, webhooks, error handlers, and self-hosted instances."
+        },
+        {
+          "name": "Make (Integromat)",
+          "level": 95,
+          "badge": "Expert",
+          "desc": "Scenarios routing, data iterators, modules optimization, and schedule automations."
+        },
+        {
+          "name": "REST APIs & Webhooks",
+          "level": 92,
+          "badge": "Core",
+          "desc": "HTTP request nodes, custom payloads, headers, webhooks, and rate-limiting."
+        },
+        {
+          "name": "JSON Data Parsing",
+          "level": 94,
+          "badge": "Advanced",
+          "desc": "Data extraction, transformation, nested object normalization, and schema mapping."
+        },
+        {
+          "name": "OAuth2 Authentication",
+          "level": 88,
+          "badge": "Security",
+          "desc": "Token generation, refresh rotations, scopes authorization, and credential safety."
+        }
+      ]
+    },
+    {
+      "categoryName": "AI & Backend Development",
+      "categoryNameAr": "الذكاء الاصطناعي والتطوير الخلفي",
+      "icon": "bot",
+      "skills": [
+        {
+          "name": "Prompt Engineering",
+          "level": 95,
+          "badge": "Specialist",
+          "desc": "System prompts, structured JSON extraction, few-shot prompting, and guardrails."
+        },
+        {
+          "name": "Autonomous AI Agents",
+          "level": 90,
+          "badge": "Architect",
+          "desc": "Autonomous agent execution loops, multi-agent coordination, and custom tool calling."
+        },
+        {
+          "name": "Vibe Coding & Cursor",
+          "level": 92,
+          "badge": "Agile",
+          "desc": "High-speed AI-assisted development, rapid full-stack prototyping, and clean architecture."
+        },
+        {
+          "name": "Firebase (Firestore & Hosting)",
+          "level": 90,
+          "badge": "Production",
+          "desc": "Real-time NoSQL database, security rules, cloud REST APIs, and CDN deployments."
+        },
+        {
+          "name": "Supabase & PostgreSQL",
+          "level": 88,
+          "badge": "Database",
+          "desc": "Relational table schemas, row-level security (RLS), and backend integration."
+        }
+      ]
+    },
+    {
+      "categoryName": "Hardware & Embedded Systems",
+      "categoryNameAr": "الأنظمة المدمجة والعتاد الذكي",
+      "icon": "cpu",
+      "skills": [
+        {
+          "name": "ESP32 Microcontrollers",
+          "level": 90,
+          "badge": "Hardware",
+          "desc": "WiFi/BLE IoT telemetry, sensor data acquisition, and real-time controller firmware."
+        },
+        {
+          "name": "PlatformIO (C++)",
+          "level": 88,
+          "badge": "Firmware",
+          "desc": "Modular C++ libraries, sensor calibration algorithms, and embedded logic."
+        },
+        {
+          "name": "EasyEDA Circuit Design",
+          "level": 85,
+          "badge": "Schematics",
+          "desc": "Custom PCB schematics, component selection, and prototype layout design."
+        },
+        {
+          "name": "Sensors & Actuators",
+          "level": 88,
+          "badge": "Biomedical",
+          "desc": "Thermal feedback sensors, Peltier elements, and motor driver circuits (DRV8873H)."
+        },
+        {
+          "name": "VS Code & Git / GitHub",
+          "level": 92,
+          "badge": "DevOps",
+          "desc": "Version control, automated commits, code organization, and collaborative workflows."
+        }
+      ]
+    },
+    {
+      "categoryName": "Soft Skills & Optimization",
+      "categoryNameAr": "المهارات التحليلية والتحسينية",
+      "icon": "sparkles",
+      "skills": [
+        {
+          "name": "Analytical Problem Solving",
+          "level": 95,
+          "badge": "Strategic",
+          "desc": "Diagnosing edge cases, resolving workflow exceptions, and failover architectures."
+        },
+        {
+          "name": "Critical Thinking & Optimization",
+          "level": 94,
+          "badge": "Process",
+          "desc": "Streamlining business processes to minimize operational latency and eliminate waste."
+        },
+        {
+          "name": "Rapid Tech Learning",
+          "level": 96,
+          "badge": "Adaptive",
+          "desc": "Mastering new frameworks, APIs, and AI models in days with instant practical execution."
+        },
+        {
+          "name": "Time Management & Prioritization",
+          "level": 92,
+          "badge": "Efficiency",
+          "desc": "Milestone-driven project completion and reliable delivery schedules."
+        },
+        {
+          "name": "Cross-functional Teamwork",
+          "level": 90,
+          "badge": "Collaborative",
+          "desc": "Clear professional communication and smooth integration with technical stakeholders."
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "jobTitle": "AI Automation Specialist (Trainee)",
+      "jobTitleAr": "أخصائي أتمتة الذكاء الاصطناعي (متدرب)",
+      "company": "Digital Egypt Pioneers Initiative (DEPI) – MCIT / eYouth",
+      "companyAr": "مبادرة رواد مصر الرقمية (DEPI) - وزارة الاتصالات وتكنولوجيا المعلومات",
+      "employmentType": "Intensive Government Fellowship",
+      "employmentTypeAr": "زمالة تدريبية حكومية مكثفة",
+      "startDate": "June 2026",
+      "startDateAr": "يونيو 2026",
+      "endDate": "Present",
+      "endDateAr": "حتى الآن",
+      "responsibilities": "Architecting and implementing production-ready automated workflows using n8n and Make to eliminate manual business tasks. Developing secure API integrations, webhooks triggers, and automated multi-source data processing pipelines. Integrating custom AI prompt engineering workflows with automated systems to handle dynamic business responses.",
+      "responsibilitiesAr": "تصميم وتنفيذ مسارات عمل مؤتمتة جاهزة للإنتاج باستخدام n8n و Make لإلغاء المهام اليدوية المتكررة. بناء عمليات ربط آمنة للـ APIs ومحفزات الـ Webhooks، ومعالجة البيانات المتدفقة من مصادر متعددة. دمج نماذج الذكاء الاصطناعي وهندسة الأوامر مع مسارات الأتمتة لتقديم استجابات آلية ذكية وسريعة.",
+      "technologies": [
+        "n8n",
+        "Make",
+        "REST APIs",
+        "Webhooks",
+        "JSON",
+        "Prompt Engineering",
+        "OpenAI API"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "therade-stimulation",
+      "name": "TheraDe – Portable Thermal Sensory Stimulation Device",
+      "nameAr": "TheraDe – جهاز محمول للتحفيز الحسي الحراري",
+      "category": "Biomedical & Embedded Systems",
+      "categoryAr": "أنظمة طبية وأجهزة مدمجة",
+      "shortDescription": "Designing and prototyping a closed-loop medical stimulation system for sensory threshold evaluation and neuro-rehabilitation therapy with real-time temperature regulation.",
+      "shortDescriptionAr": "تصميم ونمذجة نظام طبي مغلق الحلقة لتقييم عتبات الإحساس وإعادة التأهيل العصبي مع تنظيم حراري فوري ودقيق.",
+      "technologies": [
+        "ESP32",
+        "Peltier Module",
+        "DRV8873H",
+        "PlatformIO (C++)",
+        "EasyEDA",
+        "Sensors"
+      ],
+      "liveDemo": "",
+      "imageUrl": "",
+      "metric": "Closed-Loop Regulation",
+      "metricAr": "تنظيم مغلق الحلقة فوري",
+      "overview": "Built to bridge physical therapy science with embedded engineering, TheraDe delivers accurate thermal stimulation protocols to assist neurological rehabilitation patients, using real-time sensor feedback and micro-controller safety limits."
+    },
+    {
+      "id": "qgame-trivia",
+      "name": "QGame – Interactive Social Trivia Web Platform",
+      "nameAr": "QGame – منصة مسابقات وتفاعل اجتماعي تفاعلية",
+      "category": "Full-Stack Web & Realtime Database",
+      "categoryAr": "تطبيقات ويب وقواعد بيانات فورية",
+      "shortDescription": "A real-time interactive web quiz platform allowing friends to generate customized questions, compare answers, and test interpersonal knowledge in an engaging UI.",
+      "shortDescriptionAr": "منصة ويب تفاعلية فورية تتيح للمستخدمين إنشاء أسئلة مخصصة، مقارنة الإجابات، واختبار المعرفة المشتركة في واجهة مستخدم سريعة وسلسة.",
+      "technologies": [
+        "JavaScript",
+        "Firebase Hosting",
+        "Firestore Database",
+        "HTML5/CSS3"
+      ],
+      "liveDemo": "https://qgame-30129.web.app/",
+      "imageUrl": "",
+      "metric": "Sub-50ms Sync",
+      "metricAr": "مزامنة لحظية فائقة السرعة",
+      "overview": "An engaging real-time multiplayer application designed with modular state management and cloud synchronization via Firebase."
+    },
+    {
+      "id": "depi-lead-triage",
+      "name": "Enterprise Multi-Source Lead & Ticket Dispatch Engine",
+      "nameAr": "محرك أتمتة إدارة وفرز طلبات العملاء المؤسسي",
+      "category": "AI Workflow Automation",
+      "categoryAr": "أتمتة مسارات العمل بالذكاء الاصطناعي",
+      "shortDescription": "End-to-end automated workflow connecting incoming webhooks, categorizing intents via LLM prompts, updating databases, and alerting team leads in sub-30 seconds.",
+      "shortDescriptionAr": "مسار عمل مؤتمت بالكامل يربط الـ Webhooks، ويفرز نوايا العملاء بنماذج الذكاء الاصطناعي، ويحدث قواعد البيانات ويرسل تنبيهات فورية في أقل من 30 ثانية.",
+      "technologies": [
+        "n8n",
+        "Make",
+        "REST APIs",
+        "Webhooks",
+        "JSON Parsing",
+        "OpenAI"
+      ],
+      "liveDemo": "",
+      "imageUrl": "",
+      "metric": "95% Speedup",
+      "metricAr": "توفير 95% من وقت الاستجابة",
+      "overview": "Eliminates hours of manual data entry, ticket dispatching, and routing by executing flawless automated pipelines."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Physical Therapy (B.Sc.)",
+      "degreeAr": "بكالوريوس العلاج الطبيعي (B.Sc.)",
+      "institution": "Faculty of Physical Therapy, Kafr El-Sheikh University",
+      "institutionAr": "كلية العلاج الطبيعي - جامعة كفر الشيخ",
+      "graduationDate": "Expected 2029",
+      "graduationDateAr": "متوقع التخرج 2029",
+      "gpa": "Very Good (GPA: 3.65)",
+      "gpaAr": "جيد جداً (معدل 3.65)",
+      "highlights": "Studying biomechanics, neuro-anatomy, electrotherapy, and physiological rehabilitation, directly informing the design of smart biomedical devices and robotic health interfaces.",
+      "highlightsAr": "دراسة الميكانيكا الحيوية، التشريح العصبي، العلاج الكهربائي، والتأهيل الفسيولوجي، مما يوفر أساساً علمياً متيناً لتطوير الأجهزة الطبية الذكية وأنظمة الـ IoT الصحية.",
+      "certificatesFolderUrl": "https://drive.google.com/"
+    }
+  ],
+  "courses": [
+    {
+      "name": "AI Automation & Integration Track",
+      "platform": "Digital Egypt Pioneers Initiative (DEPI) – MCIT / eYouth",
+      "completionDate": "2026"
+    },
+    {
+      "name": "Oracle AI for You",
+      "platform": "Oracle MyLearn – Official Achievement Badge & Certificate",
+      "completionDate": "2026"
+    },
+    {
+      "name": "Applied Prompt Engineering & Agent Systems",
+      "platform": "Hands-on Practical Training & LLM Workflows",
+      "completionDate": "2026"
+    },
+    {
+      "name": "Supabase Fundamentals & Backend Integration",
+      "platform": "Self-Paced Training & Database Architecture",
+      "completionDate": "2026"
+    }
+  ],
+  "addedValue": {
+    "sectionTitle": "Client Added Value & ROI Matrix",
+    "sectionTitleAr": "القيمة المضافة للعميل والعائد على الاستثمار (ROI)",
+    "sectionSubtitle": "Quantitative comparison showing the monumental shift from manual labor to intelligent autonomous workflows.",
+    "sectionSubtitleAr": "مقارنة رقمية واضحة توضح الفارق الجذري بين العمل اليدوي التقليدي وبين مسارات الأتمتة الذكية.",
+    "driveReportsUrl": "https://drive.google.com/",
+    "models": [
+      {
+        "id": "m1",
+        "title": "Manual Operations",
+        "titleAr": "العمل اليدوي التقليدي",
+        "tag": "High Cost & Friction",
+        "tagAr": "تكلفة عالية وبطء ملحوظ",
+        "cost": "$4,200 / mo",
+        "costAr": "$4,200 / شهرياً",
+        "costDetail": "Manual data entry, multiple repetitive staff salaries",
+        "costDetailAr": "رواتب إدخال بيانات يدوي ومتابعة متكررة",
+        "time": "4 - 6 Hours",
+        "timeAr": "4 - 6 ساعات",
+        "timeDetail": "Average latency per batch or ticket resolution",
+        "timeDetailAr": "متوسط وقت معالجة كل دفعة أو طلب",
+        "accuracy": "80% - 85%",
+        "accuracyAr": "80% - 85%",
+        "accuracyDetail": "15-20% human fatigue error rate",
+        "accuracyDetailAr": "نسبة أخطاء بشرية متوقعة 15-20%",
+        "scalability": "Linear & Costly",
+        "scalabilityAr": "محدودة وتتطلب توظيفاً إضافياً",
+        "badgeColor": "#ef4444"
+      },
+      {
+        "id": "m2",
+        "title": "Human-in-the-Loop Automation",
+        "titleAr": "الأتمتة مع الإشراف البشري",
+        "tag": "Balanced & Supervised",
+        "tagAr": "متوازنة ومراجعة بشرياً",
+        "cost": "$1,200 / mo",
+        "costAr": "$1,200 / شهرياً",
+        "costDetail": "71% reduction in labor hours; small supervisor oversight",
+        "costDetailAr": "توفير 71% من تكلفة المجهود البشري",
+        "time": "2 - 5 Minutes",
+        "timeAr": "2 - 5 دقائق",
+        "timeDetail": "System prepares data, human gives single-click approval",
+        "timeDetailAr": "النظام يجهز كل شيء والبشري يوافق بضغطة",
+        "accuracy": "98.5%",
+        "accuracyAr": "98.5%",
+        "accuracyDetail": "High accuracy with final verification sign-off",
+        "accuracyDetailAr": "دقة عالية مع مراجعة نهائية سريعة",
+        "scalability": "High (10x volume)",
+        "scalabilityAr": "عالية (تتحمل 10 أضعاف العمل بنفس الفريق)",
+        "badgeColor": "#f59e0b"
+      },
+      {
+        "id": "m3",
+        "title": "Autonomous AI Automation",
+        "titleAr": "الأتمتة الكاملة بالذكاء الاصطناعي",
+        "tag": "Maximum ROI & Speed",
+        "tagAr": "أعلى عائد وسرعة قصوى",
+        "cost": "$380 / mo",
+        "costAr": "$380 / شهرياً",
+        "costDetail": "91% cost slashed; runs 24/7 on serverless cloud triggers",
+        "costDetailAr": "خفض 91% من التكاليف مع تشغيل سحابي 24/7",
+        "time": "< 15 Seconds",
+        "timeAr": "أقل من 15 ثانية",
+        "timeDetail": "Instant real-time ingestion, triage, routing & notification",
+        "timeDetailAr": "معالجة وفرز وتوجيه وتنبيه فوري ولحظي",
+        "accuracy": "99.9%",
+        "accuracyAr": "99.9%",
+        "accuracyDetail": "Automated retry logic, zero fatigue, fault-tolerant",
+        "accuracyDetailAr": "إعادة محاولة تلقائية عند الأعطال وصفر أخطاء إرهاق",
+        "scalability": "Virtually Unlimited",
+        "scalabilityAr": "توسع غير محدود وتلقائي",
+        "badgeColor": "#10b981"
+      }
+    ],
+    "metrics": [
+      {
+        "label": "Cost Slashed",
+        "labelAr": "خفض التكاليف",
+        "value": "91%",
+        "progress": 91
+      },
+      {
+        "label": "Execution Speedup",
+        "labelAr": "تسريع العمليات",
+        "value": "95%",
+        "progress": 95
+      },
+      {
+        "label": "System Availability",
+        "labelAr": "جاهزية واستمرارية",
+        "value": "99.9%",
+        "progress": 99.9
+      }
+    ]
+  }
+};
+    const CLOUD_URL = typeof getPortfolioCloudUrl === 'function' ? getPortfolioCloudUrl() : null;
+
+    let data = INITIAL_DATA;
+    let currentLang = localStorage.getItem('portfolio_lang') || 'en';
+
+    // LocalStorage Initial Cache
+    try {
+      const cached = localStorage.getItem('portfolio_cache');
+      if (cached) {
+        data = JSON.parse(cached);
+      }
+    } catch(err) {}
+
+    // Live Cross-Tab BroadcastChannel listener for instant real-time updates!
+    try {
+      const bc = new BroadcastChannel('portfolio_sync');
+      bc.onmessage = (event) => {
+        if (event.data && event.data.type === 'DATA_UPDATED') {
+          data = event.data.data;
+          renderAll();
+        }
+      };
+    } catch(e) {}
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'portfolio_cache' && e.newValue) {
+        data = JSON.parse(e.newValue);
+        renderAll();
+      }
+    });
+
+    const I18N = {
+      en: {
+        nav_home: "Home",
+        nav_about: "About",
+        nav_skills: "Skills",
+        nav_added_value: "Added Value",
+        nav_projects: "Projects",
+        nav_experience: "Experience",
+        nav_education: "Credentials",
+        nav_contact: "Contact",
+        nav_download_cv: "Official CV",
+        btn_get_in_touch: "Get in Touch",
+        hero_greeting: "Hi, I'm",
+        hero_explore_btn: "Explore Projects",
+        hero_print_btn: "Print Portfolio",
+        about_eyebrow: "About Me",
+        about_heading_1: "Engineering Mindset Applied to",
+        about_heading_2: "Intelligent Automation",
+        about_subheading: "A synthesis of software orchestration, AI models, and biomedical precision.",
+        career_vision_label: "Career Vision",
+        summary_card_title: "Professional Summary",
+        skills_eyebrow: "Technical Mastery",
+        skills_heading_1: "Categorized Technical",
+        skills_heading_2: "Competencies",
+        skills_subheading: "Structured across workflow automation, backend AI systems, embedded IoT, and operational optimization.",
+        roi_eyebrow: "Quantitative Value",
+        roi_drive_text: "View Detailed ROI Files & Statistics on Google Drive",
+        projects_eyebrow: "Engineering Portfolio",
+        projects_heading_1: "Featured Systems &",
+        projects_heading_2: "Automations",
+        projects_subheading: "Real-world production automations, health-tech hardware prototypes, and interactive cloud applications.",
+        exp_eyebrow: "Work History",
+        exp_heading_1: "Professional Experience &",
+        exp_heading_2: "Fellowships",
+        exp_subheading: "Practical track record in enterprise process automation and system deployment.",
+        edu_eyebrow: "Academic Foundation",
+        edu_heading_1: "Education &",
+        edu_heading_2: "Certifications",
+        edu_subheading: "Rigorous medical-technical foundation coupled with continuous technology upskilling.",
+        cert_heading: "Specialized Certifications",
+        view_certificates_drive: "View All Certificate Files in Google Drive",
+        contact_eyebrow: "Direct Outreach",
+        contact_heading_1: "Let's Discuss Your",
+        contact_heading_2: "Next Automation",
+        contact_subheading: "Ready to streamline your business pipelines or collaborate on innovative systems.",
+        contact_channel_title: "Direct Channels",
+        contact_channel_desc: "Feel free to connect via WhatsApp, email, or schedule a technical call.",
+        contact_whatsapp_label: "WhatsApp & Phone",
+        contact_email_label: "Email Address",
+        contact_location_label: "Location",
+        form_title: "Send a Direct Message",
+        form_name: "Your Name",
+        form_email: "Your Email",
+        form_msg: "Project Overview / Inquiry",
+        form_send: "Transmit Message",
+        footer_rights: "All rights reserved.",
+        view_details_btn: "Explore Project",
+        live_demo_btn: "Live Demo"
+      },
+      ar: {
+        nav_home: "الرئيسية",
+        nav_about: "نبذة عني",
+        nav_skills: "المهارات",
+        nav_added_value: "القيمة المضافة",
+        nav_projects: "المشاريع",
+        nav_experience: "الخبرات",
+        nav_education: "المؤهلات",
+        nav_contact: "تواصل معي",
+        nav_download_cv: "السيرة الذاتية (CV)",
+        btn_get_in_touch: "تواصل معي",
+        hero_greeting: "مرحباً، أنا",
+        hero_explore_btn: "استعراض المشاريع",
+        hero_print_btn: "طباعة البورتفوليو",
+        about_eyebrow: "نبذة عني",
+        about_heading_1: "عقلية هندسية تسخر",
+        about_heading_2: "الأتمتة الذكية والـ AI",
+        about_subheading: "مزيج متناغم بين أتمتة العمليات البرمجية، نماذج الذكاء الاصطناعي، والدقة الطبية الفسيولوجية.",
+        career_vision_label: "الرؤية المهنية",
+        summary_card_title: "الملخص المهني والتنفيذي",
+        skills_eyebrow: "الكفاءات التقنية",
+        skills_heading_1: "المهارات التقنية",
+        skills_heading_2: "المصنفة بدقة",
+        skills_subheading: "مصنفة بدقة لتشمل أتمتة مسارات العمل، أنظمة الذكاء الاصطناعي الخلفية، الأجهزة المدمجة IoT، والتحسين التشغيلي.",
+        roi_eyebrow: "عائد الاستثمار (ROI)",
+        roi_drive_text: "عرض التفاصيل والإحصائيات على Google Drive",
+        projects_eyebrow: "معرض المشاريع",
+        projects_heading_1: "أبرز الأنظمة الهندسية و",
+        projects_heading_2: "مسارات الأتمتة",
+        projects_subheading: "تطبيقات أتمتة واقعية، نماذج أجهزة طبية مدمجة، ومنصات سحابية فورية.",
+        exp_eyebrow: "المسار المهني",
+        exp_heading_1: "الخبرات العملية و",
+        exp_heading_2: "الزمالات التدريبية",
+        exp_subheading: "سجل عملي تطبيقي في أتمتة مسارات العمل المؤسسية وبناء الحلول الذكية.",
+        edu_eyebrow: "الأساس الأكاديمي",
+        edu_heading_1: "التعليم الجامعي و",
+        edu_heading_2: "الشهادات المعتمدة",
+        edu_subheading: "أساس طبي فسيولوجي رصين يعزز تطوير واجهات الأنظمة الطبية الذكية والأتمتة المتقدمة.",
+        cert_heading: "الشهادات والاعتمادات الاحترافية",
+        view_certificates_drive: "عرض كافة الشهادات على Google Drive",
+        contact_eyebrow: "قنوات التواصل المباشر",
+        contact_heading_1: "لنبدأ التخطيط لـ",
+        contact_heading_2: "مشروع الأتمتة القادم",
+        contact_subheading: "جاهز لأتمتة أعمالك واختصار مئات الساعات اليدوية باحترافية تامة.",
+        contact_channel_title: "التواصل السريع",
+        contact_channel_desc: "تواصل معي مباشرة عبر الواتساب أو البريد أو الهاتف.",
+        contact_whatsapp_label: "واتساب وهاتف",
+        contact_email_label: "البريد الإلكتروني",
+        contact_location_label: "الموقع الجغرافي",
+        form_title: "أرسل رسالة مباشرة",
+        form_name: "الاسم الكريم",
+        form_email: "البريد الإلكتروني",
+        form_msg: "تفاصيل المشروع أو الاستفسار",
+        form_send: "إرسال الرسالة الآن",
+        footer_rights: "جميع الحقوق محفوظة.",
+        view_details_btn: "تفاصيل المشروع",
+        live_demo_btn: "عرض حي"
+      }
+    };
+
+    function init() {
+      applyLanguage(currentLang);
+      renderAll();
+      fetchLatestFromCloud();
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      localStorage.setItem('portfolio_lang', currentLang);
+      applyLanguage(currentLang);
+      renderAll();
+    }
+
+    function applyLanguage(lang) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.getElementById('langBtnText').textContent = lang === 'en' ? 'العربية' : 'English';
+      const shortLangEl = document.getElementById('langBtnTextShort');
+      if (shortLangEl) shortLangEl.textContent = lang === 'en' ? 'AR' : 'EN';
+
+      const dict = I18N[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      if (isDark) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        localStorage.setItem('portfolio_theme', 'light');
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        localStorage.setItem('portfolio_theme', 'dark');
+      }
+      lucide.createIcons();
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileDrawer').classList.toggle('open');
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobileDrawer').classList.remove('open');
+    }
+
+    function renderAll() {
+      const isAr = currentLang === 'ar';
+      const p = data.personal || {};
+      const c = data.contact || {};
+      const av = data.addedValue || {};
+
+      const displayName = isAr && p.fullNameAr ? p.fullNameAr : (p.fullName || 'Ahmed Hamed El-shrabasy');
+      const displayTitle = isAr && p.professionalTitleAr ? p.professionalTitleAr : (p.professionalTitle || 'AI Automation Specialist & Systems Developer');
+      
+      document.getElementById('navBrandName').textContent = isAr ? 'أحمد الشرباصي' : 'Ahmed Hamed';
+      document.getElementById('footerBrandName').textContent = displayName;
+
+      const profilePhoto = (p && p.profileImage) ? p.profileImage : 'profile.jpg';
+      const heroAvatarImg = document.getElementById('heroAvatarCardImg');
+      if (heroAvatarImg) heroAvatarImg.src = profilePhoto;
+      const navAvatarImg = document.getElementById('navBrandAvatarImg');
+      if (navAvatarImg) navAvatarImg.src = profilePhoto;
+      document.getElementById('heroFullName').textContent = displayName;
+      document.getElementById('cardHeroName').textContent = displayName;
+      document.getElementById('heroHeadline').textContent = isAr && p.professionalHeadlineAr ? p.professionalHeadlineAr : p.professionalHeadline;
+      document.getElementById('cardHeroTitle').textContent = displayTitle;
+      document.getElementById('heroIntro').textContent = isAr && p.shortIntroductionAr ? p.shortIntroductionAr : p.shortIntroduction;
+      document.getElementById('heroAvailabilityPill').textContent = isAr && p.availabilityAr ? p.availabilityAr : p.availability;
+      document.getElementById('cardHeroLocation').textContent = isAr && p.currentLocationAr ? p.currentLocationAr : (p.currentLocation || 'New Damietta, Damietta, Egypt (Remote Ready)');
+
+      // Contact Links
+      if (c.linkedin) document.getElementById('heroSocialLinkedin').href = c.linkedin;
+      if (c.github) document.getElementById('heroSocialGithub').href = c.github;
+      if (c.whatsappUrl) {
+        document.getElementById('heroSocialWhatsapp').href = c.whatsappUrl;
+        document.getElementById('contactPhoneText').parentElement.parentElement.href = c.whatsappUrl;
+      }
+      if (c.email) {
+        document.getElementById('heroSocialEmail').href = 'mailto:' + c.email;
+        document.getElementById('contactEmailText').parentElement.parentElement.href = 'mailto:' + c.email;
+        document.getElementById('contactEmailText').textContent = c.email;
+      }
+      if (c.phoneDisplay || c.phone) {
+        document.getElementById('contactPhoneText').textContent = c.phoneDisplay || c.phone;
+      }
+      if (p.currentLocation) {
+        document.getElementById('contactLocationText').textContent = isAr && p.currentLocationAr ? p.currentLocationAr : p.currentLocation;
+      }
+
+      // About
+      document.getElementById('aboutMeP1').textContent = isAr && p.aboutMeAr ? p.aboutMeAr : p.aboutMe;
+      document.getElementById('careerObjectiveText').textContent = isAr && p.careerObjectiveAr ? p.careerObjectiveAr : p.careerObjective;
+
+      // Stats Pills INSIDE the Card
+      renderHeroCardStats();
+
+      // Floating Badges outside the card
+      renderFloatingBadges();
+
+      // 5 Professional Summary Key Facts
+      renderKeyFactsSummary();
+
+      // Categorized Skills (4 categories with descriptions)
+      renderCategorizedSkills();
+
+      // Added Value & ROI
+      renderAddedValueSection();
+
+      // Projects
+      renderProjects();
+
+      // Experience & Education
+      renderExperience();
+      renderEducation();
+
+      lucide.createIcons();
+    }
+
+    // Hero Card Stat Pills
+    function renderHeroCardStats() {
+      const grid = document.getElementById('cardHeroStatsGrid');
+      grid.innerHTML = '';
+      const stats = data.stats || [];
+      const isAr = currentLang === 'ar';
+
+      stats.forEach(s => {
+        const pill = document.createElement('div');
+        pill.className = 'stat-pill';
+        pill.innerHTML = `
+          <div class="stat-number">${s.number}</div>
+          <div class="stat-label">${isAr && s.labelAr ? s.labelAr : s.label}</div>
+        `;
+        grid.appendChild(pill);
+      });
+    }
+
+    // Interactive Closer Floating Badges
+    function renderFloatingBadges() {
+      const container = document.getElementById('heroFloatingBadgesContainer');
+      container.innerHTML = '';
+      const badges = data.floatingBadges || [];
+      const isAr = currentLang === 'ar';
+
+      badges.forEach((b, idx) => {
+        const a = document.createElement('a');
+        a.className = 'floating-badge badge-pos-' + (idx % 6);
+        a.href = b.targetSection || '#skills';
+        a.onclick = (e) => handleBadgeClick(e, b);
+
+        const iconName = b.icon || 'cpu';
+        a.innerHTML = `
+          <i data-lucide="${iconName}" style="color: var(--accent-cyan); width: 20px; height: 20px; flex-shrink: 0;"></i>
+          <div>
+            <div class="badge-cat" style="font-size: 0.72rem; color: var(--text-tertiary);">${isAr && b.categoryAr ? b.categoryAr : b.category}</div>
+            <div class="badge-title" style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary);">${isAr && b.titleAr ? b.titleAr : b.title}</div>
+          </div>
+          <i data-lucide="arrow-up-right" class="badge-arrow" style="width: 14px; height: 14px; opacity: 0.5; margin-left: 0.25rem; transition: all 0.2s ease;"></i>
+        `;
+        container.appendChild(a);
+      });
+    }
+
+    function handleBadgeClick(e, badge) {
+      e.preventDefault();
+      const target = badge.targetSection || '#skills';
+      const el = document.querySelector(target);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (badge.targetId) {
+          setTimeout(() => {
+            const p = (data.projects || []).find(x => x.id === badge.targetId);
+            if (p) openProjectModal(p);
+          }, 600);
+        } else {
+          el.style.transition = 'box-shadow 0.4s ease';
+          el.style.boxShadow = '0 0 35px var(--primary-glow)';
+          setTimeout(() => { el.style.boxShadow = ''; }, 1600);
+        }
+      }
+    }
+
+    // Key Facts (5 Professional Summary items)
+    function renderKeyFactsSummary() {
+      const list = document.getElementById('keyFactsList');
+      list.innerHTML = '';
+      const items = data.professionalSummary || [];
+      const isAr = currentLang === 'ar';
+
+      items.forEach(it => {
+        const row = document.createElement('div');
+        row.className = 'fact-item';
+        row.innerHTML = `
+          <div class="fact-icon">
+            <i data-lucide="${it.icon || 'award'}" style="width: 18px; height: 18px;"></i>
+          </div>
+          <div>
+            <div class="fact-label">${isAr && it.labelAr ? it.labelAr : it.label}</div>
+            <div class="fact-value">${isAr && it.valueAr ? it.valueAr : it.value}</div>
+          </div>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    // Categorized Skills (4 categories with descriptions)
+    function renderCategorizedSkills() {
+      const container = document.getElementById('skillsContainer');
+      container.innerHTML = '';
+      const cats = data.skillsCategories || [];
+      const isAr = currentLang === 'ar';
+
+      cats.forEach(cat => {
+        const card = document.createElement('div');
+        card.className = 'skill-card';
+
+        let skillsHtml = '';
+        (cat.skills || []).forEach(sk => {
+          skillsHtml += `
+            <div class="skill-item">
+              <div class="skill-item-header">
+                <span class="skill-name">${sk.name} ${sk.badge ? `<span class="skill-badge">${sk.badge}</span>` : ''}</span>
+                <span class="skill-level">${sk.level}%</span>
+              </div>
+              <div class="skill-progress-bar">
+                <div class="skill-progress-fill" style="width: ${sk.level}%;"></div>
+              </div>
+              ${sk.desc ? `<p class="skill-desc">${sk.desc}</p>` : ''}
+            </div>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="skill-card-header">
+            <i data-lucide="${cat.icon || 'workflow'}" style="color: var(--accent-cyan); width: 22px; height: 22px;"></i>
+            <h3>${isAr && cat.categoryNameAr ? cat.categoryNameAr : cat.categoryName}</h3>
+          </div>
+          <div class="skill-card-body">
+            ${skillsHtml}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Added Value & ROI
+    function renderAddedValueSection() {
+      const av = data.addedValue || {};
+      const isAr = currentLang === 'ar';
+
+      document.getElementById('roiMainTitle').textContent = isAr && av.sectionTitleAr ? av.sectionTitleAr : (av.sectionTitle || 'Client Added Value & ROI Matrix');
+      document.getElementById('roiMainSubtitle').textContent = isAr && av.sectionSubtitleAr ? av.sectionSubtitleAr : (av.sectionSubtitle || 'Quantitative comparison showing the monumental shift from manual labor to intelligent autonomous workflows.');
+      if (av.driveReportsUrl) {
+        document.getElementById('roiDriveBtn').href = av.driveReportsUrl;
+      }
+
+      const modelsGrid = document.getElementById('roiModelsGrid');
+      modelsGrid.innerHTML = '';
+      (av.models || []).forEach((m, idx) => {
+        const card = document.createElement('div');
+        card.className = 'roi-model-card' + (idx === 2 ? ' featured' : '');
+        card.innerHTML = `
+          <div>
+            <span class="roi-tag-badge" style="background: ${m.badgeColor || '#6366f1'}22; color: ${m.badgeColor || '#818cf8'};">${isAr && m.tagAr ? m.tagAr : m.tag}</span>
+            <h3 style="font-size: 1.35rem; margin-bottom: 1.25rem;">${isAr && m.titleAr ? m.titleAr : m.title}</h3>
+            
+            <div class="roi-item-row">
+              <div class="roi-item-label">${isAr ? 'التكلفة التشغيلية' : 'Estimated Cost'}</div>
+              <div class="roi-item-val">${isAr && m.costAr ? m.costAr : m.cost}</div>
+              <div class="roi-item-sub">${isAr && m.costDetailAr ? m.costDetailAr : m.costDetail}</div>
+            </div>
+
+            <div class="roi-item-row">
+              <div class="roi-item-label">${isAr ? 'زمن التنفيذ والاستجابة' : 'Turnaround Time'}</div>
+              <div class="roi-item-val">${isAr && m.timeAr ? m.timeAr : m.time}</div>
+              <div class="roi-item-sub">${isAr && m.timeDetailAr ? m.timeDetailAr : m.timeDetail}</div>
+            </div>
+
+            <div class="roi-item-row">
+              <div class="roi-item-label">${isAr ? 'الدقة والموثوقية' : 'Accuracy & Reliability'}</div>
+              <div class="roi-item-val">${isAr && m.accuracyAr ? m.accuracyAr : m.accuracy}</div>
+              <div class="roi-item-sub">${isAr && m.accuracyDetailAr ? m.accuracyDetailAr : m.accuracyDetail}</div>
+            </div>
+          </div>
+
+          <div class="roi-item-row" style="margin-top: 1rem; border-bottom: none;">
+            <div class="roi-item-label">${isAr ? 'قابلية التوسع والنمو' : 'Scalability'}</div>
+            <div class="roi-item-sub" style="font-weight: 700; color: var(--text-primary);">${isAr && m.scalabilityAr ? m.scalabilityAr : m.scalability}</div>
+          </div>
+        `;
+        modelsGrid.appendChild(card);
+      });
+
+      const metricsGrid = document.getElementById('roiMetricsSummary');
+      metricsGrid.innerHTML = '';
+      (av.metrics || []).forEach(met => {
+        const box = document.createElement('div');
+        box.className = 'roi-summary-box';
+        box.innerHTML = `
+          <div class="roi-summary-num">${met.value}</div>
+          <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-secondary); margin-top: 0.25rem;">${isAr && met.labelAr ? met.labelAr : met.label}</div>
+        `;
+        metricsGrid.appendChild(box);
+      });
+    }
+
+    // Projects
+    function renderProjects() {
+      const grid = document.getElementById('projectsGrid');
+      grid.innerHTML = '';
+      const list = data.projects || [];
+      const isAr = currentLang === 'ar';
+
+      list.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.onclick = () => openProjectModal(p);
+
+        let tagsHtml = '';
+        (p.technologies || []).forEach(t => {
+          tagsHtml += `<span class="project-tag">${t}</span>`;
+        });
+
+        const bannerMarkup = p.imageUrl ? `
+          <div class="project-header-banner has-custom-image" style="background-image: url('${p.imageUrl}');">
+            <span class="project-img-pill"><i data-lucide="image" style="width:12px;height:12px;"></i> ${isAr ? 'معاينة' : 'Preview'}</span>
+          </div>
+        ` : `
+          <div class="project-header-banner">
+            <i data-lucide="sparkles"></i>
+          </div>
+        `;
+
+        card.innerHTML = `
+          ${bannerMarkup}
+          <div class="project-card-body">
+            <div class="project-category">${isAr && p.categoryAr ? p.categoryAr : p.category}</div>
+            <h3 class="project-title">${isAr && p.nameAr ? p.nameAr : p.name}</h3>
+            <p class="project-desc">${isAr && p.shortDescriptionAr ? p.shortDescriptionAr : p.shortDescription}</p>
+            <div class="project-tags">${tagsHtml}</div>
+            <div class="project-footer">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-emerald);">${isAr && p.metricAr ? p.metricAr : p.metric}</span>
+              <span style="font-size: 0.85rem; color: var(--primary-light); display: inline-flex; align-items: center; gap: 0.25rem;">
+                ${isAr ? 'عرض التفاصيل' : 'Explore'} <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+              </span>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function openProjectModal(p) {
+      const isAr = currentLang === 'ar';
+      const body = document.getElementById('modalBody');
+      let tagsHtml = '';
+      (p.technologies || []).forEach(t => tagsHtml += `<span class="project-tag" style="padding:0.35rem 0.75rem; font-size:0.85rem;">${t}</span>`);
+
+      const modalImageMarkup = p.imageUrl ? `
+        <div style="width: 100%; max-height: 280px; height: 220px; border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; border: 1px solid var(--border-card); box-shadow: 0 8px 24px rgba(0,0,0,0.35); position: relative;">
+          <img src="${p.imageUrl}" alt="${p.name}" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+      ` : '';
+
+      body.innerHTML = `
+        ${modalImageMarkup}
+        <span class="project-category">${isAr && p.categoryAr ? p.categoryAr : p.category}</span>
+        <h2 style="font-size: 1.75rem; margin: 0.5rem 0 1rem 0;">${isAr && p.nameAr ? p.nameAr : p.name}</h2>
+        <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">
+          ${isAr && p.overviewAr ? p.overviewAr : (p.overview || p.shortDescription)}
+        </p>
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 0.9rem; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 0.5rem;">${isAr ? 'التقنيات المستخدمة' : 'Technologies & Tools'}</h4>
+          <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">${tagsHtml}</div>
+        </div>
+        ${p.liveDemo ? `
+          <a href="${p.liveDemo}" target="_blank" class="btn btn-primary" style="margin-top: 1rem;">
+            <span>${isAr ? 'زيارة المشروع الحي' : 'Launch Live Demo'}</span>
+            <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+          </a>
+        ` : ''}
+      `;
+      document.getElementById('projectModal').classList.add('open');
+      lucide.createIcons();
+    }
+
+    function closeProjectModal(e) {
+      if (!e || e.target === document.getElementById('projectModal') || e.target.classList.contains('modal-close-btn')) {
+        document.getElementById('projectModal').classList.remove('open');
+      }
+    }
+
+    // Experience & Education
+    function renderExperience() {
+      const container = document.getElementById('experienceTimeline');
+      container.innerHTML = '';
+      const list = data.experience || [];
+      const isAr = currentLang === 'ar';
+
+      list.forEach(ex => {
+        const item = document.createElement('div');
+        item.className = 'timeline-item';
+        item.innerHTML = `
+          <div class="timeline-marker"></div>
+          <div class="timeline-card">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-cyan);">${isAr && ex.startDateAr ? ex.startDateAr : ex.startDate} - ${isAr && ex.endDateAr ? ex.endDateAr : ex.endDate}</span>
+            <h3 style="font-size: 1.25rem; margin: 0.25rem 0;">${isAr && ex.jobTitleAr ? ex.jobTitleAr : ex.jobTitle}</h3>
+            <div style="font-size: 0.9rem; color: var(--primary-light); font-weight: 600; margin-bottom: 0.75rem;">${isAr && ex.companyAr ? ex.companyAr : ex.company} (${isAr && ex.employmentTypeAr ? ex.employmentTypeAr : ex.employmentType})</div>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">${isAr && ex.responsibilitiesAr ? ex.responsibilitiesAr : ex.responsibilities}</p>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function renderEducation() {
+      const eduCard = document.getElementById('educationMainCard');
+      const certsList = document.getElementById('certificationsList');
+      eduCard.innerHTML = '';
+      certsList.innerHTML = '';
+      const isAr = currentLang === 'ar';
+
+      const edu = (data.education || [])[0] || {};
+      eduCard.innerHTML = `
+        <div class="key-facts-card" style="height: 100%;">
+          <span class="project-category">${isAr ? 'الدرجة الأكاديمية' : 'Higher Degree'}</span>
+          <h3 style="font-size: 1.4rem; margin: 0.5rem 0;">${isAr && edu.degreeAr ? edu.degreeAr : edu.degree}</h3>
+          <p style="font-size: 0.95rem; color: var(--primary-light); font-weight: 600; margin-bottom: 0.75rem;">${isAr && edu.institutionAr ? edu.institutionAr : edu.institution}</p>
+          <div style="display:inline-block; padding:0.25rem 0.75rem; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:var(--radius-full); font-size:0.85rem; font-weight:700; color:var(--accent-emerald); margin-bottom:1.25rem;">
+            ${isAr && edu.gpaAr ? edu.gpaAr : edu.gpa} • ${isAr && edu.graduationDateAr ? edu.graduationDateAr : edu.graduationDate}
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">${isAr && edu.highlightsAr ? edu.highlightsAr : edu.highlights}</p>
+        </div>
+      `;
+
+      (data.courses || []).forEach(c => {
+        const item = document.createElement('div');
+        item.className = 'cert-card';
+        item.innerHTML = `
+          <div class="cert-icon"><i data-lucide="award"></i></div>
+          <div>
+            <h4 style="font-size: 1rem; font-weight: 700;">${c.name}</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">${c.platform} • ${c.completionDate}</p>
+          </div>
+        `;
+        certsList.appendChild(item);
+      });
+    }
+
+    async function fetchLatestFromCloud() {
+      if (!CLOUD_URL) return;
+      try {
+        const res = await fetch(CLOUD_URL, { cache: 'no-store' });
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.fields && json.fields.payload && json.fields.payload.stringValue) {
+            const parsed = JSON.parse(json.fields.payload.stringValue);
+            if (parsed && parsed.personal) {
+              data = parsed;
+              localStorage.setItem('portfolio_cache', JSON.stringify(data));
+              renderAll();
+            }
+          }
+        }
+      } catch (err) {}
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      alert(currentLang === 'ar' ? 'شكراً لتواصلك! سيتم الرد عليك في أقرب وقت.' : 'Thank you for your message! I will respond promptly.');
+      e.target.reset();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

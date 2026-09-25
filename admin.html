@@ -1,0 +1,2210 @@
+<!DOCTYPE html>
+<html lang="ar" class="dark" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>استوديو إدارة وتعديل البورتفوليو | Ahmed Hamed El-shrabasy</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Google Fonts: Outfit, Plus Jakarta Sans, Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Tajawal:wght@400;500;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Portfolio Config -->
+  <script src="config.js"></script>
+
+  <style>
+    :root {
+      --bg-base: #060913;
+      --bg-surface: #0c1222;
+      --bg-surface-elevated: #131d36;
+      --bg-glass: rgba(12, 18, 34, 0.85);
+      --bg-glass-card: rgba(19, 29, 54, 0.7);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-card: rgba(255, 255, 255, 0.12);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-tertiary: #64748b;
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --gradient-accent: linear-gradient(135deg, #6366f1 0%, #06b6d4 50%, #10b981 100%);
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Admin Sticky Top Bar */
+    .admin-bar {
+      position: sticky;
+      top: 0;
+      background: rgba(12, 18, 34, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-card);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+    }
+
+    .admin-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .admin-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.15rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--gradient-accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .btn-glass {
+      background: var(--bg-surface-elevated);
+      border-color: var(--border-card);
+      color: var(--text-primary);
+    }
+
+    .btn-glass:hover {
+      border-color: var(--accent-cyan);
+    }
+
+    .btn-success {
+      background: #10b981;
+      color: #fff;
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    /* Admin Sections Bar */
+    .admin-sections-nav {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.65rem 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .sec-tab-btn {
+      background: none;
+      border: 1px solid var(--border-subtle);
+      padding: 0.4rem 0.9rem;
+      border-radius: var(--radius-full);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      white-space: nowrap;
+    }
+
+    .sec-tab-btn:hover,
+    .sec-tab-btn.active {
+      border-color: var(--primary);
+      color: #fff;
+      background: rgba(99, 102, 241, 0.15);
+    }
+
+    /* Side Customizer Drawer */
+    .drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 480px;
+      max-width: 90vw;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-card);
+      z-index: 200;
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 10px 0 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface-elevated);
+    }
+
+    .drawer-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      flex-grow: 1;
+    }
+
+    .drawer-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      background: var(--bg-surface-elevated);
+    }
+
+    /* Forms */
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text-secondary);
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      background: var(--bg-base);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    /* Live Preview Container */
+    .preview-container {
+      padding: 2rem 1.5rem;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+
+    .preview-banner {
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #10b981;
+      color: #fff;
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+      z-index: 1000;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Auth Modal */
+    .auth-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(6, 9, 19, 0.95);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .auth-box {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .pin-input {
+      font-family: monospace;
+      font-size: 2rem;
+      letter-spacing: 0.5rem;
+      text-align: center;
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--bg-base);
+      border: 2px solid var(--border-card);
+      border-radius: var(--radius-md);
+      color: var(--accent-cyan);
+      margin: 1.5rem 0;
+      outline: none;
+    }
+
+    .pin-input:focus {
+      border-color: var(--primary);
+    }
+
+    /* RESPONSIVE GRIDS FOR ADMIN PREVIEW */
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .admin-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .admin-roi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .admin-projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    /* RTL & LTR INTELLIGENT DRAWER SLIDE */
+    html[dir="ltr"] .drawer {
+      left: 0;
+      right: auto;
+      border-right: 1px solid var(--border-card);
+      border-left: none;
+      transform: translateX(-100%);
+    }
+
+    html[dir="ltr"] .drawer.open {
+      transform: translateX(0);
+    }
+
+    html[dir="rtl"] .drawer {
+      right: 0;
+      left: auto;
+      border-left: 1px solid var(--border-card);
+      border-right: none;
+      transform: translateX(100%);
+    }
+
+    html[dir="rtl"] .drawer.open {
+      transform: translateX(0);
+    }
+
+    /* MOBILE & TABLET RESPONSIVENESS (< 1100px) */
+    @media (max-width: 1100px) {
+      .admin-skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .admin-roi-grid,
+      .admin-projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        overflow-x: hidden;
+        width: 100%;
+      }
+
+      .admin-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.65rem;
+        padding: 0.75rem 1rem;
+      }
+
+      .admin-title {
+        justify-content: space-between;
+        width: 100%;
+        font-size: 0.95rem;
+      }
+
+      .admin-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        width: 100%;
+        justify-content: stretch;
+      }
+
+      .admin-actions .btn,
+      .admin-actions label.btn {
+        flex: 1 1 auto;
+        justify-content: center;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.75rem;
+      }
+
+      .preview-container {
+        padding: 1rem 0.65rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .preview-banner {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-start;
+        padding: 1rem;
+      }
+
+      .admin-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.65rem;
+      }
+
+      .admin-skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .admin-roi-grid,
+      .admin-projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .drawer {
+        width: 100% !important;
+        max-width: 100vw !important;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PIN Modal -->
+  <div class="auth-modal" id="adminAuthModal">
+    <div class="auth-box">
+      <div
+        style="width: 50px; height: 50px; border-radius: 50%; background: rgba(99,102,241,0.15); color: var(--primary-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto;">
+        <i data-lucide="lock" style="width: 24px; height: 24px;"></i>
+      </div>
+      <h2>دخول لوحة التحكم المعتمدة</h2>
+      <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">أدخل رمز PIN للمتابعة (الافتراضي: 1234)</p>
+      <input type="password" id="adminPinInput" class="pin-input" maxlength="10" placeholder="••••" autofocus
+        onkeypress="if(event.key==='Enter') verifyAdminPin()">
+      <button onclick="verifyAdminPin()" class="btn btn-primary" style="width: 100%; justify-content: center;">
+        <span>تأكيد الرمز والدخول</span>
+        <i data-lucide="key" style="width: 16px; height: 16px;"></i>
+      </button>
+      <p id="pinErrorMsg" style="color: #ef4444; font-size: 0.85rem; margin-top: 0.75rem; display: none;">الرمز غير
+        صحيح، حاول مرة أخرى.</p>
+    </div>
+  </div>
+
+  <!-- Settings Modal (Cloud Config & Admin PIN) -->
+  <div class="auth-modal" id="adminSettingsModal" style="display:none; z-index: 10000;">
+    <div class="auth-box" style="max-width: 520px; text-align: right;" dir="rtl">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.75rem;">
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+          <i data-lucide="settings" style="width: 20px; height: 20px; color: var(--accent-cyan);"></i>
+          <h3 style="font-size: 1.15rem; font-weight: 700;">إعدادات السحابة وكلمة المرور</h3>
+        </div>
+        <button type="button" onclick="closeCloudSettingsModal()" style="background:none; border:none; color:var(--text-tertiary); cursor:pointer; font-size:1.5rem; line-height:1;">&times;</button>
+      </div>
+
+      <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.25rem;">
+        يمكنك تفعيل الحفظ السحابي مجاناً عبر Firebase أو تخصيص رمز PIN للوحة. هذه الإعدادات تحفظ محلياً في متصفحك أو يمكنك كتابتها في <code style="color:var(--accent-cyan);">config.js</code>.
+      </p>
+
+      <div class="form-group" style="margin-bottom: 1rem;">
+        <label style="display:block; font-size:0.85rem; margin-bottom:0.35rem; color:var(--text-primary);">رمز PIN للوحة التحكم:</label>
+        <input type="text" id="cfg_admin_pin" class="form-input" placeholder="الافتراضي: 1234" maxlength="10">
+      </div>
+
+      <div style="border-top:1px solid var(--border-subtle); padding-top:1rem; margin-top:1rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+          <strong style="color:var(--primary-light); font-size:0.9rem;">ربط سحابة Google Firebase (اختياري)</strong>
+          <a href="https://console.firebase.google.com/" target="_blank" style="font-size:0.75rem; color:var(--accent-cyan); text-decoration:none;">إنشاء مشروع مجاني ↗</a>
+        </div>
+        <div class="form-group" style="margin-bottom: 0.75rem;">
+          <label style="display:block; font-size:0.8rem; margin-bottom:0.25rem; color:var(--text-secondary);">Firebase Project ID:</label>
+          <input type="text" id="cfg_fb_project_id" class="form-input" placeholder="مثال: my-portfolio-12345">
+        </div>
+        <div class="form-group" style="margin-bottom: 0.75rem;">
+          <label style="display:block; font-size:0.8rem; margin-bottom:0.25rem; color:var(--text-secondary);">Firebase Web API Key:</label>
+          <input type="text" id="cfg_fb_api_key" class="form-input" placeholder="مثال: AIzaSy...">
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+        <button onclick="saveCloudSettings()" class="btn btn-primary" style="flex: 1; justify-content: center;">
+          <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+          <span>حفظ وتطبيق الإعدادات</span>
+        </button>
+        <button onclick="closeCloudSettingsModal()" class="btn btn-glass" style="flex: 0.5; justify-content: center;">
+          <span>إلغاء</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Sticky Bar -->
+  <header class="admin-bar">
+    <div class="admin-title">
+      <div style="display:flex; align-items:center; gap:0.6rem;">
+        <span
+          style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; background: var(--gradient-accent); color: #fff; flex-shrink:0;">
+          <i data-lucide="sliders" style="width: 18px; height: 18px;"></i>
+        </span>
+        <span id="lbl_adm_title">لوحة تحكم وتعديل البورتفوليو</span>
+      </div>
+      <span id="lbl_adm_status"
+        style="font-size: 0.75rem; padding: 0.15rem 0.55rem; border-radius: var(--radius-full); background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); white-space:nowrap;">متصل
+        ومفعل</span>
+    </div>
+
+    <div class="admin-actions">
+      <!-- Admin Studio Language Switcher (AR / EN) -->
+      <button onclick="toggleAdminLanguage()" class="btn btn-glass btn-sm" id="adminLangToggleBtn"
+        title="تبديل لغة لوحة التحكم / Switch Language">
+        <i data-lucide="globe" style="width: 14px; height: 14px;"></i>
+        <span id="adminLangBtnLabel">English</span>
+      </button>
+
+      <!-- The Official Primary Visitor URL requested by user -->
+      <a href="index.html" target="_blank" class="btn btn-glass" id="adminVisitSiteBtn"
+        title="فتح الموقع المعتمد للزوار">
+        <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+        <span id="lbl_adm_visit">معاينة للزوار</span>
+      </a>
+
+      <!-- Cloud & Security Settings -->
+      <button onclick="openCloudSettingsModal()" class="btn btn-glass btn-sm" id="adminCloudConfigBtn"
+        title="إعدادات السحابة وكلمة المرور / Settings">
+        <i data-lucide="settings" style="width: 14px; height: 14px;"></i>
+        <span id="lbl_adm_settings">الإعدادات</span>
+      </button>
+
+      <button onclick="saveAllToCloud()" class="btn btn-primary" id="adminSaveCloudBtn">
+        <i data-lucide="cloud-upload" style="width: 16px; height: 16px;"></i>
+        <span id="lbl_adm_save">حفظ التعديلات سحابياً</span>
+      </button>
+
+      <button onclick="exportBackupJson()" class="btn btn-glass btn-sm" id="adminBackupBtn"
+        title="تحميل ملف JSON كامل كنسخة احتياطية">
+        <i data-lucide="download" style="width: 14px; height: 14px;"></i>
+        <span id="lbl_adm_backup">نسخة احتياطية</span>
+      </button>
+
+      <label class="btn btn-glass btn-sm" style="margin: 0; cursor: pointer;">
+        <i data-lucide="upload" style="width: 14px; height: 14px;"></i>
+        <span id="lbl_adm_restore">استرجاع</span>
+        <input type="file" accept=".json" onchange="handleRestoreFile(event)" style="display: none;">
+      </label>
+    </div>
+  </header>
+
+  <!-- Sections Quick Access Nav -->
+  <div class="admin-sections-nav" id="adminSectionsNav">
+    <button onclick="openDrawer('personal')" class="sec-tab-btn"><i data-lucide="user"></i><span
+        id="tab_lbl_personal">البيانات والصورة</span></button>
+    <button onclick="openDrawer('stats')" class="sec-tab-btn"><i data-lucide="hash"></i><span id="tab_lbl_stats">أرقام
+        البطاقة الـ 4</span></button>
+    <button onclick="openDrawer('badges')" class="sec-tab-btn"><i data-lucide="tag"></i><span
+        id="tab_lbl_badges">الشارات المعلقة</span></button>
+    <button onclick="openDrawer('summary')" class="sec-tab-btn"><i data-lucide="sparkles"></i><span
+        id="tab_lbl_summary">الملخص المهني</span></button>
+    <button onclick="openDrawer('skills')" class="sec-tab-btn active"><i data-lucide="cpu"></i><span
+        id="tab_lbl_skills">المهارات والتفاصيل</span></button>
+    <button onclick="openDrawer('roi')" class="sec-tab-btn"><i data-lucide="trending-up"></i><span
+        id="tab_lbl_roi">القيمة المضافة و ROI</span></button>
+    <button onclick="openDrawer('projects')" class="sec-tab-btn"><i data-lucide="folder-git-2"></i><span
+        id="tab_lbl_projects">المشاريع الهندسية</span></button>
+    <button onclick="openDrawer('contact')" class="sec-tab-btn"><i data-lucide="message-square"></i><span
+        id="tab_lbl_contact">بيانات الاتصال</span></button>
+  </div>
+
+  <!-- Live Preview Area -->
+  <main class="preview-container">
+    <div class="preview-banner">
+      <div>
+        <h3 style="font-size: 1.1rem; margin-bottom: 0.25rem;">استعراض فوري وتعديل مرئي حي</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">كل تعديل تقوم به ينعكس مباشرة في هذه الشاشة ويتم
+          بثه فوراً لصفحة البورتفوليو الرسمية عبر تقنية المزامنة اللحظية.</p>
+      </div>
+      <button onclick="openDrawer('skills')" class="btn btn-primary btn-sm">
+        <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i>
+        <span>تعديل المهارات وتفاصيلها</span>
+      </button>
+    </div>
+
+    <!-- Live Cards Preview Area -->
+    <div id="liveAdminPreview">
+      <!-- Section Preview: Hero & Stats -->
+      <div
+        style="background: var(--bg-surface); border: 1px solid var(--border-card); border-radius: var(--radius-xl); padding: 2rem; margin-bottom: 2rem;">
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.75rem;">
+          <h3 style="font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem;"><i
+              data-lucide="user"></i><span>بطاقة الواجهة والأرقام الأربعة</span></h3>
+          <button onclick="openDrawer('stats')" class="btn btn-glass btn-sm">تعديل الأرقام</button>
+        </div>
+        <div class="admin-stats-grid" id="admStatsRow"></div>
+      </div>
+
+      <!-- Section Preview: Categorized Skills -->
+      <div
+        style="background: var(--bg-surface); border: 1px solid var(--border-card); border-radius: var(--radius-xl); padding: 2rem; margin-bottom: 2rem;">
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.75rem;">
+          <div>
+            <h3 style="font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem;"><i
+                data-lucide="cpu"></i><span id="lbl_adm_sec_skills">المهارات المصنفة مع تفاصيلها</span></h3>
+            <p id="lbl_adm_sec_skills_desc"
+              style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">مرتبة بأناقة وتدعم إضافة
+              الوصف والتفاصيل أسفل كل شريط مهارة.</p>
+          </div>
+          <button onclick="openDrawer('skills')" class="btn btn-primary btn-sm" id="lbl_adm_btn_skills">+ إضافة / تعديل
+            المهارات</button>
+        </div>
+        <div class="admin-skills-grid" id="admSkillsGrid"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Side Customizer Drawer -->
+  <aside class="drawer" id="customizerDrawer">
+    <div class="drawer-header">
+      <h3 id="drawerTitle" style="font-size: 1.15rem; font-weight: 700;">تعديل البيانات</h3>
+      <button onclick="closeDrawer()"
+        style="background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.5rem;">&times;</button>
+    </div>
+    <div class="drawer-body" id="drawerBody">
+      <!-- Drawer Content Dynamically Rendered -->
+    </div>
+    <div class="drawer-footer">
+      <button onclick="closeDrawer()" class="btn btn-glass" id="lbl_adm_drawer_cancel">إلغاء</button>
+      <button onclick="saveFromDrawer()" class="btn btn-primary" id="lbl_adm_drawer_save">تطبيق التعديلات</button>
+    </div>
+  </aside>
+
+  <!-- Toast -->
+  <div class="toast" id="toastNotice">
+    <span id="toastMsg">تم تطبيق التعديلات بنجاح</span>
+  </div>
+
+  <script>
+    const INITIAL_DATA = {
+      "personal": {
+        "fullName": "Ahmed Hamed El-shrabasy",
+        "fullNameAr": "أحمد حامد الشرباصي",
+        "professionalTitle": "AI Automation Specialist & Systems Developer",
+        "professionalTitleAr": "أخصائي أتمتة الذكاء الاصطناعي ومطور أنظمة",
+        "professionalHeadline": "Automating Workflows with n8n, Make & AI Agents | IoT & Health-Tech Developer",
+        "professionalHeadlineAr": "أتمتة مسارات العمل باستخدام n8n و Make ونماذج AI | مطور أنظمة مدمجة وتقنية طبية",
+        "shortIntroduction": "Building and deploying end-to-end automated workflows using n8n, Make, REST APIs, and custom AI agents to eliminate manual friction and streamline business operations.",
+        "shortIntroductionAr": "بناء وتطوير مسارات عمل مؤتمتة متكاملة باستخدام n8n و Make وواجهات REST APIs ونماذج الذكاء الاصطناعي الذكية للقضاء على الاختناقات اليدوية ورفع كفاءة الأعمال.",
+        "aboutMe": "I am an AI Automation Specialist and Health-Tech Developer with practical experience in designing resilient workflows, API integrations, and prompt architectures. Through the Digital Egypt Pioneers Initiative (DEPI - MCIT / eYouth), I build production-ready automation pipelines connecting external APIs, databases, and messaging channels. With my academic background in Physical Therapy (B.Sc., Kafr El-Sheikh University) and hands-on practice in embedded systems (ESP32, C++), I combine rigorous physiological understanding with automation engineering to build intelligent healthcare and business systems.",
+        "aboutMeAr": "أنا أخصائي أتمتة ذكاء اصطناعي ومطور أنظمة طبية وتقنية، أمتلك خبرة عملية في تصميم مسارات العمل المؤتمتة، وربط واجهات البرمجة APIs، وهندسة الأوامر المتقدمة. من خلال مبادرة رواد مصر الرقمية (DEPI - وزارة الاتصالات / eYouth)، أقوم ببناء مسارات أتمتة مؤسسية تربط قواعد البيانات والأنظمة السحابية. وبفضل دراستي الأكاديمية للعلاج الطبيعي وتطبيقي العملي للأنظمة المدمجة (ESP32 و C++)، أدمج الفهم الدقيق مع هندسة الأتمتة لابتكار حلول وأنظمة فائقة الكفاءة.",
+        "careerObjective": "To spearhead scalable automation initiatives, integrate intelligent AI agent loops into business processes, and engineer smart biomedical IoT systems that maximize operational velocity.",
+        "careerObjectiveAr": "قيادة مبادرات الأتمتة المؤسسية، ودمج وكلاء الذكاء الاصطناعي الذاتيين في بيئات العمل، وهندسة أنظمة IoT طبية متقدمة تعظم سرعة وكفاءة العمليات.",
+        "currentLocation": "New Damietta, Damietta, Egypt",
+        "currentLocationAr": "دمياط الجديدة، دمياط، مصر",
+        "nationality": "Egyptian",
+        "availability": "Available for High-Impact Projects & Roles",
+        "availabilityAr": "متاح للمشاريع المتقدمة والفرص الوظيفية",
+        "experienceYears": "2+ Years in Automation & Systems",
+        "profileImage": "profile.jpg",
+        "cvUrl": "Ahmed_Hamed_Elshrabasy_CV.pdf"
+      },
+      "contact": {
+        "email": "Ahmed.edu.pt12@gmail.com",
+        "phone": "+201006193690",
+        "phoneDisplay": "+20 100 619 3690",
+        "whatsappUrl": "https://wa.me/201006193690",
+        "linkedin": "https://linkedin.com/in/ahmed-elshrabasy",
+        "github": "https://github.com/ahmedelshrabasy",
+        "portfolioUrl": "https://ahmed-elshrabasy-portfolio.web.app/"
+      },
+      "stats": [
+        {
+          "id": "s1",
+          "number": "100%",
+          "label": "Automated Reliability",
+          "labelAr": "دقة وموثوقية التشغيل"
+        },
+        {
+          "id": "s2",
+          "number": "3.65",
+          "label": "Academic GPA (Very Good)",
+          "labelAr": "المعدل التراكمي (جيد جداً)"
+        },
+        {
+          "id": "s3",
+          "number": "4+",
+          "label": "Certified AI Tracks",
+          "labelAr": "مسارات ذكاء اصطناعي معتمدة"
+        },
+        {
+          "id": "s4",
+          "number": "2+",
+          "label": "Deployed Systems & MedTech",
+          "labelAr": "أنظمة تشغيلية وأجهزة طبية"
+        }
+      ],
+      "floatingBadges": [
+        {
+          "id": "b1",
+          "icon": "cpu",
+          "category": "Domain",
+          "categoryAr": "المجال",
+          "title": "n8n & AI Workflows",
+          "titleAr": "أتمتة n8n وذكاء اصطناعي",
+          "targetSection": "#skills"
+        },
+        {
+          "id": "b2",
+          "icon": "zap",
+          "category": "Track",
+          "categoryAr": "المسار",
+          "title": "DEPI Fellow (MCIT)",
+          "titleAr": "رواد مصر الرقمية (الاتصالات)",
+          "targetSection": "#experience"
+        },
+        {
+          "id": "b3",
+          "icon": "activity",
+          "category": "Health-Tech",
+          "categoryAr": "تقنية طبية",
+          "title": "TheraDe IoT Device",
+          "titleAr": "نظام TheraDe الطبي",
+          "targetSection": "#projects",
+          "targetId": "therade-stimulation"
+        },
+        {
+          "id": "b4",
+          "icon": "database",
+          "category": "Stack",
+          "categoryAr": "التقنيات",
+          "title": "Firebase & Supabase",
+          "titleAr": "قواعد بيانات سحابية",
+          "targetSection": "#skills"
+        }
+      ],
+      "professionalSummary": [
+        {
+          "id": "ps1",
+          "icon": "map-pin",
+          "label": "Base Location",
+          "labelAr": "الموقع الجغرافي",
+          "value": "New Damietta, Damietta, Egypt",
+          "valueAr": "دمياط الجديدة، دمياط، مصر"
+        },
+        {
+          "id": "ps2",
+          "icon": "graduation-cap",
+          "label": "Academic Degree",
+          "labelAr": "المؤهل الأكاديمي",
+          "value": "B.Sc. in Physical Therapy (Undergraduate, Exp. 2029, GPA: 3.65)",
+          "valueAr": "بكالوريوس العلاج الطبيعي (جامعة كفر الشيخ، متوقع 2029، امتياز 3.65)"
+        },
+        {
+          "id": "ps3",
+          "icon": "award",
+          "label": "Government Fellowship",
+          "labelAr": "المبادرة الحكومية",
+          "value": "DEPI AI Automation Track (MCIT / eYouth)",
+          "valueAr": "مسار أتمتة الذكاء الاصطناعي - رواد مصر الرقمية (وزارة الاتصالات)"
+        },
+        {
+          "id": "ps4",
+          "icon": "languages",
+          "label": "Languages",
+          "labelAr": "اللغات",
+          "value": "Arabic (Native), English (Intermediate B1), French (Beginner A1)",
+          "valueAr": "العربية (اللغة الأم)، الإنجليزية (متوسط B1)، الفرنسية (مبتدئ A1)"
+        },
+        {
+          "id": "ps5",
+          "icon": "calendar-check",
+          "label": "Availability",
+          "labelAr": "حالة التوفر",
+          "value": "Immediate for High-Impact Projects & Automation Roles",
+          "valueAr": "متاح فوراً للمشاريع المتقدمة وعقود الأتمتة"
+        }
+      ],
+      "skillsCategories": [
+        {
+          "categoryName": "Workflow Automation",
+          "categoryNameAr": "أتمتة سير العمل والمزامنة",
+          "icon": "workflow",
+          "skills": [
+            {
+              "name": "n8n",
+              "level": 96,
+              "badge": "Mastery",
+              "desc": "Complex multi-node workflows, webhooks, error handlers, and self-hosted instances."
+            },
+            {
+              "name": "Make (Integromat)",
+              "level": 95,
+              "badge": "Expert",
+              "desc": "Scenarios routing, data iterators, modules optimization, and schedule automations."
+            },
+            {
+              "name": "REST APIs & Webhooks",
+              "level": 92,
+              "badge": "Core",
+              "desc": "HTTP request nodes, custom payloads, headers, webhooks, and rate-limiting."
+            },
+            {
+              "name": "JSON Data Parsing",
+              "level": 94,
+              "badge": "Advanced",
+              "desc": "Data extraction, transformation, nested object normalization, and schema mapping."
+            },
+            {
+              "name": "OAuth2 Authentication",
+              "level": 88,
+              "badge": "Security",
+              "desc": "Token generation, refresh rotations, scopes authorization, and credential safety."
+            }
+          ]
+        },
+        {
+          "categoryName": "AI & Backend Development",
+          "categoryNameAr": "الذكاء الاصطناعي والتطوير الخلفي",
+          "icon": "bot",
+          "skills": [
+            {
+              "name": "Prompt Engineering",
+              "level": 95,
+              "badge": "Specialist",
+              "desc": "System prompts, structured JSON extraction, few-shot prompting, and guardrails."
+            },
+            {
+              "name": "Autonomous AI Agents",
+              "level": 90,
+              "badge": "Architect",
+              "desc": "Autonomous agent execution loops, multi-agent coordination, and custom tool calling."
+            },
+            {
+              "name": "Vibe Coding & Cursor",
+              "level": 92,
+              "badge": "Agile",
+              "desc": "High-speed AI-assisted development, rapid full-stack prototyping, and clean architecture."
+            },
+            {
+              "name": "Firebase (Firestore & Hosting)",
+              "level": 90,
+              "badge": "Production",
+              "desc": "Real-time NoSQL database, security rules, cloud REST APIs, and CDN deployments."
+            },
+            {
+              "name": "Supabase & PostgreSQL",
+              "level": 88,
+              "badge": "Database",
+              "desc": "Relational table schemas, row-level security (RLS), and backend integration."
+            }
+          ]
+        },
+        {
+          "categoryName": "Hardware & Embedded Systems",
+          "categoryNameAr": "الأنظمة المدمجة والعتاد الذكي",
+          "icon": "cpu",
+          "skills": [
+            {
+              "name": "ESP32 Microcontrollers",
+              "level": 90,
+              "badge": "Hardware",
+              "desc": "WiFi/BLE IoT telemetry, sensor data acquisition, and real-time controller firmware."
+            },
+            {
+              "name": "PlatformIO (C++)",
+              "level": 88,
+              "badge": "Firmware",
+              "desc": "Modular C++ libraries, sensor calibration algorithms, and embedded logic."
+            },
+            {
+              "name": "EasyEDA Circuit Design",
+              "level": 85,
+              "badge": "Schematics",
+              "desc": "Custom PCB schematics, component selection, and prototype layout design."
+            },
+            {
+              "name": "Sensors & Actuators",
+              "level": 88,
+              "badge": "Biomedical",
+              "desc": "Thermal feedback sensors, Peltier elements, and motor driver circuits (DRV8873H)."
+            },
+            {
+              "name": "VS Code & Git / GitHub",
+              "level": 92,
+              "badge": "DevOps",
+              "desc": "Version control, automated commits, code organization, and collaborative workflows."
+            }
+          ]
+        },
+        {
+          "categoryName": "Soft Skills & Optimization",
+          "categoryNameAr": "المهارات التحليلية والتحسينية",
+          "icon": "sparkles",
+          "skills": [
+            {
+              "name": "Analytical Problem Solving",
+              "level": 95,
+              "badge": "Strategic",
+              "desc": "Diagnosing edge cases, resolving workflow exceptions, and failover architectures."
+            },
+            {
+              "name": "Critical Thinking & Optimization",
+              "level": 94,
+              "badge": "Process",
+              "desc": "Streamlining business processes to minimize operational latency and eliminate waste."
+            },
+            {
+              "name": "Rapid Tech Learning",
+              "level": 96,
+              "badge": "Adaptive",
+              "desc": "Mastering new frameworks, APIs, and AI models in days with instant practical execution."
+            },
+            {
+              "name": "Time Management & Prioritization",
+              "level": 92,
+              "badge": "Efficiency",
+              "desc": "Milestone-driven project completion and reliable delivery schedules."
+            },
+            {
+              "name": "Cross-functional Teamwork",
+              "level": 90,
+              "badge": "Collaborative",
+              "desc": "Clear professional communication and smooth integration with technical stakeholders."
+            }
+          ]
+        }
+      ],
+      "experience": [
+        {
+          "jobTitle": "AI Automation Specialist (Trainee)",
+          "jobTitleAr": "أخصائي أتمتة الذكاء الاصطناعي (متدرب)",
+          "company": "Digital Egypt Pioneers Initiative (DEPI) – MCIT / eYouth",
+          "companyAr": "مبادرة رواد مصر الرقمية (DEPI) - وزارة الاتصالات وتكنولوجيا المعلومات",
+          "employmentType": "Intensive Government Fellowship",
+          "employmentTypeAr": "زمالة تدريبية حكومية مكثفة",
+          "startDate": "June 2026",
+          "startDateAr": "يونيو 2026",
+          "endDate": "Present",
+          "endDateAr": "حتى الآن",
+          "responsibilities": "Architecting and implementing production-ready automated workflows using n8n and Make to eliminate manual business tasks. Developing secure API integrations, webhooks triggers, and automated multi-source data processing pipelines. Integrating custom AI prompt engineering workflows with automated systems to handle dynamic business responses.",
+          "responsibilitiesAr": "تصميم وتنفيذ مسارات عمل مؤتمتة جاهزة للإنتاج باستخدام n8n و Make لإلغاء المهام اليدوية المتكررة. بناء عمليات ربط آمنة للـ APIs ومحفزات الـ Webhooks، ومعالجة البيانات المتدفقة من مصادر متعددة. دمج نماذج الذكاء الاصطناعي وهندسة الأوامر مع مسارات الأتمتة لتقديم استجابات آلية ذكية وسريعة.",
+          "technologies": [
+            "n8n",
+            "Make",
+            "REST APIs",
+            "Webhooks",
+            "JSON",
+            "Prompt Engineering",
+            "OpenAI API"
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "id": "therade-stimulation",
+          "name": "TheraDe – Portable Thermal Sensory Stimulation Device",
+          "nameAr": "TheraDe – جهاز محمول للتحفيز الحسي الحراري",
+          "category": "Biomedical & Embedded Systems",
+          "categoryAr": "أنظمة طبية وأجهزة مدمجة",
+          "shortDescription": "Designing and prototyping a closed-loop medical stimulation system for sensory threshold evaluation and neuro-rehabilitation therapy with real-time temperature regulation.",
+          "shortDescriptionAr": "تصميم ونمذجة نظام طبي مغلق الحلقة لتقييم عتبات الإحساس وإعادة التأهيل العصبي مع تنظيم حراري فوري ودقيق.",
+          "technologies": [
+            "ESP32",
+            "Peltier Module",
+            "DRV8873H",
+            "PlatformIO (C++)",
+            "EasyEDA",
+            "Sensors"
+          ],
+          "liveDemo": "",
+          "imageUrl": "",
+          "metric": "Closed-Loop Regulation",
+          "metricAr": "تنظيم مغلق الحلقة فوري",
+          "overview": "Built to bridge physical therapy science with embedded engineering, TheraDe delivers accurate thermal stimulation protocols to assist neurological rehabilitation patients, using real-time sensor feedback and micro-controller safety limits."
+        },
+        {
+          "id": "qgame-trivia",
+          "name": "QGame – Interactive Social Trivia Web Platform",
+          "nameAr": "QGame – منصة مسابقات وتفاعل اجتماعي تفاعلية",
+          "category": "Full-Stack Web & Realtime Database",
+          "categoryAr": "تطبيقات ويب وقواعد بيانات فورية",
+          "shortDescription": "A real-time interactive web quiz platform allowing friends to generate customized questions, compare answers, and test interpersonal knowledge in an engaging UI.",
+          "shortDescriptionAr": "منصة ويب تفاعلية فورية تتيح للمستخدمين إنشاء أسئلة مخصصة، مقارنة الإجابات، واختبار المعرفة المشتركة في واجهة مستخدم سريعة وسلسة.",
+          "technologies": [
+            "JavaScript",
+            "Firebase Hosting",
+            "Firestore Database",
+            "HTML5/CSS3"
+          ],
+          "liveDemo": "https://qgame-30129.web.app/",
+          "imageUrl": "",
+          "metric": "Sub-50ms Sync",
+          "metricAr": "مزامنة لحظية فائقة السرعة",
+          "overview": "An engaging real-time multiplayer application designed with modular state management and cloud synchronization via Firebase."
+        },
+        {
+          "id": "depi-lead-triage",
+          "name": "Enterprise Multi-Source Lead & Ticket Dispatch Engine",
+          "nameAr": "محرك أتمتة إدارة وفرز طلبات العملاء المؤسسي",
+          "category": "AI Workflow Automation",
+          "categoryAr": "أتمتة مسارات العمل بالذكاء الاصطناعي",
+          "shortDescription": "End-to-end automated workflow connecting incoming webhooks, categorizing intents via LLM prompts, updating databases, and alerting team leads in sub-30 seconds.",
+          "shortDescriptionAr": "مسار عمل مؤتمت بالكامل يربط الـ Webhooks، ويفرز نوايا العملاء بنماذج الذكاء الاصطناعي، ويحدث قواعد البيانات ويرسل تنبيهات فورية في أقل من 30 ثانية.",
+          "technologies": [
+            "n8n",
+            "Make",
+            "REST APIs",
+            "Webhooks",
+            "JSON Parsing",
+            "OpenAI"
+          ],
+          "liveDemo": "",
+          "imageUrl": "",
+          "metric": "95% Speedup",
+          "metricAr": "توفير 95% من وقت الاستجابة",
+          "overview": "Eliminates hours of manual data entry, ticket dispatching, and routing by executing flawless automated pipelines."
+        }
+      ],
+      "education": [
+        {
+          "degree": "Bachelor of Physical Therapy (B.Sc.)",
+          "degreeAr": "بكالوريوس العلاج الطبيعي (B.Sc.)",
+          "institution": "Faculty of Physical Therapy, Kafr El-Sheikh University",
+          "institutionAr": "كلية العلاج الطبيعي - جامعة كفر الشيخ",
+          "graduationDate": "Expected 2029",
+          "graduationDateAr": "متوقع التخرج 2029",
+          "gpa": "Very Good (GPA: 3.65)",
+          "gpaAr": "جيد جداً (معدل 3.65)",
+          "highlights": "Studying biomechanics, neuro-anatomy, electrotherapy, and physiological rehabilitation, directly informing the design of smart biomedical devices and robotic health interfaces.",
+          "highlightsAr": "دراسة الميكانيكا الحيوية، التشريح العصبي، العلاج الكهربائي، والتأهيل الفسيولوجي، مما يوفر أساساً علمياً متيناً لتطوير الأجهزة الطبية الذكية وأنظمة الـ IoT الصحية.",
+          "certificatesFolderUrl": "https://drive.google.com/"
+        }
+      ],
+      "courses": [
+        {
+          "name": "AI Automation & Integration Track",
+          "platform": "Digital Egypt Pioneers Initiative (DEPI) – MCIT / eYouth",
+          "completionDate": "2026"
+        },
+        {
+          "name": "Oracle AI for You",
+          "platform": "Oracle MyLearn – Official Achievement Badge & Certificate",
+          "completionDate": "2026"
+        },
+        {
+          "name": "Applied Prompt Engineering & Agent Systems",
+          "platform": "Hands-on Practical Training & LLM Workflows",
+          "completionDate": "2026"
+        },
+        {
+          "name": "Supabase Fundamentals & Backend Integration",
+          "platform": "Self-Paced Training & Database Architecture",
+          "completionDate": "2026"
+        }
+      ],
+      "addedValue": {
+        "sectionTitle": "Client Added Value & ROI Matrix",
+        "sectionTitleAr": "القيمة المضافة للعميل والعائد على الاستثمار (ROI)",
+        "sectionSubtitle": "Quantitative comparison showing the monumental shift from manual labor to intelligent autonomous workflows.",
+        "sectionSubtitleAr": "مقارنة رقمية واضحة توضح الفارق الجذري بين العمل اليدوي التقليدي وبين مسارات الأتمتة الذكية.",
+        "driveReportsUrl": "https://drive.google.com/",
+        "models": [
+          {
+            "id": "m1",
+            "title": "Manual Operations",
+            "titleAr": "العمل اليدوي التقليدي",
+            "tag": "High Cost & Friction",
+            "tagAr": "تكلفة عالية وبطء ملحوظ",
+            "cost": "$4,200 / mo",
+            "costAr": "$4,200 / شهرياً",
+            "costDetail": "Manual data entry, multiple repetitive staff salaries",
+            "costDetailAr": "رواتب إدخال بيانات يدوي ومتابعة متكررة",
+            "time": "4 - 6 Hours",
+            "timeAr": "4 - 6 ساعات",
+            "timeDetail": "Average latency per batch or ticket resolution",
+            "timeDetailAr": "متوسط وقت معالجة كل دفعة أو طلب",
+            "accuracy": "80% - 85%",
+            "accuracyAr": "80% - 85%",
+            "accuracyDetail": "15-20% human fatigue error rate",
+            "accuracyDetailAr": "نسبة أخطاء بشرية متوقعة 15-20%",
+            "scalability": "Linear & Costly",
+            "scalabilityAr": "محدودة وتتطلب توظيفاً إضافياً",
+            "badgeColor": "#ef4444"
+          },
+          {
+            "id": "m2",
+            "title": "Human-in-the-Loop Automation",
+            "titleAr": "الأتمتة مع الإشراف البشري",
+            "tag": "Balanced & Supervised",
+            "tagAr": "متوازنة ومراجعة بشرياً",
+            "cost": "$1,200 / mo",
+            "costAr": "$1,200 / شهرياً",
+            "costDetail": "71% reduction in labor hours; small supervisor oversight",
+            "costDetailAr": "توفير 71% من تكلفة المجهود البشري",
+            "time": "2 - 5 Minutes",
+            "timeAr": "2 - 5 دقائق",
+            "timeDetail": "System prepares data, human gives single-click approval",
+            "timeDetailAr": "النظام يجهز كل شيء والبشري يوافق بضغطة",
+            "accuracy": "98.5%",
+            "accuracyAr": "98.5%",
+            "accuracyDetail": "High accuracy with final verification sign-off",
+            "accuracyDetailAr": "دقة عالية مع مراجعة نهائية سريعة",
+            "scalability": "High (10x volume)",
+            "scalabilityAr": "عالية (تتحمل 10 أضعاف العمل بنفس الفريق)",
+            "badgeColor": "#f59e0b"
+          },
+          {
+            "id": "m3",
+            "title": "Autonomous AI Automation",
+            "titleAr": "الأتمتة الكاملة بالذكاء الاصطناعي",
+            "tag": "Maximum ROI & Speed",
+            "tagAr": "أعلى عائد وسرعة قصوى",
+            "cost": "$380 / mo",
+            "costAr": "$380 / شهرياً",
+            "costDetail": "91% cost slashed; runs 24/7 on serverless cloud triggers",
+            "costDetailAr": "خفض 91% من التكاليف مع تشغيل سحابي 24/7",
+            "time": "< 15 Seconds",
+            "timeAr": "أقل من 15 ثانية",
+            "timeDetail": "Instant real-time ingestion, triage, routing & notification",
+            "timeDetailAr": "معالجة وفرز وتوجيه وتنبيه فوري ولحظي",
+            "accuracy": "99.9%",
+            "accuracyAr": "99.9%",
+            "accuracyDetail": "Automated retry logic, zero fatigue, fault-tolerant",
+            "accuracyDetailAr": "إعادة محاولة تلقائية عند الأعطال وصفر أخطاء إرهاق",
+            "scalability": "Virtually Unlimited",
+            "scalabilityAr": "توسع غير محدود وتلقائي",
+            "badgeColor": "#10b981"
+          }
+        ],
+        "metrics": [
+          {
+            "label": "Cost Slashed",
+            "labelAr": "خفض التكاليف",
+            "value": "91%",
+            "progress": 91
+          },
+          {
+            "label": "Execution Speedup",
+            "labelAr": "تسريع العمليات",
+            "value": "95%",
+            "progress": 95
+          },
+          {
+            "label": "System Availability",
+            "labelAr": "جاهزية واستمرارية",
+            "value": "99.9%",
+            "progress": 99.9
+          }
+        ]
+      }
+    };
+    const CLOUD_URL = typeof getPortfolioCloudUrl === 'function' ? getPortfolioCloudUrl() : null;
+
+    let data = INITIAL_DATA;
+    let activeDrawerTab = 'skills';
+
+    try {
+      const cached = localStorage.getItem('portfolio_cache');
+      if (cached) data = JSON.parse(cached);
+    } catch (err) { }
+
+    function verifyAdminPin() {
+      const input = document.getElementById('adminPinInput').value;
+      const expectedPin = typeof getPortfolioAdminPin === 'function' ? getPortfolioAdminPin() : '1234';
+      if (input === expectedPin) {
+        document.getElementById('adminAuthModal').style.display = 'none';
+        sessionStorage.setItem('portfolio_admin_auth', 'true');
+        initAdmin();
+      } else {
+        document.getElementById('pinErrorMsg').style.display = 'block';
+      }
+    }
+
+    // BILINGUAL SUPPORT FOR ADMIN STUDIO
+    let adminLang = localStorage.getItem('admin_lang') || 'ar';
+
+    const adminDict = {
+      ar: {
+        title: 'لوحة تحكم وتعديل البورتفوليو',
+        status: 'متصل ومفعل',
+        langBtn: 'English',
+        visit: 'معاينة للزوار',
+        save: 'حفظ التعديلات سحابياً',
+        backup: 'نسخة احتياطية',
+        restore: 'استرجاع',
+        tabPersonal: 'البيانات والصورة',
+        tabStats: 'أرقام البطاقة الـ 4',
+        tabBadges: 'الشارات المعلقة',
+        tabSummary: 'الملخص المهني',
+        tabSkills: 'المهارات والتفاصيل',
+        tabRoi: 'القيمة المضافة و ROI',
+        tabProjects: 'المشاريع الهندسية',
+        tabContact: 'بيانات الاتصال',
+        secHero: 'بطاقة الواجهة والأرقام الأربعة',
+        btnStats: 'تعديل الأرقام',
+        secSkills: 'المهارات المصنفة مع تفاصيلها',
+        secSkillsDesc: 'مرتبة بأناقة وتدعم إضافة الوصف والتفاصيل أسفل كل شريط مهارة.',
+        btnSkills: '+ إضافة / تعديل المهارات',
+        drawerCancel: 'إلغاء',
+        drawerSave: 'تطبيق التعديلات'
+      },
+      en: {
+        title: 'Portfolio Admin Studio',
+        status: 'Connected & Live',
+        langBtn: 'العربية',
+        visit: 'Live Visitor Site',
+        save: 'Save to Cloud',
+        backup: 'Backup JSON',
+        restore: 'Restore',
+        tabPersonal: 'Personal & Profile',
+        tabStats: 'Hero Card 4 Stats',
+        tabBadges: 'Floating Badges',
+        tabSummary: 'Summary (5 Items)',
+        tabSkills: 'Skills & Details',
+        tabRoi: 'Added Value & ROI',
+        tabProjects: 'Engineering Projects',
+        tabContact: 'Contact & Socials',
+        secHero: 'Hero Visual Card & 4 Stats',
+        btnStats: 'Edit Stats',
+        secSkills: 'Categorized Skills & Details',
+        secSkillsDesc: 'Elegantly arranged with descriptions below each skill progress bar.',
+        btnSkills: '+ Add / Edit Skills',
+        drawerCancel: 'Cancel',
+        drawerSave: 'Apply Changes'
+      }
+    };
+
+    function applyAdminLanguage(lang) {
+      adminLang = lang;
+      localStorage.setItem('admin_lang', lang);
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar' ? 'rtl' : 'ltr');
+
+      const d = adminDict[lang] || adminDict.ar;
+      const el = (id) => document.getElementById(id);
+
+      if (el('lbl_adm_title')) el('lbl_adm_title').textContent = d.title;
+      if (el('lbl_adm_status')) el('lbl_adm_status').textContent = d.status;
+      if (el('adminLangBtnLabel')) el('adminLangBtnLabel').textContent = d.langBtn;
+      if (el('lbl_adm_visit')) el('lbl_adm_visit').textContent = d.visit;
+      if (el('lbl_adm_save')) el('lbl_adm_save').textContent = d.save;
+      if (el('lbl_adm_backup')) el('lbl_adm_backup').textContent = d.backup;
+      if (el('lbl_adm_restore')) el('lbl_adm_restore').textContent = d.restore;
+
+      if (el('tab_lbl_personal')) el('tab_lbl_personal').textContent = d.tabPersonal;
+      if (el('tab_lbl_stats')) el('tab_lbl_stats').textContent = d.tabStats;
+      if (el('tab_lbl_badges')) el('tab_lbl_badges').textContent = d.tabBadges;
+      if (el('tab_lbl_summary')) el('tab_lbl_summary').textContent = d.tabSummary;
+      if (el('tab_lbl_skills')) el('tab_lbl_skills').textContent = d.tabSkills;
+      if (el('tab_lbl_roi')) el('tab_lbl_roi').textContent = d.tabRoi;
+      if (el('tab_lbl_projects')) el('tab_lbl_projects').textContent = d.tabProjects;
+      if (el('tab_lbl_contact')) el('tab_lbl_contact').textContent = d.tabContact;
+
+      if (el('lbl_adm_sec_skills')) el('lbl_adm_sec_skills').textContent = d.secSkills;
+      if (el('lbl_adm_sec_skills_desc')) el('lbl_adm_sec_skills_desc').textContent = d.secSkillsDesc;
+      if (el('lbl_adm_btn_skills')) el('lbl_adm_btn_skills').textContent = d.btnSkills;
+
+      if (el('lbl_adm_drawer_cancel')) el('lbl_adm_drawer_cancel').textContent = d.drawerCancel;
+      if (el('lbl_adm_drawer_save')) el('lbl_adm_drawer_save').textContent = d.drawerSave;
+
+      if (activeDrawerTab && document.getElementById('customizerDrawer').classList.contains('open')) {
+        renderDrawerBody(activeDrawerTab);
+      }
+      renderLivePreview();
+      lucide.createIcons();
+    }
+
+    function toggleAdminLanguage() {
+      const nextLang = adminLang === 'ar' ? 'en' : 'ar';
+      applyAdminLanguage(nextLang);
+    }
+
+    function initAdmin() {
+      applyAdminLanguage(adminLang);
+      renderLivePreview();
+      openDrawer('skills');
+    }
+
+    function renderLivePreview() {
+      // Stats inside Hero Card
+      const statsRow = document.getElementById('admStatsRow');
+      statsRow.innerHTML = '';
+      (data.stats || []).forEach(s => {
+        const d = document.createElement('div');
+        d.style.cssText = 'background:var(--bg-surface-elevated); border:1px solid var(--border-card); border-radius:12px; padding:1.25rem; text-align:center;';
+        d.innerHTML = `
+          <div style="font-size:1.75rem; font-weight:800; color:var(--text-primary);">${s.number}</div>
+          <div style="font-size:0.85rem; color:var(--accent-cyan); font-weight:600; margin-top:0.25rem;">${s.labelAr || s.label}</div>
+          <div style="font-size:0.75rem; color:var(--text-tertiary);">${s.label}</div>
+        `;
+        statsRow.appendChild(d);
+      });
+
+      // Skills Grid
+      const skillsGrid = document.getElementById('admSkillsGrid');
+      skillsGrid.innerHTML = '';
+      (data.skillsCategories || []).forEach(cat => {
+        const card = document.createElement('div');
+        card.style.cssText = 'background:var(--bg-surface-elevated); border:1px solid var(--border-card); border-radius:16px; padding:1.5rem;';
+        let skHtml = '';
+        (cat.skills || []).forEach(sk => {
+          skHtml += `
+            <div style="margin-bottom: 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.75rem;">
+              <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:600;">
+                <span>${sk.name} ${sk.badge ? `<span style="font-size:0.7rem; padding:0.15rem 0.45rem; border-radius:999px; background:rgba(99,102,241,0.2); color:var(--primary-light);">${sk.badge}</span>` : ''}</span>
+                <span>${sk.level}%</span>
+              </div>
+              <div style="width:100%; height:6px; background:rgba(255,255,255,0.08); border-radius:999px; margin:0.4rem 0; overflow:hidden;">
+                <div style="width:${sk.level}%; height:100%; background:var(--gradient-accent); border-radius:999px;"></div>
+              </div>
+              ${sk.desc ? `<p style="font-size:0.8rem; color:var(--text-secondary); line-height:1.4; margin-top:0.25rem;">${sk.desc}</p>` : ''}
+            </div>
+          `;
+        });
+        card.innerHTML = `
+          <h4 style="font-size:1.15rem; margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem; color:var(--accent-cyan);">
+            <i data-lucide="${cat.icon || 'workflow'}"></i>
+            <span>${cat.categoryNameAr || cat.categoryName}</span>
+          </h4>
+          ${skHtml}
+        `;
+        skillsGrid.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function openDrawer(tab) {
+      activeDrawerTab = tab;
+      document.querySelectorAll('.sec-tab-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.sec-tab-btn')).find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes(tab));
+      if (activeBtn) activeBtn.classList.add('active');
+
+      document.getElementById('customizerDrawer').classList.add('open');
+      renderDrawerBody(tab);
+    }
+
+    function closeDrawer() {
+      document.getElementById('customizerDrawer').classList.remove('open');
+    }
+
+    function renderDrawerBody(tabId) {
+      const body = document.getElementById('drawerBody');
+      const title = document.getElementById('drawerTitle');
+
+      if (tabId === 'personal') {
+        title.textContent = 'البيانات الشخصية والصورة التعريفية';
+        const p = data.personal || {};
+        body.innerHTML = `
+          <div style="background:var(--bg-surface-elevated); padding:1.25rem; border-radius:12px; margin-bottom:1.25rem; border:1px solid var(--border-card);">
+            <label style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+              <strong style="color:var(--accent-cyan); font-size:0.95rem;">الصورة الشخصية (Profile Picture / Avatar)</strong>
+              <span style="font-size:0.75rem; color:var(--text-tertiary);">تظهر في بطاقة الهيرو والبار العلوي</span>
+            </label>
+            <div style="display:flex; gap:1.25rem; align-items:center;">
+              <div style="position:relative; width:76px; height:76px; border-radius:50%; overflow:hidden; border:2px solid var(--primary); box-shadow:0 0 16px var(--primary-glow); flex-shrink:0;">
+                <img id="dp_profileImage_preview" src="${p.profileImage || 'profile.jpg'}" style="width:100%; height:100%; object-fit:cover;">
+              </div>
+              <div style="flex:1;">
+                <div class="form-group" style="margin-bottom:0.5rem;">
+                  <input type="text" id="dp_profileImage" value="${p.profileImage || 'profile.jpg'}" class="form-input" oninput="document.getElementById('dp_profileImage_preview').src=this.value" placeholder="مسار الصورة أو الرابط المباشر...">
+                </div>
+                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                  <label class="btn btn-sm btn-primary" style="cursor:pointer; margin:0; display:inline-flex; align-items:center; gap:0.35rem;">
+                    <span>📷 اختيار صورة من جهازك</span>
+                    <input type="file" accept="image/*" style="display:none;" onchange="handleImageUpload(event, 'personal')">
+                  </label>
+                  <button type="button" class="btn btn-sm" style="background:transparent; border:1px solid var(--border-card); color:var(--text-secondary);" onclick="document.getElementById('dp_profileImage').value='profile.jpg'; document.getElementById('dp_profileImage_preview').src='profile.jpg'; data.personal.profileImage='profile.jpg'; renderLivePreview();">استعادة الافتراضية</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>الاسم بالإنجليزية</label><input type="text" id="dp_fullName" value="${p.fullName || ''}" class="form-input"></div>
+            <div class="form-group"><label>الاسم بالعربية</label><input type="text" id="dp_fullNameAr" value="${p.fullNameAr || ''}" class="form-input"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>المسمى المهني (EN)</label><input type="text" id="dp_title" value="${p.professionalTitle || ''}" class="form-input"></div>
+            <div class="form-group"><label>المسمى المهني (AR)</label><input type="text" id="dp_titleAr" value="${p.professionalTitleAr || ''}" class="form-input"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>شعار التخصص (Headline EN)</label><input type="text" id="dp_headline" value="${p.professionalHeadline || ''}" class="form-input"></div>
+            <div class="form-group"><label>شعار التخصص (Headline AR)</label><input type="text" id="dp_headlineAr" value="${p.professionalHeadlineAr || ''}" class="form-input"></div>
+          </div>
+          <div class="form-group"><label>نبذة سريعة (EN)</label><textarea id="dp_intro" class="form-textarea" rows="3">${p.shortIntroduction || ''}</textarea></div>
+          <div class="form-group"><label>نبذة سريعة (AR)</label><textarea id="dp_introAr" class="form-textarea" rows="3">${p.shortIntroductionAr || ''}</textarea></div>
+          <div class="form-row">
+            <div class="form-group"><label>حالة التوفر (EN)</label><input type="text" id="dp_avail" value="${p.availability || ''}" class="form-input"></div>
+            <div class="form-group"><label>حالة التوفر (AR)</label><input type="text" id="dp_availAr" value="${p.availabilityAr || ''}" class="form-input"></div>
+          </div>
+        `;
+      } else if (tabId === 'stats') {
+        title.textContent = 'أرقام بطاقة الصورة الأربعة';
+        let stHtml = '';
+        (data.stats || []).forEach((s, idx) => {
+          stHtml += `
+            <div style="background:var(--bg-surface-elevated); padding:1rem; border-radius:12px; margin-bottom:1rem; border:1px solid var(--border-card);">
+              <div class="form-row">
+                <div class="form-group"><label>الرقم / النسبة</label><input type="text" value="${s.number || ''}" onchange="data.stats[${idx}].number=this.value" class="form-input"></div>
+                <div class="form-group"><label>التسمية بالإنجليزية</label><input type="text" value="${s.label || ''}" onchange="data.stats[${idx}].label=this.value" class="form-input"></div>
+              </div>
+              <div class="form-group"><label>التسمية بالعربية</label><input type="text" value="${s.labelAr || ''}" onchange="data.stats[${idx}].labelAr=this.value" class="form-input"></div>
+            </div>
+          `;
+        });
+        body.innerHTML = `<p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">هذه الأرقام تظهر داخل بطاقة الصورة في الواجهة الرئيسية وتتغير تلقائياً في ثوانٍ.</p>${stHtml}`;
+      } else if (tabId === 'badges') {
+        title.textContent = 'الشارات المعلقة حول الصورة';
+        let bHtml = '';
+        (data.floatingBadges || []).forEach((b, idx) => {
+          bHtml += `
+            <div style="background:var(--bg-surface-elevated); padding:1rem; border-radius:12px; margin-bottom:1rem; border:1px solid var(--border-card);">
+              <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                <strong>شارة ${idx + 1}</strong>
+                <button onclick="deleteBadgeItem(${idx})" style="color:#ef4444; background:none; border:none; cursor:pointer;">حذف</button>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>التصنيف (EN)</label><input type="text" value="${b.category || ''}" onchange="data.floatingBadges[${idx}].category=this.value" class="form-input"></div>
+                <div class="form-group"><label>التصنيف (AR)</label><input type="text" value="${b.categoryAr || ''}" onchange="data.floatingBadges[${idx}].categoryAr=this.value" class="form-input"></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>العنوان (EN)</label><input type="text" value="${b.title || ''}" onchange="data.floatingBadges[${idx}].title=this.value" class="form-input"></div>
+                <div class="form-group"><label>العنوان (AR)</label><input type="text" value="${b.titleAr || ''}" onchange="data.floatingBadges[${idx}].titleAr=this.value" class="form-input"></div>
+              </div>
+              <div class="form-group">
+                <label>القسم المستهدف عند النقر (Smooth Scroll Target)</label>
+                <select class="form-input" onchange="data.floatingBadges[${idx}].targetSection=this.value; renderDrawerBody('badges');">
+                  <option value="#skills" ${(b.targetSection === '#skills' || !b.targetSection) ? 'selected' : ''}>قسم المهارات (Technical Competencies)</option>
+                  <option value="#projects" ${b.targetSection === '#projects' ? 'selected' : ''}>قسم المشاريع الهندسية (Engineering Projects)</option>
+                  <option value="#experience" ${b.targetSection === '#experience' ? 'selected' : ''}>قسم مسار العمل والزمالة (Work History & Fellowships)</option>
+                  <option value="#added-value" ${b.targetSection === '#added-value' ? 'selected' : ''}>قسم القيمة المضافة و ROI (Added Value Matrix)</option>
+                  <option value="#about" ${b.targetSection === '#about' ? 'selected' : ''}>قسم نبذة عني (About Me)</option>
+                  <option value="#education" ${b.targetSection === '#education' ? 'selected' : ''}>المؤهل الأكاديمي والشهادات (Credentials)</option>
+                  <option value="#contact" ${b.targetSection === '#contact' ? 'selected' : ''}>قنوات التواصل المباشر (Contact Channels)</option>
+                </select>
+              </div>
+              ${b.targetSection === '#projects' ? `
+              <div class="form-group">
+                <label>معرف المشروع لفتح تفاصيله مباشرة (اختياري)</label>
+                <select class="form-input" onchange="data.floatingBadges[${idx}].targetId=this.value">
+                  <option value="">-- تمرير للقسم فقط --</option>
+                  ${(data.projects || []).map(p => `<option value="${p.id}" ${b.targetId === p.id ? 'selected' : ''}>${p.name}</option>`).join('')}
+                </select>
+              </div>
+              ` : ''}
+            </div>
+          `;
+        });
+        body.innerHTML = `
+          <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
+            <span>الشارات العائمة التفاعلية (تطفو بأناقة وتنقل الزائر للقسم فور النقر)</span>
+            <button onclick="addBadgeItem()" class="btn btn-sm btn-primary">+ إضافة شارة</button>
+          </div>
+          ${bHtml}
+        `;
+      } else if (tabId === 'skills') {
+        title.textContent = 'إدارة وتعديل المهارات والتفاصيل';
+        let catHtml = '';
+        (data.skillsCategories || []).forEach((cat, cIdx) => {
+          let sListHtml = '';
+          (cat.skills || []).forEach((sk, sIdx) => {
+            sListHtml += `
+              <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                  <strong style="color: var(--accent-cyan); font-size: 0.95rem;">مهارة ${sIdx + 1}: ${sk.name || 'مهارة جديدة'}</strong>
+                  <button onclick="deleteSkillItem(${cIdx}, ${sIdx})" style="color:#ef4444; background:none; border:none; cursor:pointer; font-size: 0.8rem;">حذف المهارة</button>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>اسم المهارة</label>
+                    <input type="text" value="${sk.name || ''}" class="form-input" onchange="data.skillsCategories[${cIdx}].skills[${sIdx}].name=this.value">
+                  </div>
+                  <div class="form-group">
+                    <label>نسبة الإتقان % (0 - 100)</label>
+                    <input type="number" min="0" max="100" value="${sk.level || 90}" class="form-input" onchange="data.skillsCategories[${cIdx}].skills[${sIdx}].level=Number(this.value)">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>الشارة المميزة (Badge Pill - مثال: Mastery, Expert)</label>
+                  <input type="text" value="${sk.badge || ''}" class="form-input" placeholder="Mastery" onchange="data.skillsCategories[${cIdx}].skills[${sIdx}].badge=this.value">
+                </div>
+                <div class="form-group">
+                  <label style="color: #38bdf8; font-weight: 700;">تفاصيل ووصف المهارة (Skill Details & Description)</label>
+                  <textarea class="form-textarea" rows="2" placeholder="اكتب تفاصيل تطبيق هذه المهارة ومساراتها..." onchange="data.skillsCategories[${cIdx}].skills[${sIdx}].desc=this.value">${sk.desc || ''}</textarea>
+                </div>
+              </div>
+            `;
+          });
+
+          catHtml += `
+            <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-card); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
+                <h4 style="color: var(--primary-light); font-size: 1.1rem;">فئة: ${cat.categoryNameAr || cat.categoryName}</h4>
+                <button onclick="deleteSkillCategoryItem(${cIdx})" style="color:#ef4444; background:none; border:none; cursor:pointer; font-size:0.85rem;">حذف الفئة</button>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>اسم الفئة بالإنجليزية</label>
+                  <input type="text" value="${cat.categoryName || ''}" class="form-input" onchange="data.skillsCategories[${cIdx}].categoryName=this.value">
+                </div>
+                <div class="form-group">
+                  <label>اسم الفئة بالعربية</label>
+                  <input type="text" value="${cat.categoryNameAr || ''}" class="form-input" onchange="data.skillsCategories[${cIdx}].categoryNameAr=this.value">
+                </div>
+              </div>
+
+              <div style="margin-top: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                  <span style="font-weight: 700; font-size: 0.9rem;">المهارات داخل هذه الفئة:</span>
+                  <button onclick="addSkillItem(${cIdx})" class="btn btn-sm btn-glass">+ إضافة مهارة جديدة</button>
+                </div>
+                ${sListHtml}
+              </div>
+            </div>
+          `;
+        });
+
+        body.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <h4>إدارة المهارات المصنفة</h4>
+            <button onclick="addCategoryItem()" class="btn btn-sm btn-primary">+ إضافة فئة جديدة</button>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1.25rem;">
+            يمكنك كتابة وتعديل تفاصيل وأوصاف كل مهارة تظهر أسفل شريط النسبة في الموقع!
+          </p>
+          ${catHtml}
+        `;
+      } else if (tabId === 'summary') {
+        title.textContent = 'الملخص المهني (5 بنود)';
+        let sHtml = '';
+        (data.professionalSummary || []).forEach((it, idx) => {
+          sHtml += `
+            <div style="background:var(--bg-surface-elevated); padding:1rem; border-radius:12px; margin-bottom:1rem; border:1px solid var(--border-card);">
+              <div class="form-row">
+                <div class="form-group"><label>العنوان (EN)</label><input type="text" value="${it.label || ''}" onchange="data.professionalSummary[${idx}].label=this.value" class="form-input"></div>
+                <div class="form-group"><label>العنوان (AR)</label><input type="text" value="${it.labelAr || ''}" onchange="data.professionalSummary[${idx}].labelAr=this.value" class="form-input"></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>القيمة (EN)</label><input type="text" value="${it.value || ''}" onchange="data.professionalSummary[${idx}].value=this.value" class="form-input"></div>
+                <div class="form-group"><label>القيمة (AR)</label><input type="text" value="${it.valueAr || ''}" onchange="data.professionalSummary[${idx}].valueAr=this.value" class="form-input"></div>
+              </div>
+            </div>
+          `;
+        });
+        body.innerHTML = sHtml;
+      } else if (tabId === 'roi') {
+        title.textContent = 'إدارة القيمة المضافة وعائد الاستثمار (ROI Matrix)';
+        const av = data.addedValue || {};
+        if (!av.models) av.models = [];
+        if (!av.metrics) av.metrics = [];
+
+        let modelsHtml = '';
+        av.models.forEach((m, mIdx) => {
+          modelsHtml += `
+            <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1.25rem; margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">
+                <strong style="color: var(--accent-emerald); font-size: 1rem;">نموذج ${mIdx + 1}: ${m.titleAr || m.title || 'نموذج جديد'}</strong>
+                <button onclick="deleteRoiModelItem(${mIdx})" style="color: #ef4444; background: none; border: none; cursor: pointer; font-size: 0.85rem;">حذف النموذج</button>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>اسم النموذج (EN)</label>
+                  <input type="text" value="${m.title || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].title=this.value">
+                </div>
+                <div class="form-group">
+                  <label>اسم النموذج (AR)</label>
+                  <input type="text" value="${m.titleAr || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].titleAr=this.value">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>الشارة المميزة / التصنيف (EN)</label>
+                  <input type="text" value="${m.tag || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].tag=this.value">
+                </div>
+                <div class="form-group">
+                  <label>الشارة المميزة / التصنيف (AR)</label>
+                  <input type="text" value="${m.tagAr || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].tagAr=this.value">
+                </div>
+                <div class="form-group" style="max-width: 120px;">
+                  <label>لون الشارة</label>
+                  <input type="color" value="${m.badgeColor || '#6366f1'}" class="form-input" style="height: 42px; padding: 2px;" onchange="data.addedValue.models[${mIdx}].badgeColor=this.value">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>التكلفة التقديرية (EN)</label>
+                  <input type="text" value="${m.cost || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].cost=this.value">
+                </div>
+                <div class="form-group">
+                  <label>التكلفة التقديرية (AR)</label>
+                  <input type="text" value="${m.costAr || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].costAr=this.value">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>تفاصيل التكلفة (EN)</label>
+                  <input type="text" value="${m.costDetail || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].costDetail=this.value">
+                </div>
+                <div class="form-group">
+                  <label>تفاصيل التكلفة (AR)</label>
+                  <input type="text" value="${m.costDetailAr || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].costDetailAr=this.value">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>زمن التنفيذ والاستجابة (EN)</label>
+                  <input type="text" value="${m.time || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].time=this.value">
+                </div>
+                <div class="form-group">
+                  <label>زمن التنفيذ والاستجابة (AR)</label>
+                  <input type="text" value="${m.timeAr || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].timeAr=this.value">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>تفاصيل زمن التنفيذ (EN)</label>
+                  <input type="text" value="${m.timeDetail || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].timeDetail=this.value">
+                </div>
+                <div class="form-group">
+                  <label>تفاصيل زمن التنفيذ (AR)</label>
+                  <input type="text" value="${m.timeDetailAr || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].timeDetailAr=this.value">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>الدقة والموثوقية (EN)</label>
+                  <input type="text" value="${m.accuracy || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].accuracy=this.value">
+                </div>
+                <div class="form-group">
+                  <label>الدقة والموثوقية (AR)</label>
+                  <input type="text" value="${m.accuracyAr || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].accuracyAr=this.value">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>تفاصيل الدقة (EN)</label>
+                  <input type="text" value="${m.accuracyDetail || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].accuracyDetail=this.value">
+                </div>
+                <div class="form-group">
+                  <label>تفاصيل الدقة (AR)</label>
+                  <input type="text" value="${m.accuracyDetailAr || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].accuracyDetailAr=this.value">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>قابلية التوسع والنمو (EN)</label>
+                  <input type="text" value="${m.scalability || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].scalability=this.value">
+                </div>
+                <div class="form-group">
+                  <label>قابلية التوسع والنمو (AR)</label>
+                  <input type="text" value="${m.scalabilityAr || ''}" class="form-input" onchange="data.addedValue.models[${mIdx}].scalabilityAr=this.value">
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        let metricsHtml = '';
+        av.metrics.forEach((met, metIdx) => {
+          metricsHtml += `
+            <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <strong style="color: var(--accent-cyan); font-size: 0.95rem;">مؤشر أثر ${metIdx + 1}: ${met.value}</strong>
+                <button onclick="deleteRoiMetricItem(${metIdx})" style="color: #ef4444; background: none; border: none; cursor: pointer; font-size: 0.8rem;">حذف</button>
+              </div>
+              <div class="form-row">
+                <div class="form-group" style="max-width: 140px;">
+                  <label>القيمة / النسبة (مثل: +95%)</label>
+                  <input type="text" value="${met.value || ''}" class="form-input" onchange="data.addedValue.metrics[${metIdx}].value=this.value">
+                </div>
+                <div class="form-group">
+                  <label>الوصف (EN)</label>
+                  <input type="text" value="${met.label || ''}" class="form-input" onchange="data.addedValue.metrics[${metIdx}].label=this.value">
+                </div>
+                <div class="form-group">
+                  <label>الوصف (AR)</label>
+                  <input type="text" value="${met.labelAr || ''}" class="form-input" onchange="data.addedValue.metrics[${metIdx}].labelAr=this.value">
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        body.innerHTML = `
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-card); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+            <h4 style="color: var(--primary-light); margin-bottom: 1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">العناوين الرئيسية للقسم</h4>
+            <div class="form-row">
+              <div class="form-group"><label>عنوان القسم (EN)</label><input type="text" id="droi_title" value="${av.sectionTitle || ''}" class="form-input"></div>
+              <div class="form-group"><label>عنوان القسم (AR)</label><input type="text" id="droi_titleAr" value="${av.sectionTitleAr || ''}" class="form-input"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>الوصف الفرعي (EN)</label><textarea id="droi_subtitle" class="form-textarea" rows="2">${av.sectionSubtitle || ''}</textarea></div>
+              <div class="form-group"><label>الوصف الفرعي (AR)</label><textarea id="droi_subtitleAr" class="form-textarea" rows="2">${av.sectionSubtitleAr || ''}</textarea></div>
+            </div>
+            <div class="form-group"><label>رابط مجلد Google Drive للملفات والإحصائيات</label><input type="text" id="droi_url" value="${av.driveReportsUrl || ''}" class="form-input"></div>
+          </div>
+
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-card); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
+              <h4 style="color: var(--primary-light); margin: 0;">نماذج المقارنة الثلاثة (Comparison Models)</h4>
+              <button onclick="addRoiModelItem()" class="btn btn-sm btn-primary">+ إضافة نموذج مقارنة</button>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">يمكنك تعديل أي تفصيلة أو رقم يظهر داخل البطاقات الثلاثة للمقارنة.</p>
+            ${modelsHtml}
+          </div>
+
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-card); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
+              <h4 style="color: var(--primary-light); margin: 0;">صناديق ملخص الأثر الكمي (Impact Metrics)</h4>
+              <button onclick="addRoiMetricItem()" class="btn btn-sm btn-primary">+ إضافة مؤشر أثر</button>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">الأرقام البارزة في الصناديق السفلية للقسم (مثل +95%، 0% أخطاء، 10x).</p>
+            ${metricsHtml}
+          </div>
+        `;
+      } else if (tabId === 'projects') {
+        title.textContent = 'إدارة المشاريع الهندسية';
+        let pHtml = '';
+        (data.projects || []).forEach((p, idx) => {
+          pHtml += `
+            <div style="background:var(--bg-surface-elevated); padding:1.25rem; border-radius:12px; margin-bottom:1.25rem; border:1px solid var(--border-card);">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                <strong style="color:var(--accent-cyan);">مشروع ${idx + 1}: ${p.name || ''}</strong>
+                <button onclick="deleteProjectItem(${idx})" style="color:#ef4444; background:none; border:none; cursor:pointer; font-size:0.85rem;">حذف المشروع</button>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>اسم المشروع (EN)</label><input type="text" value="${p.name || ''}" onchange="data.projects[${idx}].name=this.value" class="form-input"></div>
+                <div class="form-group"><label>اسم المشروع (AR)</label><input type="text" value="${p.nameAr || ''}" onchange="data.projects[${idx}].nameAr=this.value" class="form-input"></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>التصنيف (EN)</label><input type="text" value="${p.category || ''}" onchange="data.projects[${idx}].category=this.value" class="form-input"></div>
+                <div class="form-group"><label>التصنيف (AR)</label><input type="text" value="${p.categoryAr || ''}" onchange="data.projects[${idx}].categoryAr=this.value" class="form-input"></div>
+              </div>
+              <div class="form-group"><label>الوصف المختصر (EN)</label><textarea class="form-textarea" rows="2" onchange="data.projects[${idx}].shortDescription=this.value">${p.shortDescription || ''}</textarea></div>
+              <div class="form-group"><label>الوصف المختصر (AR)</label><textarea class="form-textarea" rows="2" onchange="data.projects[${idx}].shortDescriptionAr=this.value">${p.shortDescriptionAr || ''}</textarea></div>
+              <div class="form-row">
+                <div class="form-group"><label>رابط المعاينة المباشرة (Demo URL)</label><input type="text" value="${p.demoUrl || ''}" onchange="data.projects[${idx}].demoUrl=this.value" class="form-input"></div>
+                <div class="form-group"><label>رابط مستودع GitHub</label><input type="text" value="${p.githubUrl || ''}" onchange="data.projects[${idx}].githubUrl=this.value" class="form-input"></div>
+              </div>
+
+              <!-- Project Image Editor & Device Upload -->
+              <div class="form-group" style="background:rgba(0,0,0,0.25); padding:0.85rem; border-radius:10px; border:1px solid var(--border-subtle); margin-top:0.5rem;">
+                <label style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                  <strong style="color:var(--accent-cyan); font-size:0.85rem;">صورة غلاف المشروع (Project Cover / Screenshot)</strong>
+                  <span style="font-size:0.75rem; color:var(--text-tertiary);">تظهر في بطاقة المشروع ونافذة التفاصيل</span>
+                </label>
+                <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom:0.5rem;">
+                  <input type="text" value="${p.imageUrl || ''}" id="proj_img_${idx}" onchange="data.projects[${idx}].imageUrl=this.value; renderDrawerBody('projects'); renderLivePreview();" class="form-input" placeholder="رابط الصورة المباشر أو مسارها...">
+                  <label class="btn btn-sm btn-glass" style="cursor:pointer; white-space:nowrap; margin:0; display:inline-flex; align-items:center; gap:0.3rem;">
+                    <span>📷 رفع صورة</span>
+                    <input type="file" accept="image/*" style="display:none;" onchange="handleImageUpload(event, 'project', ${idx})">
+                  </label>
+                </div>
+                ${p.imageUrl ? `
+                  <div style="position:relative; width:100%; height:130px; border-radius:8px; overflow:hidden; border:1px solid var(--border-card);">
+                    <img src="${p.imageUrl}" style="width:100%; height:100%; object-fit:cover;">
+                    <button type="button" onclick="data.projects[${idx}].imageUrl=''; renderDrawerBody('projects'); renderLivePreview();" style="position:absolute; top:6px; right:6px; background:rgba(239,68,68,0.9); color:#fff; border:none; border-radius:4px; padding:3px 8px; cursor:pointer; font-size:0.75rem;">إزالة الصورة</button>
+                  </div>
+                ` : '<div style="font-size:0.75rem; color:var(--text-tertiary);">لا توجد صورة مخصصة حالياً (يظهر التصميم الهندسي الافتراضي)</div>'}
+              </div>
+            </div>
+          `;
+        });
+        body.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <span>المشاريع المتاحة للعرض والتعديل</span>
+            <button onclick="addProjectItem()" class="btn btn-sm btn-primary">+ إضافة مشروع جديد</button>
+          </div>
+          ${pHtml}
+        `;
+      } else if (tabId === 'contact') {
+        title.textContent = 'بيانات وروابط التواصل';
+        const c = data.contact || {};
+        body.innerHTML = `
+          <div class="form-group"><label>البريد الإلكتروني</label><input type="text" id="dc_email" value="${c.email || ''}" class="form-input"></div>
+          <div class="form-group"><label>رقم الهاتف والواتساب</label><input type="text" id="dc_phone" value="${c.phone || ''}" class="form-input"></div>
+          <div class="form-group"><label>رابط واتساب المباشر</label><input type="text" id="dc_wa" value="${c.whatsappUrl || ''}" class="form-input"></div>
+          <div class="form-group"><label>رابط LinkedIn</label><input type="text" id="dc_li" value="${c.linkedin || ''}" class="form-input"></div>
+          <div class="form-group"><label>رابط GitHub</label><input type="text" id="dc_gh" value="${c.github || ''}" class="form-input"></div>
+        `;
+      }
+    }
+
+    function addRoiModelItem() {
+      if (!data.addedValue) data.addedValue = {};
+      if (!data.addedValue.models) data.addedValue.models = [];
+      data.addedValue.models.push({
+        id: 'm-' + Date.now(),
+        tag: 'New Model',
+        tagAr: 'نموذج جديد',
+        badgeColor: '#6366f1',
+        title: 'New Automation Model',
+        titleAr: 'نموذج أتمتة جديد',
+        cost: '$500 / mo',
+        costAr: '$500 / شهرياً',
+        costDetail: 'Low infrastructure overhead',
+        costDetailAr: 'تكاليف تشغيل منخفضة',
+        time: '< 1 min',
+        timeAr: 'أقل من دقيقة',
+        timeDetail: 'Automated triggers',
+        timeDetailAr: 'محفزات تلقائية',
+        accuracy: '99%',
+        accuracyAr: '99%',
+        accuracyDetail: 'Verified data validation',
+        accuracyDetailAr: 'تحقق من صحة البيانات',
+        scalability: 'High',
+        scalabilityAr: 'عالية جداً'
+      });
+      renderDrawerBody('roi');
+      renderLivePreview();
+    }
+    function deleteRoiModelItem(mIdx) {
+      data.addedValue.models.splice(mIdx, 1);
+      renderDrawerBody('roi');
+      renderLivePreview();
+    }
+    function addRoiMetricItem() {
+      if (!data.addedValue) data.addedValue = {};
+      if (!data.addedValue.metrics) data.addedValue.metrics = [];
+      data.addedValue.metrics.push({
+        value: '+90%',
+        label: 'New Impact Metric',
+        labelAr: 'مؤشر أثر جديد'
+      });
+      renderDrawerBody('roi');
+      renderLivePreview();
+    }
+    function deleteRoiMetricItem(metIdx) {
+      data.addedValue.metrics.splice(metIdx, 1);
+      renderDrawerBody('roi');
+      renderLivePreview();
+    }
+
+    function handleImageUpload(event, type, index) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = new Image();
+        img.onload = function () {
+          // Downscale to reasonable dimensions to keep payload lean (<100KB) and preserve Firestore document limits
+          const maxDim = type === 'personal' ? 500 : 900;
+          let width = img.width;
+          let height = img.height;
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+
+          if (type === 'personal') {
+            const input = document.getElementById('dp_profileImage');
+            if (input) input.value = compressedDataUrl;
+            const prev = document.getElementById('dp_profileImage_preview');
+            if (prev) prev.src = compressedDataUrl;
+            if (!data.personal) data.personal = {};
+            data.personal.profileImage = compressedDataUrl;
+          } else if (type === 'project' && typeof index === 'number') {
+            if (data.projects && data.projects[index]) {
+              data.projects[index].imageUrl = compressedDataUrl;
+              renderDrawerBody('projects');
+            }
+          }
+
+          localStorage.setItem('portfolio_cache', JSON.stringify(data));
+          try {
+            const bc = new BroadcastChannel('portfolio_sync');
+            bc.postMessage({ type: 'DATA_UPDATED', data: data });
+          } catch (err) { }
+
+          renderLivePreview();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function addProjectItem() {
+      if (!data.projects) data.projects = [];
+      data.projects.push({
+        id: 'proj-' + Date.now(),
+        name: 'New Engineering Project',
+        nameAr: 'مشروع هندسي جديد',
+        category: 'AI Automation',
+        categoryAr: 'أتمتة ذكية',
+        shortDescription: 'Brief summary of the automation architecture and tools.',
+        shortDescriptionAr: 'وصف مختصر لمعمارية المشروع والأدوات المستخدمة.',
+        technologies: ['n8n', 'Make', 'REST API', 'JavaScript'],
+        demoUrl: 'https://github.com/ahmedelshrabasy',
+        githubUrl: 'https://github.com/ahmedelshrabasy',
+        imageUrl: ''
+      });
+      renderDrawerBody('projects');
+      renderLivePreview();
+    }
+    function deleteProjectItem(idx) {
+      data.projects.splice(idx, 1);
+      renderDrawerBody('projects');
+      renderLivePreview();
+    }
+
+    // Skill Action Helpers
+    function addSkillItem(cIdx) {
+      if (!data.skillsCategories[cIdx].skills) data.skillsCategories[cIdx].skills = [];
+      data.skillsCategories[cIdx].skills.push({
+        name: 'مهارة جديدة',
+        level: 90,
+        badge: 'Core',
+        desc: 'اكتب هنا تفاصيل ومميزات تطبيق هذه المهارة...'
+      });
+      renderDrawerBody('skills');
+      renderLivePreview();
+    }
+
+    function deleteSkillItem(cIdx, sIdx) {
+      data.skillsCategories[cIdx].skills.splice(sIdx, 1);
+      renderDrawerBody('skills');
+      renderLivePreview();
+    }
+
+    function addCategoryItem() {
+      if (!data.skillsCategories) data.skillsCategories = [];
+      data.skillsCategories.push({
+        categoryName: 'New Category',
+        categoryNameAr: 'فئة جديدة',
+        icon: 'workflow',
+        skills: [{ name: 'New Skill', level: 90, badge: 'Core', desc: 'اكتب تفاصيل المهارة هنا...' }]
+      });
+      renderDrawerBody('skills');
+      renderLivePreview();
+    }
+
+    function deleteSkillCategoryItem(cIdx) {
+      data.skillsCategories.splice(cIdx, 1);
+      renderDrawerBody('skills');
+      renderLivePreview();
+    }
+
+    function addBadgeItem() {
+      if (!data.floatingBadges) data.floatingBadges = [];
+      data.floatingBadges.push({ id: 'b' + Date.now(), category: 'Domain', categoryAr: 'المجال', title: 'New Badge', titleAr: 'شارة جديدة', icon: 'zap' });
+      renderDrawerBody('badges');
+      renderLivePreview();
+    }
+    function deleteBadgeItem(idx) {
+      data.floatingBadges.splice(idx, 1);
+      renderDrawerBody('badges');
+      renderLivePreview();
+    }
+
+    function saveFromDrawer() {
+      if (activeDrawerTab === 'personal') {
+        if (!data.personal) data.personal = {};
+        data.personal.fullName = document.getElementById('dp_fullName').value;
+        data.personal.fullNameAr = document.getElementById('dp_fullNameAr').value;
+        data.personal.professionalTitle = document.getElementById('dp_title').value;
+        data.personal.professionalTitleAr = document.getElementById('dp_titleAr').value;
+        data.personal.professionalHeadline = document.getElementById('dp_headline').value;
+        data.personal.professionalHeadlineAr = document.getElementById('dp_headlineAr').value;
+        data.personal.shortIntroduction = document.getElementById('dp_intro').value;
+        data.personal.shortIntroductionAr = document.getElementById('dp_introAr').value;
+        data.personal.availability = document.getElementById('dp_avail').value;
+        data.personal.availabilityAr = document.getElementById('dp_availAr').value;
+        if (document.getElementById('dp_profileImage')) {
+          data.personal.profileImage = document.getElementById('dp_profileImage').value;
+        }
+      } else if (activeDrawerTab === 'roi') {
+        if (!data.addedValue) data.addedValue = {};
+        data.addedValue.sectionTitle = document.getElementById('droi_title').value;
+        data.addedValue.sectionTitleAr = document.getElementById('droi_titleAr').value;
+        data.addedValue.sectionSubtitle = document.getElementById('droi_subtitle').value;
+        data.addedValue.sectionSubtitleAr = document.getElementById('droi_subtitleAr').value;
+        data.addedValue.driveReportsUrl = document.getElementById('droi_url').value;
+      } else if (activeDrawerTab === 'contact') {
+        if (!data.contact) data.contact = {};
+        data.contact.email = document.getElementById('dc_email').value;
+        data.contact.phone = document.getElementById('dc_phone').value;
+        data.contact.whatsappUrl = document.getElementById('dc_wa').value;
+        data.contact.linkedin = document.getElementById('dc_li').value;
+        data.contact.github = document.getElementById('dc_gh').value;
+      }
+
+      localStorage.setItem('portfolio_cache', JSON.stringify(data));
+      try {
+        const bc = new BroadcastChannel('portfolio_sync');
+        bc.postMessage({ type: 'DATA_UPDATED', data: data });
+      } catch (err) { }
+
+      renderLivePreview();
+      closeDrawer();
+      showToast('✓ تم تطبيق التعديلات بنجاح وبثها فورياً!');
+    }
+
+    function openCloudSettingsModal() {
+      const modal = document.getElementById('adminSettingsModal');
+      if (!modal) return;
+
+      const pin = typeof getPortfolioAdminPin === 'function' ? getPortfolioAdminPin() : '1234';
+      document.getElementById('cfg_admin_pin').value = pin;
+
+      let pid = (typeof PORTFOLIO_CONFIG !== 'undefined' && PORTFOLIO_CONFIG.firebase) ? PORTFOLIO_CONFIG.firebase.projectId : '';
+      let akey = (typeof PORTFOLIO_CONFIG !== 'undefined' && PORTFOLIO_CONFIG.firebase) ? PORTFOLIO_CONFIG.firebase.apiKey : '';
+      try {
+        const saved = localStorage.getItem('portfolio_firebase_config');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.projectId) pid = parsed.projectId;
+          if (parsed.apiKey) akey = parsed.apiKey;
+        }
+      } catch (e) { }
+
+      document.getElementById('cfg_fb_project_id').value = pid || '';
+      document.getElementById('cfg_fb_api_key').value = akey || '';
+      modal.style.display = 'flex';
+      lucide.createIcons();
+    }
+
+    function closeCloudSettingsModal() {
+      const modal = document.getElementById('adminSettingsModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function saveCloudSettings() {
+      const newPin = document.getElementById('cfg_admin_pin').value.trim();
+      const pid = document.getElementById('cfg_fb_project_id').value.trim();
+      const akey = document.getElementById('cfg_fb_api_key').value.trim();
+
+      if (newPin) {
+        localStorage.setItem('portfolio_custom_pin', newPin);
+      }
+
+      if (pid && akey) {
+        localStorage.setItem('portfolio_firebase_config', JSON.stringify({ projectId: pid, apiKey: akey }));
+      } else {
+        localStorage.removeItem('portfolio_firebase_config');
+      }
+
+      closeCloudSettingsModal();
+      showToast('✓ تم حفظ إعدادات الأمان والسحابة بنجاح!');
+    }
+
+    async function saveAllToCloud() {
+      const btn = document.getElementById('adminSaveCloudBtn');
+      btn.disabled = true;
+      btn.innerHTML = 'جاري المزامنة...';
+
+      localStorage.setItem('portfolio_cache', JSON.stringify(data));
+      try {
+        const bc = new BroadcastChannel('portfolio_sync');
+        bc.postMessage({ type: 'DATA_UPDATED', data: data });
+      } catch (err) { }
+
+      const targetCloudUrl = typeof getPortfolioCloudUrl === 'function' ? getPortfolioCloudUrl() : null;
+      if (!targetCloudUrl) {
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="cloud-upload" style="width: 16px; height: 16px;"></i><span id="lbl_adm_save">حفظ التعديلات سحابياً</span>';
+        lucide.createIcons();
+        showToast('✓ تم الحفظ محلياً! (للتفعيل السحابي اضغط على زر الإعدادات)');
+        openCloudSettingsModal();
+        return;
+      }
+
+      try {
+        const body = {
+          fields: {
+            payload: { stringValue: JSON.stringify(data) },
+            updatedAt: { stringValue: new Date().toISOString() }
+          }
+        };
+        const res = await fetch(targetCloudUrl, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+
+        if (res.ok) {
+          showToast('✓ تم حفظ ومزامنة البيانات مع السحابة بنجاح!');
+        } else {
+          showToast('تم الحفظ محلياً (تحقق من إعدادات السحابة)');
+        }
+      } catch (err) {
+        showToast('تم الحفظ محلياً');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="cloud-upload" style="width: 16px; height: 16px;"></i><span id="lbl_adm_save">حفظ التعديلات سحابياً</span>';
+        lucide.createIcons();
+      }
+    }
+
+    function exportBackupJson() {
+      const jsonStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
+      const a = document.createElement('a');
+      a.setAttribute("href", jsonStr);
+      a.setAttribute("download", "Ahmed_Elshrabasy_Backup_" + new Date().toISOString().slice(0, 10) + ".json");
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      showToast('✓ تم تنزيل النسخة الاحتياطية بنجاح!');
+    }
+
+    function handleRestoreFile(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async function (evt) {
+        try {
+          const parsed = JSON.parse(evt.target.result);
+          if (parsed && (parsed.personal || parsed.skillsCategories)) {
+            data = parsed;
+            localStorage.setItem('portfolio_cache', JSON.stringify(data));
+            try {
+              const bc = new BroadcastChannel('portfolio_sync');
+              bc.postMessage({ type: 'DATA_UPDATED', data: data });
+            } catch (err) { }
+            renderLivePreview();
+            await saveAllToCloud();
+            showToast('✓ تم استرجاع النسخة وتحديث السحابة بنجاح!');
+          }
+        } catch (err) {
+          alert('تعذر قراءة ملف JSON.');
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotice');
+      document.getElementById('toastMsg').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (sessionStorage.getItem('portfolio_admin_auth') === 'true') {
+        document.getElementById('adminAuthModal').style.display = 'none';
+        initAdmin();
+      }
+    });
+  </script>
+</body>
+
+</html>
