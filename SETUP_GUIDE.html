@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>دليل الاستخدام والإعداد الشامل | Open-Source Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    @page {
+      size: A4;
+      margin: 18mm 15mm 18mm 15mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #ffffff;
+      color: #1e293b;
+      line-height: 1.7;
+      font-size: 13.5px;
+      padding: 20px;
+    }
+
+    .header {
+      border-bottom: 2px solid #6366f1;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      color: #0f172a;
+      font-weight: 800;
+    }
+
+    .header p {
+      color: #64748b;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: #e0e7ff;
+      color: #4338ca;
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    h2 {
+      font-size: 16px;
+      color: #4338ca;
+      margin-top: 22px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-right: 4px solid #6366f1;
+      padding-right: 10px;
+    }
+
+    h3 {
+      font-size: 14px;
+      color: #0f172a;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    p, li {
+      color: #334155;
+      margin-bottom: 8px;
+    }
+
+    ul, ol {
+      padding-right: 20px;
+      margin-bottom: 12px;
+    }
+
+    li {
+      margin-bottom: 5px;
+    }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 12px 0;
+    }
+
+    .alert-tip {
+      background: #f0fdf4;
+      border-right: 4px solid #16a34a;
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 12.5px;
+      color: #166534;
+    }
+
+    .alert-warning {
+      background: #fffbeb;
+      border-right: 4px solid #f59e0b;
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-size: 12.5px;
+      color: #92400e;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      direction: ltr;
+      display: inline-block;
+    }
+
+    pre {
+      font-family: 'JetBrains Mono', monospace;
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 12px 14px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      direction: ltr;
+      text-align: left;
+      overflow-x: auto;
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 12.5px;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 10px;
+      text-align: right;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #1e293b;
+      font-weight: 700;
+    }
+
+    .page-break {
+      page-break-after: always;
+    }
+
+    .footer {
+      margin-top: 30px;
+      padding-top: 15px;
+      border-top: 1px solid #e2e8f0;
+      text-align: center;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div>
+      <h1>دليل التشغيل والإعداد الكامل (Setup & Admin Guide)</h1>
+      <p>قالب بورتفوليو تفاعلي مفتوح المصدر مع لوحة تحكم وإدارة سحابية مباشرة</p>
+    </div>
+    <span class="badge">Open-Source v1.0</span>
+  </div>
+
+  <h2>1. نظرة عامة وبنية المشروع (Project Architecture)</h2>
+  <p>تم بناء المشروع باستخدام <strong>Vanilla Web Standards (HTML5 / CSS3 / JavaScript)</strong> بدون أي أطر عمل ثقيلة أو خطوات Build معقدة، مما يجعله فائق السرعة وجاهزاً للعمل على أي خادم استضافة ثابتة أو سحابية.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>الملف</th>
+        <th>الوظيفة والمسؤولية</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>index.html</code></td>
+        <td>الموقع الرئيسي للزوار (ثنائي اللغة عربي/إنجليزي، الوضع الليلي الفاخر، تأثيرات زجاجية).</td>
+      </tr>
+      <tr>
+        <td><code>admin.html</code></td>
+        <td>استوديو الإدارة وتعديل المشاريع والمهارات مع معاينة مباشرة وتصدير بيانات.</td>
+      </tr>
+      <tr>
+        <td><code>config.js</code></td>
+        <td>ملف الإعدادات الموحد (رمز PIN، إعدادات السحابة الاختيارية).</td>
+      </tr>
+      <tr>
+        <td><code>README.md</code></td>
+        <td>دليل التوثيق الرسمي على GitHub باللغتين العربية والإنجليزية.</td>
+      </tr>
+      <tr>
+        <td><code>firestore.rules</code></td>
+        <td>قواعد الحماية والصلاحيات المعتمدة عند تفعيل Google Firebase.</td>
+      </tr>
+      <tr>
+        <td><code>LICENSE</code></td>
+        <td>ترخيص MIT المفتوح المصدر لحفظ حقوق النشر والاستخدام الحر.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>2. التشغيل المحلي السريع (Local Quick Start)</h2>
+  <ol>
+    <li>قم بتحميل أو استنساخ المستودع:
+      <pre>git clone https://github.com/el-shrabasy/interactive-portfolio.git</pre>
+    </li>
+    <li>يمكنك فتح ملف <code>index.html</code> مباشرة في أي متصفح، أو تشغيل خادم محلي:
+      <pre>npx serve .
+# أو بايثون:
+python -m http.server 3000</pre>
+    </li>
+    <li>للدخول إلى لوحة التحكم: افتح الرابط <code>admin.html</code>.</li>
+  </ol>
+
+  <div class="alert-tip">
+    <strong>💡 رمز الدخول الافتراضي (Default PIN):</strong> هو <code>1234</code>. يمكنك تغييره كما هو موضح في القسم التالي.
+  </div>
+
+  <h2>3. إدارة الأمان وتغيير رمز الدخول (Admin PIN)</h2>
+  <p>لحماية لوحة التحكم الخاصة بك من دخول أي شخص آخر، يمكنك تغيير الرمز بطريقتين:</p>
+  <ul>
+    <li><strong>الطريقة 1 (من لوحة التحكم مباشرة):</strong>
+      ادخل على <code>admin.html</code> واضغط على زر <strong>⚙️ الإعدادات</strong> في الشريط العلوي، ثم اكتب رمز الـ PIN الجديد واضغط <strong>حفظ وتطبيق</strong>.
+    </li>
+    <li><strong>الطريقة 2 (من الكود مباشرة في <code>config.js</code>):</strong>
+      <pre>const PORTFOLIO_CONFIG = {
+  adminPin: "5678", // اكتب رمزك السري هنا
+  ...
+};</pre>
+    </li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <h2>4. كيفية تعديل البيانات والمحتوى (Content Management)</h2>
+  <p>المشروع يدعم طريقتين لتعديل البيانات:</p>
+
+  <h3>أ. التعديل المرئي من لوحة التحكم (موصى به)</h3>
+  <ul>
+    <li>افتح <code>admin.html</code> وقم بتسجيل الدخول برمز الـ PIN.</li>
+    <li>اختر القسم الذي تريد تعديله من الشريط العلوي (المهارات، المشاريع، نماذج الأتمتة، الشهادات، نبذة عني، التواصل).</li>
+    <li>ستشاهد التعديل يظهر في <strong>المعاينة الحية الفورية (Live Preview)</strong> على يسار الشاشة فور كتابته.</li>
+    <li>لحفظ التعديلات في متصفحك وتصديرها، اضغط <strong>"نسخة احتياطية"</strong> لتحميل ملف JSON محدث.</li>
+  </ul>
+
+  <h3>ب. التعديل اليدوي في الكود (Zero-Dependency)</h3>
+  <p>إذا أردت جعل بياناتك هي الأساسية الثابتة دائماً في الكود بدون أي اعتماديات خارجية، يمكنك تعديل كائن <code>INITIAL_DATA</code> الموجود داخل ملف <code>index.html</code> و <code>admin.html</code>.</p>
+
+  <h2>5. تفعيل المزامنة السحابية المجانية (Google Firebase Cloud Sync)</h2>
+  <p>إذا أردت أن تنعكس التعديلات التي تجريها في لوحة التحكم فورياً لجميع زوار موقعك في أي مكان في العالم:</p>
+
+  <ol>
+    <li>ادخل على موقع <strong>Google Firebase Console</strong>: <br><code>https://console.firebase.google.com/</code></li>
+    <li>اضغط على <strong>Create a project</strong> وأنشئ مشروعاً مجانياً (Spark Plan المجانية مدى الحياة).</li>
+    <li>من القائمة الجانبية، اضغط على <strong>Build</strong> ثم <strong>Firestore Database</strong>، ثم اضغط <strong>Create database</strong>.</li>
+    <li>في إعدادات القواعد (Rules)، ادخل على تبويب <strong>Rules</strong> واجعل الصلاحيات تسمح بالقراءة والكتابة:
+      <pre>rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}</pre>
+      ثم اضغط <strong>Publish</strong>.
+    </li>
+    <li>انسخ <strong>Project ID</strong> و <strong>Web API Key</strong> من إعدادات المشروع (Project Settings)، وضعهما إما:
+      <ul>
+        <li>داخل ملف <code>config.js</code> في حقلي <code>projectId</code> و <code>apiKey</code>.</li>
+        <li>أو عبر الضغط على زر <strong>⚙️ الإعدادات</strong> في <code>admin.html</code> ولصقهما هناك بضغطة زر.</li>
+      </ul>
+    </li>
+    <li>الآن اضغط على زر <strong>"حفظ التعديلات سحابياً"</strong> الأزرق، وستتم مزامنة بياناتك على مستوى العالم فورياً!</li>
+  </ol>
+
+  <h2>6. النشر المجاني على الإنترنت (Deployment Options)</h2>
+
+  <h3>1. النشر عبر Vercel (الأسهل والأسرع)</h3>
+  <ul>
+    <li>سجل الدخول في <a href="https://vercel.com">Vercel</a> بحساب GitHub الخاص بك.</li>
+    <li>اضغط <strong>Add New > Project</strong> واختر مستودع <code>interactive-portfolio</code>.</li>
+    <li>اضغط <strong>Deploy</strong> مباشرة (بدون أي إعدادات)، وسيعطيك رابطاً سريعاً مع شهادة SSL مجانية.</li>
+  </ul>
+
+  <h3>2. النشر عبر GitHub Pages</h3>
+  <ul>
+    <li>ادخل على المستودع على GitHub: <code>https://github.com/el-shrabasy/interactive-portfolio</code></li>
+    <li>ادخل على <strong>Settings > Pages</strong>.</li>
+    <li>تحت <strong>Branch</strong> اختر <code>main</code> ثم اضغط <strong>Save</strong>.</li>
+  </ul>
+
+  <h3>3. الاستضافات التقليدية (cPanel / Apache / Nginx)</h3>
+  <ul>
+    <li>ارفع جميع ملفات هذا المجلد مباشرة إلى مجلد <code>public_html</code> في استضافتك وسيعمل الموقع فوراً.</li>
+  </ul>
+
+  <div class="footer">
+    تم إعداد هذا الدليل لتوثيق قالب البورتفوليو مفتوح المصدر | برمجة وتطوير: أحمد حامد الشرباصي (Ahmed Hamed El-shrabasy)
+  </div>
+
+</body>
+</html>
