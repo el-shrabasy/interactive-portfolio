@@ -2,13 +2,13 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>دليل الاحتراف الشامل: تشغيل ونشر وتطوير البورتفوليو التفاعلي | Master Deployment & Architecture Handbook</title>
+  <title>دليل الاحتراف الشامل: تشغيل ونشر وتخصيص البورتفوليو التفاعلي واستوديو الإدارة والـ CV</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
     @page {
       size: A4;
-      margin: 14mm 12mm 14mm 12mm;
+      margin: 12mm 10mm 12mm 10mm;
     }
 
     * {
@@ -21,9 +21,9 @@
       font-family: 'Tajawal', sans-serif;
       background-color: #ffffff;
       color: #0f172a;
-      line-height: 1.65;
-      font-size: 12.5px;
-      padding: 10px;
+      line-height: 1.6;
+      font-size: 12px;
+      padding: 8px;
     }
 
     /* Cover / Hero Header */
@@ -32,7 +32,7 @@
       color: #ffffff;
       border-radius: 12px;
       padding: 24px 28px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       position: relative;
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
@@ -58,7 +58,7 @@
     }
 
     .hero-title {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 900;
       line-height: 1.3;
       margin-bottom: 6px;
@@ -68,16 +68,17 @@
     }
 
     .hero-subtitle {
-      font-size: 12px;
+      font-size: 11.5px;
       color: #94a3b8;
-      max-width: 90%;
+      max-width: 95%;
+      line-height: 1.5;
     }
 
     /* Section Headings */
     h2 {
-      font-size: 15px;
+      font-size: 14.5px;
       color: #1e1b4b;
-      margin-top: 18px;
+      margin-top: 16px;
       margin-bottom: 8px;
       display: flex;
       align-items: center;
@@ -85,17 +86,19 @@
       border-right: 4px solid #6366f1;
       padding-right: 10px;
       font-weight: 800;
+      page-break-after: avoid;
     }
 
     h3 {
-      font-size: 13px;
+      font-size: 12.5px;
       color: #0f172a;
-      margin-top: 12px;
-      margin-bottom: 5px;
+      margin-top: 10px;
+      margin-bottom: 4px;
       font-weight: 700;
       display: flex;
       align-items: center;
       gap: 6px;
+      page-break-after: avoid;
     }
 
     p, li {
@@ -105,7 +108,7 @@
 
     ul, ol {
       padding-right: 18px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     li {
@@ -117,7 +120,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin: 10px 0;
+      margin: 8px 0;
     }
 
     .card {
@@ -125,7 +128,8 @@
       border: 1px solid #e2e8f0;
       border-radius: 8px;
       padding: 10px 14px;
-      margin: 8px 0;
+      margin: 6px 0;
+      page-break-inside: avoid;
     }
 
     .card-title {
@@ -141,9 +145,10 @@
       padding: 8px 12px;
       border-radius: 6px;
       margin: 8px 0;
-      font-size: 11.5px;
+      font-size: 11px;
       display: flex;
       gap: 8px;
+      page-break-inside: avoid;
     }
 
     .alert-tip {
@@ -170,42 +175,69 @@
       color: #6b21a8;
     }
 
+    /* Figures & Images */
+    .img-figure {
+      margin: 10px 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #cbd5e1;
+      background: #0f172a;
+      text-align: center;
+      page-break-inside: avoid;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .img-figure img {
+      width: 100%;
+      max-height: 230px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .img-caption {
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 5px 10px;
+      font-size: 10.5px;
+      color: #475569;
+      font-weight: 600;
+      text-align: right;
+    }
+
     code {
       font-family: 'JetBrains Mono', monospace;
       background: #f1f5f9;
-      color: #4338ca;
+      color: #dc2626;
       padding: 1px 5px;
       border-radius: 4px;
-      font-size: 11px;
-      direction: ltr;
-      display: inline-block;
+      font-size: 10.5px;
     }
 
     pre {
-      font-family: 'JetBrains Mono', monospace;
-      background: #090d16;
+      background: #0f172a;
       color: #e2e8f0;
-      padding: 10px 12px;
+      padding: 8px 12px;
       border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 10.5px;
+      line-height: 1.4;
+      overflow-x: auto;
+      margin: 6px 0;
       direction: ltr;
       text-align: left;
-      overflow-x: auto;
-      margin: 8px 0;
-      line-height: 1.45;
-      border: 1px solid #1e293b;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 10px 0;
-      font-size: 11.5px;
+      margin: 8px 0;
+      font-size: 11px;
+      page-break-inside: avoid;
     }
 
     th, td {
       border: 1px solid #e2e8f0;
-      padding: 6px 9px;
+      padding: 6px 8px;
       text-align: right;
     }
 
@@ -230,12 +262,13 @@
     }
 
     .feature-pill {
-      font-size: 10.5px;
-      padding: 3px 8px;
+      font-size: 9.5px;
+      padding: 2px 7px;
       border-radius: 4px;
       background: #f1f5f9;
       color: #334155;
       border: 1px solid #cbd5e1;
+      font-weight: 600;
     }
 
     .page-break {
@@ -243,13 +276,13 @@
     }
 
     .footer {
-      margin-top: 25px;
-      padding-top: 12px;
+      margin-top: 16px;
+      padding-top: 10px;
       border-top: 1px solid #e2e8f0;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 10px;
+      font-size: 9.5px;
       color: #94a3b8;
     }
   </style>
@@ -260,243 +293,274 @@
   <div class="hero-banner">
     <div class="hero-tags">
       <span class="hero-tag">OPEN SOURCE v2.0</span>
-      <span class="hero-tag">FULL ARCHITECTURE GUIDE</span>
-      <span class="hero-tag">VERCEL • FIREBASE • GITHUB PAGES</span>
+      <span class="hero-tag">STEP-BY-STEP HANDBOOK</span>
+      <span class="hero-tag">GITHUB PAGES • VERCEL • NETLIFY</span>
+      <span class="hero-tag">NOTEBOOK LM READY</span>
     </div>
-    <h1 class="hero-title">دليل الاحتراف الشامل: تشغيل ونشر وتطوير البورتفوليو التفاعلي</h1>
+    <h1 class="hero-title">دليل الاحتراف الشامل: تشغيل ونشر وتخصيص البورتفوليو التفاعلي</h1>
     <p class="hero-subtitle">
-      المرجع الهندسي الكامل لكيفية تشغيل المشروع محلياً، رفعه واستضافته على مختلف السيرفرات السحابية، ربطه بقواعد البيانات، وتخصيص كل تفصيلة فيه باحترافية.
+      الدليل الهندسي الشامل بالمللي وخطوة بخطوة لكيفية استنساخ ونشر وتعديل هذا الموقع واستوديو الإدارة وتوليد السيرة الذاتية (CV)، بدون الحاجة لأي خبرة برمجية سابقة أو بنية تحتية مدفوعة.
     </p>
   </div>
 
-  <!-- SECTION 1: ARCHITECTURE OVERVIEW -->
-  <h2>1. البنية المعمارية وفلسفة النظام (Architecture & Philosophy)</h2>
+  <!-- SECTION 1: OVERVIEW -->
+  <h2>1. البنية المعمارية وفلسفة النظام (Architecture & Zero-Dependency)</h2>
   <p>
-    صُمم هذا البورتفوليو ليكون <strong>Decoupled Static-First Architecture</strong>، أي يعمل بنظام الواجهة الأمامية الصافية (Vanilla HTML/CSS/JS) بدون خوادم Backend تقليدية مكلفة، مع إمكانية ربطه اختيارياً بقواعد بيانات بدون خادم (Serverless Cloud Database):
+    صُمم هذا المشروع ليحل مشكلة تعقيد المواقع الشخصية وإدارتها للمطورين ومهندسي الذكاء الاصطناعي. بدلاً من الاعتماد على فريم وركات ضخمة تتطلب صيانة وتحديثات مكتبات لا تنتهي، يعتمد النظام على <strong>Decoupled Static-First Architecture</strong> نقية بنسبة 100%:
   </p>
 
   <table>
     <thead>
       <tr>
-        <th style="width: 22%;">الملف / المجلد</th>
-        <th style="width: 48%;">الوظيفة والمكونات الأساسية</th>
+        <th style="width: 20%;">الملف</th>
+        <th style="width: 50%;">الوظيفة والمكونات الأساسية</th>
         <th style="width: 30%;">التقنيات المستخدمة</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><code>index.html</code></td>
-        <td>الموقع الرئيسي للزوار، يضم الهيدر التفاعلي، نبذة عنك، المهارات مع عدادات متحركة، المشاريع مع تصنيفات تفاعلية، نماذج الأتمتة وحاسبة الـ ROI، الشهادات، ونموذج التواصل.</td>
-        <td>HTML5, CSS Variables, Lucide Icons, Vanilla JS, Web Animations</td>
+        <td>الموقع الرئيسي للزوار: تصميم زجاجي عصري داكن (Dark Glassmorphic)، دعم ثنائي اللغة (AR/EN) مع تحويل اتجاه فوري (RTL/LTR)، مصفوفة حاسبة العائد الاستثماري (ROI Matrix)، نافذة تفاعلية للمشاريع، استعراض الخبرات والشهادات المعتمدة، وروابط التواصل.</td>
+        <td>HTML5, CSS Custom Properties, Lucide Icons, Vanilla JS, BroadcastChannel</td>
       </tr>
       <tr>
         <td><code>admin.html</code></td>
-        <td>استوديو الإدارة وتعديل المحتوى. يحتوي على لوحة تحكم لتعديل أي جزء في الموقع مع <strong>Live Real-time Preview</strong> في نفس الصفحة ونافذة إعدادات الأمان.</td>
-        <td>Single-Page Architecture, BroadcastChannel, REST API, JSON Exporter</td>
+        <td>استوديو الإدارة التفاعلي المباشر (Visual Studio): يتيح تعديل أي بيانات بالكامل (النبذة، المهارات، المشاريع، الخبرات) بدون فتح كود، مع شاشة قفل أمنية بـ PIN وحفظ محلي وسحابي.</td>
+        <td>Pure Vanilla SPA, LocalStorage, Cloud Firestore REST API, JSON Exporter</td>
       </tr>
       <tr>
         <td><code>config.js</code></td>
-        <td>ملف الإعدادات الموحد المركزي. يعزل رمز الدخول السري (PIN) وإعدادات السحابة عن الكود، بحيث يمكن لأي شخص استنساخ المشروع وتخصيصه في سطرين.</td>
+        <td>ملف الإعدادات الموحد: يعزل رمز الحماية (PIN) ومعلومات المزامنة السحابية عن كود الموقع لسهولة التخصيص.</td>
         <td>Decoupled Config System</td>
       </tr>
       <tr>
-        <td><code>firebase.json</code></td>
-        <td>إعدادات النشر السحابي، وتحويل الروابط (URL Rewrites)، وضبط الـ Caching لضمان سرعة تحميل فائقة وعدم حدوث تضارب في النسخ.</td>
-        <td>Firebase Hosting Specs, Cache-Control Headers</td>
-      </tr>
-      <tr>
-        <td><code>firestore.rules</code></td>
-        <td>قواعد الصلاحيات المعتمدة لقاعدة بيانات Cloud Firestore لقراءة وكتابة البيانات السحابية.</td>
-        <td>Firestore Security Rules Engine</td>
+        <td><code>Ahmed_Hamed_Elshrabasy_CV.pdf</code></td>
+        <td>السيرة الذاتية المعتمدة بصيغة ATS (صفحتين متطابقتين)، قابلة للتحميل بضغطة زر من الموقع.</td>
+        <td>Standard ATS Clean 2-Page Format</td>
       </tr>
     </tbody>
   </table>
 
-  <!-- SECTION 2: LOCAL SETUP -->
-  <h2>2. التشغيل والتجربة المحلية (Local Development)</h2>
-  <p>لا تحتاج لتثبيت أي حزم معقدة، فالمشروع يعمل فوراً بأكثر من طريقة:</p>
-
   <div class="grid-2">
-    <div class="card">
-      <div class="card-title"><strong>الطريقة السريعة (Node.js)</strong> <span class="feature-pill">موصى بها</span></div>
-      <p style="font-size: 11px;">شغّل خادماً محلياً بضغطة واحدة من مسار المجلد:</p>
-      <pre>npx serve .
-# سيفتح لك: http://localhost:3000</pre>
+    <div class="img-figure">
+      <img src="docs/images/01_hero_preview.png" alt="English Hero Preview">
+      <div class="img-caption">الشكل 1: الواجهة الرئيسية الإنجليزية للموقع (LTR) مع المؤثرات البصرية وتنسيق الزجاج المعتم.</div>
     </div>
-    <div class="card">
-      <div class="card-title"><strong>طريقة بايثون (Python 3)</strong> <span class="feature-pill">بدون تثبيت</span></div>
-      <p style="font-size: 11px;">إذا كان بايثون مثبتاً على جهازك:</p>
-      <pre>python -m http.server 3000
-# سيفتح لك: http://localhost:3000</pre>
-    </div>
-  </div>
-
-  <div class="alert alert-tip">
-    <div>
-      <strong>💡 ميزة المزامنة اللحظية (BroadcastChannel Sync):</strong>
-      عند فتح <code>admin.html</code> و <code>index.html</code> في تبويبين متجاورين في نفس المتصفح، أي حرف تعدله في لوحة التحكم سينعكس تلقائياً في صفحة الزوار في نفس اللحظة بدون تحديث الصفحة وبدون الحاجة لإنترنت!
+    <div class="img-figure">
+      <img src="docs/images/02_hero_arabic.png" alt="Arabic Hero Preview">
+      <div class="img-caption">الشكل 2: التحويل التلقائي للغة العربية (RTL) بضغطة زر واحدة بدون إعادة تحميل الصفحة.</div>
     </div>
   </div>
 
   <div class="page-break"></div>
 
-  <!-- SECTION 3: VERCEL DEPLOYMENT -->
-  <h2>3. النشر الاحترافي على Vercel (Global Serverless CDN)</h2>
-  <p>منصة <strong>Vercel</strong> تعتبر الخيار رقم 1 عالمياً للمواقع السريعة، حيث توفر شبكة CDN عالمية مجانية مع شهادة SSL تلقائية وتحديث تلقائي مع كل Commit على GitHub.</p>
+  <!-- SECTION 2: GITHUB PAGES 1-CLICK DEPLOYMENT -->
+  <h2>2. النشر الفوري بضغطة زر على GitHub Pages (بالمللي - 3 دقائق)</h2>
+  <p>
+    يمكن لأي شخص نشر نسخته الخاصة مجاناً مدى الحياة وبدون كتابة سطر كود واحد عبر اتباع 4 خطوات دقيقة:
+  </p>
 
-  <h3><span class="step-badge">1</span> ربط المستودع في ثوانٍ</h3>
-  <ol>
-    <li>ادخل على موقع <strong><a href="https://vercel.com" target="_blank">Vercel.com</a></strong> وسجل دخول بحسابك على GitHub.</li>
-    <li>اضغط على زر <strong>Add New...</strong> ثم اختر <strong>Project</strong>.</li>
-    <li>اختر مستودع <code>interactive-portfolio</code> من القائمة واضغط <strong>Import</strong>.</li>
-    <li>اترك كافة الخيارات الافتراضية كما هي (Framework Preset: Other) واضغط <strong>Deploy</strong>.</li>
-    <li>في غضون 15 ثانية، سيكون موقعك منشوراً برابط عالمي مثل:
-      <pre>https://interactive-portfolio-el-shrabasy.vercel.app</pre>
-    </li>
-  </ol>
-
-  <h3><span class="step-badge">2</span> ضبط النطاق الخاص (Custom Domain على Vercel)</h3>
+  <h3><span class="step-badge">1</span> الدخول للمستودع واستخدام القالب (Use This Template)</h3>
   <ul>
-    <li>إذا كان لديك دومين خاص (مثل <code>yourname.com</code>):</li>
-    <li>ادخل على <strong>Project Settings > Domains</strong> على Vercel، واكتب اسم الدومين.</li>
-    <li>أضف سجل <code>CNAME</code> أو <code>A Record</code> في مزود الدومين الخاص بك كما يطلب Vercel. يتم تفعيل شهادة الأمان (HTTPS) مجاناً وتلقائياً.</li>
+    <li>ادخل على الرابط الرسمي للمستودع: <a href="https://github.com/el-shrabasy/interactive-portfolio" target="_blank"><strong>github.com/el-shrabasy/interactive-portfolio</strong></a>.</li>
+    <li>اضغط على الزر الأخضر في أعلى اليمين <strong>"Use this template"</strong> ثم اختر <strong>"Create a new repository"</strong>.</li>
   </ul>
 
-  <!-- SECTION 4: FIREBASE HOSTING DEPLOYMENT -->
-  <h2>4. النشر والاستضافة على Google Firebase Hosting</h2>
-  <p>إذا أردت دمج الاستضافة وقاعدة البيانات السحابية بالكامل تحت سقف Google Cloud:</p>
+  <div class="img-figure">
+    <img src="docs/images/05_github_template.png" alt="GitHub Use This Template">
+    <div class="img-caption">الشكل 3: الضغط على زر "Use this template" لإنشاء نسختك الخاصة مباشرة في حسابك على GitHub.</div>
+  </div>
 
-  <h3><span class="step-badge">1</span> تثبيت وتسجيل دخول Firebase CLI</h3>
-  <pre># 1. تثبيت أدوات فايربيز (إذا لم تكن مثبتة)
-npm install -g firebase-tools
+  <h3><span class="step-badge">2</span> تسمية مستودعك الجديد</h3>
+  <ul>
+    <li>اكتب اسماً لمستودعك الجديد (مثلاً: <code>my-portfolio</code> أو <code>&lt;username&gt;.github.io</code>).</li>
+    <li>تأكد من اختيار <strong>Public</strong> لكي يعمل النشر المجاني عبر GitHub Pages.</li>
+    <li>اضغط على <strong>"Create repository"</strong>. سيقوم GitHub بنسخ جميع الملفات إلى حسابك في ثانيتين.</li>
+  </ul>
 
-# 2. تسجيل الدخول بحساب جوجل الخاص بك
-firebase login</pre>
+  <h3><span class="step-badge">3</span> تفعيل الاستضافة المجانية (GitHub Pages)</h3>
+  <ul>
+    <li>من داخل مستودعك الجديد، اضغط على تبويب <strong>Settings</strong> (الإعدادات) في الشريط العلوي.</li>
+    <li>من القائمة الجانبية اليسرى، اضغط على <strong>Pages</strong>.</li>
+    <li>تحت خيار <strong>Build and deployment</strong>:
+      <ul>
+        <li>تأكد أن Source هو: <strong>Deploy from a branch</strong>.</li>
+        <li>اختر Branch: <strong>main</strong> والمجلد: <strong>/ (root)</strong>.</li>
+      </ul>
+    </li>
+    <li>اضغط على <strong>Save</strong>.</li>
+  </ul>
 
-  <h3><span class="step-badge">2</span> ربط ونشر المشروع</h3>
-  <pre># 3. اختيار المشروع الذي أنشأته على فايربيز
-firebase use YOUR_PROJECT_ID
-
-# 4. نشر الاستضافة وقواعد البيانات بضغطة زر واحدة!
-firebase deploy</pre>
-
-  <div class="alert alert-info">
+  <h3><span class="step-badge">4</span> مبروك! موقعك الآن مباشر على الإنترنت</h3>
+  <div class="alert alert-tip">
     <div>
-      <strong>🌐 رابطك السحابي المباشر:</strong>
-      بمجرد انتهاء الأمر، سيعطيك فايربيز رابطاً عاماً جاهزاً للجمهور:
-      <code>https://YOUR_PROJECT_ID.web.app</code>
+      <strong>🎉 رابط موقعك الحي:</strong><br>
+      <code>https://&lt;your-github-username&gt;.github.io/&lt;repo-name&gt;/</code><br>
+      <strong>🛠️ رابط لوحة التحكم الخاصة بك:</strong><br>
+      <code>https://&lt;your-github-username&gt;.github.io/&lt;repo-name&gt;/admin.html</code> (رمز الدخول الافتراضي: <code>1234</code>).
     </div>
   </div>
 
-  <!-- SECTION 5: GITHUB PAGES -->
-  <h2>5. النشر بنقرة واحدة عبر GitHub Pages</h2>
-  <p>طريقة بديلة مجانية 100% ومستضافة مباشرة من مستودعك على GitHub:</p>
-  <ol>
-    <li>افتح صفحة المستودع على GitHub: <code>https://github.com/el-shrabasy/interactive-portfolio</code></li>
-    <li>ادخل على تبويب <strong>Settings</strong> بالأعلى، ثم من القائمة الجانبية اختر <strong>Pages</strong>.</li>
-    <li>تحت خيار <strong>Build and deployment</strong>:
-      <ul>
-        <li>اختر في خانة Source: <strong>Deploy from a branch</strong>.</li>
-        <li>اختر الـ Branch: <code>main</code> والمجلد: <code>/ (root)</code>.</li>
-        <li>اضغط على زر <strong>Save</strong>.</li>
-      </ul>
-    </li>
-    <li>بعد دقيقة واحدة، سيظهر لك رابط موقعك الرسمي:
-      <pre>https://el-shrabasy.github.io/interactive-portfolio/</pre>
-    </li>
-  </ol>
+  <div class="img-figure">
+    <img src="docs/images/06_github_quickstart.png" alt="GitHub Quickstart Guide">
+    <div class="img-caption">الشكل 4: خطوات الـ 3-Minute Quickstart الموثقة داخل المستودع باللغتين العربية والإنجليزية.</div>
+  </div>
 
   <div class="page-break"></div>
 
-  <!-- SECTION 6: CLOUD SYNC & FIRESTORE SETUP -->
-  <h2>6. تفعيل وإعداد المزامنة السحابية (Firebase Cloud Sync Engine)</h2>
-  <p>النظام يحتوي على محرك مزامنة بدون خادم (REST-based Serverless Sync) يستند إلى Firestore API:</p>
+  <!-- SECTION 3: ADMIN STUDIO -->
+  <h2>3. استوديو الإدارة وتعديل المحتوى المباشر (Admin Studio Guide)</h2>
+  <p>
+    يحتوي القالب على استوديو إدارة متكامل مدمج (<code>admin.html</code>) لا يحتاج لأي لوحة تحكم خارجية أو اشتراكات شهرية:
+  </p>
 
-  <div class="card">
-    <div class="card-title"><strong>كيف يعمل محرك السحابة في المشروع؟</strong></div>
-    <p style="font-size: 11px;">
-      عند الضغط على <strong>"حفظ التعديلات سحابياً"</strong> في <code>admin.html</code>، يُرسل المتصفح طلباً مشفراً من نوع <code>PATCH</code> يحتوي على بيانات الموقع كاملة إلى مسار المستند:
-      <br>
-      <code>/databases/(default)/documents/portfolio_data/main</code>
-      <br>
-      وعندما يفتح أي زائر في العالم <code>index.html</code>، ينفذ المتصفح طلباً خفيفاً وسريعاً لجلب أحدث البيانات وتطبيقها فوراً وبدون وميض (Flicker-free Cache).
-    </p>
+  <div class="grid-2">
+    <div class="img-figure">
+      <img src="docs/images/07_admin_lock.png" alt="Admin PIN Lock">
+      <div class="img-caption">الشكل 5: شاشة القفل الأمنية لحماية لوحة التحكم. الرمز الافتراضي هو 1234.</div>
+    </div>
+    <div class="img-figure">
+      <img src="docs/images/08_admin_dashboard.png" alt="Admin Dashboard">
+      <div class="img-caption">الشكل 6: لوحة تحكم الاستوديو وإحصائيات المحتوى وأزرار الأقسام المختلفة.</div>
+    </div>
   </div>
 
-  <h3>خطوات تجهيز الـ Database خطوة بخطوة:</h3>
+  <h3>خطوات تعديل محتواك بالكامل:</h3>
   <ol>
-    <li>ادخل على <strong><a href="https://console.firebase.google.com/" target="_blank">Google Firebase Console</a></strong> وأنشئ مشروعاً مجانياً (Spark Plan).</li>
-    <li>من القائمة الجانبية: اضغط <strong>Build > Firestore Database</strong> ثم <strong>Create Database</strong>.</li>
-    <li>في إعدادات الأمان (Security Rules): ادخل على تبويب <strong>Rules</strong> وضع الكود التالي:
-      <pre>rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if true;
-    }
-  }
-}</pre>
-      ثم اضغط <strong>Publish (نشر)</strong>.
+    <li><strong>تسجيل الدخول:</strong> افتح صفحة <code>admin.html</code> وأدخل الرمز <code>1234</code> ثم اضغط <strong>دخول اللوحة</strong>.</li>
+    <li><strong>تعديل البيانات الشخصية (Profile):</strong>
+      عدّل اسمك بالعربية والإنجليزية، اللقب المهني، نبذة عنك، رقم الهاتف، الإيميل، ورابط حسابك على LinkedIn و GitHub.
     </li>
-    <li>احصل على <strong>Project ID</strong> و <strong>Web API Key</strong> من صفحة <strong>Project Settings > General</strong>.</li>
-    <li>الصقهما في ملف <code>config.js</code> أو من داخل لوحة التحكم مباشرة بالضغط على <strong>⚙️ الإعدادات</strong>!</li>
+    <li><strong>تعديل المشاريع (Projects Drawer):</strong>
+      اضغط على تبويب <strong>المشاريع</strong>، واضغط على زر <strong>تعديل</strong> أمام أي مشروع لتغيير اسمه، التقنيات المستخدمة فيه، الوصف، ورابط الـ GitHub أو العرض المباشر.
+    </li>
+    <li><strong>تعديل الخبرات والشهادات:</strong>
+      يمكنك إضافة شركات جديدة، تواريخ العمل، أسماء الشهادات المعتمدة مع تواريخ الحصول عليها.
+    </li>
   </ol>
 
-  <!-- SECTION 7: PRO HACKS & SUPERPOWERS -->
-  <h2>7. أسرار وحبشتكنات احترافية لرفع البورتفوليو لمستوى عالمي (Pro Superpowers)</h2>
-
   <div class="grid-2">
-    <div class="card">
-      <div class="card-title"><strong>✉️ نموذج تواصل شغال 100% بدون خادم</strong></div>
-      <p style="font-size: 11px;">
-        لجعل نموذج التواصل في الموقع يرسل لك إيميلات حقيقية على بريدك فور إرسال الزائر لرسالته، يمكنك استخدام خدمة <strong>Web3Forms</strong> أو <strong>Formspree</strong> المجانية:
-      </p>
-      <pre>&lt;form action="https://api.web3forms.com/submit" method="POST"&gt;
-  &lt;input type="hidden" name="access_key" value="YOUR_ACCESS_KEY"&gt;
-  &lt;!-- حقول الإرسال --&gt;
-&lt;/form&gt;</pre>
+    <div class="img-figure">
+      <img src="docs/images/09_admin_edit_drawer.png" alt="Admin Edit Drawer">
+      <div class="img-caption">الشكل 7: درج تعديل المشاريع في اللوحة مع حقول مخصصة لكل تفصيلة باللغتين.</div>
     </div>
-
-    <div class="card">
-      <div class="card-title"><strong>💬 زر واتساب عائم مباشر (Direct WhatsApp)</strong></div>
-      <p style="font-size: 11px;">
-        يمكنك تخصيص رابط الواتساب ليفتح محادثة مباشرة مع رسالة ترحيبية جاهزة يكتبها الزائر لك بضغطة زر:
-      </p>
-      <pre>https://wa.me/2010XXXXXXXX?text=مرحباً%20أحمد،%20شاهدت%20بورتفوليو%20أعمالك%20وأريد%20التعاون%20معك!</pre>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title"><strong>📈 تحسين محركات البحث وظهور السوشيال (SEO & OpenGraph)</strong></div>
-      <p style="font-size: 11px;">
-        عند مشاركة رابط موقعك على LinkedIn أو WhatsApp أو Twitter، تظهر بطاقة أنيقة بصورتك وعنوانك بفضل وسوم الـ OpenGraph المدمجة في <code>index.html</code>:
-      </p>
-      <pre>&lt;meta property="og:title" content="Ahmed El-shrabasy | Portfolio"&gt;
-&lt;meta property="og:image" content="https://yourdomain.com/profile.jpg"&gt;
-&lt;meta property="og:description" content="AI Automation Specialist..."&gt;</pre>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><strong>🛡️ حماية وتأمين استوديو الإدارة (Security Hardening)</strong></div>
-      <p style="font-size: 11px;">
-        لوحة التحكم <code>admin.html</code> محمية برمز PIN مشفر محلياً. لمزيد من الخصوصية، يمكنك إعادة تسمية الملف إلى أي اسم غير تقليدي (مثلاً <code>studio-x9.html</code>) وإخفائه من محركات البحث عبر كود:
-      </p>
-      <pre>&lt;meta name="robots" content="noindex, nofollow"&gt;</pre>
+    <div class="img-figure">
+      <img src="docs/images/10_admin_cloud_settings.png" alt="Admin Cloud Settings">
+      <div class="img-caption">الشكل 8: نافذة إعدادات الأمان وتغيير الـ PIN وتفعيل السحابة بضغطة زر.</div>
     </div>
   </div>
 
   <div class="alert alert-pro">
     <div>
-      <strong>⚡ سرعة خارقة (Lighthouse 100/100):</strong>
-      نظراً لعدم استخدام مكتبات React أو Angular الثقيلة، يقوم الموقع بتحميل صفحة البورتفوليو في أقل من <strong>0.3 ثانية</strong>، مما يمنحه تقييم 100/100 في معايير Google Core Web Vitals وتجربة مستخدم لا تضاهى.
+      <strong>💾 حفظ وتصدير البيانات:</strong>
+      اللوحة تحفظ تلقائياً في ذاكرة المتصفح (<code>localStorage</code>). كما توفر زراً لتصدير ملف <code>portfolio_data.json</code> كنسخة احتياطية يمكنك رفعها لأي مكان أو مشاركتها.
     </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- SECTION 4: OTHER DEPLOYMENT PLATFORMS -->
+  <h2>4. النشر على منصات الاستضافة الأخرى (Vercel, Netlify, Cloudflare)</h2>
+  <p>
+    إذا كنت تفضل استخدام منصات استضافة أخرى غير GitHub Pages، فإن المشروع متوافق 100% مع جميع مزودي الخدمات السحابية الثابتة:
+  </p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><strong>الخيار الأول: Vercel (موصى به للسرعة العالمية)</strong> <span class="feature-pill">1-Click</span></div>
+      <ol style="font-size: 11px;">
+        <li>ادخل على <a href="https://vercel.com" target="_blank">Vercel.com</a> وسجل بحساب GitHub.</li>
+        <li>اضغط <strong>Add New Project</strong> واختر مستودع <code>interactive-portfolio</code>.</li>
+        <li>اترك جميع الإعدادات الافتراضية كما هي (Framework: Other, Root: ./).</li>
+        <li>اضغط <strong>Deploy</strong>. سينشر الموقع في أقل من 20 ثانية مع دومين مجاني <code>.vercel.app</code> وشهادة SSL تلقائية.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><strong>الخيار الثاني: Netlify</strong> <span class="feature-pill">سحب وإفلات أو Git</span></div>
+      <ol style="font-size: 11px;">
+        <li>ادخل على <a href="https://netlify.com" target="_blank">Netlify.com</a>.</li>
+        <li>اختر <strong>Import from Git</strong> واختر مستودعك، أو اسحب مجلد المشروع وأفلته في صفحة <strong>Drop site</strong>.</li>
+        <li>اضغط <strong>Deploy</strong> ليكون موقعك حياً على دومين <code>.netlify.app</code>.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><strong>الخيار الثالث: Cloudflare Pages</strong> <span class="feature-pill">أسرع شبكة CDN عالمية</span></div>
+    <p style="font-size: 11px;">
+      من لوحة تحكم Cloudflare، اختر <strong>Workers & Pages</strong> ثم <strong>Create application -> Pages</strong> واربط مستودعك، مع اختيار <code>main</code> كـ Production branch ومسار البناء <code>/</code>.
+    </p>
+  </div>
+
+  <!-- SECTION 5: CV AND FIREBASE -->
+  <h2>5. تخصيص الـ CV والمزامنة السحابية الحية (Customization & Cloud Sync)</h2>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><strong>📄 تخصيص ملف السيرة الذاتية (CV)</strong></div>
+      <p style="font-size: 11px;">
+        الملف المرفق <code>Ahmed_Hamed_Elshrabasy_CV.pdf</code> مصمم ليكون مطابقاً لمعايير ATS العالمية وموجزاً في صفحتين دقيقتين.
+      </p>
+      <ul style="font-size: 11px;">
+        <li>لاستبداله بسيرتك الذاتية، قم بتسمية ملف الـ PDF الخاص بك بنفس الاسم وضعه في المجلد الرئيسي، أو عدل رابط <code>cvUrl</code> في ملف <code>config.js</code> أو من داخل استوديو الإدارة <code>admin.html</code>.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><strong>☁️ المزامنة السحابية (Firebase Cloud Sync - اختياري)</strong></div>
+      <p style="font-size: 11px;">
+        إذا كنت تريد أن تنعكس تعديلاتك في <code>admin.html</code> لحظياً لجميع زوار موقعك حول العالم دون الحاجة لفتح GitHub:
+      </p>
+      <ol style="font-size: 11px;">
+        <li>أنشئ مشروعاً مجانياً على <a href="https://console.firebase.google.com" target="_blank">Firebase Console</a>.</li>
+        <li>فعّل قاعدة بيانات <strong>Cloud Firestore</strong> (في وضع Test mode).</li>
+        <li>انسخ <code>projectId</code> و <code>apiKey</code> وضعهما في نافذة الإعدادات داخل <code>admin.html</code> أو في <code>config.js</code>.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- SECTION 6: NOTEBOOK LM CHEAT SHEET -->
+  <h2>6. ورقة المرجع والأسئلة الشائعة (Cheat Sheet & NotebookLM Summary)</h2>
+  <p>
+    هذا القسم مخصص للتلخيص والمراجعة السريعة، ومصاغ بأسلوب الأسئلة والأجوبة المركزة لتسهيل تحليله وتوليد بودكاست وفيديوهات توضيحية عبر <strong>Google NotebookLM</strong>:
+  </p>
+
+  <div class="card">
+    <div class="card-title"><strong>س: ما هو الهدف الرئيسي من هذا المشروع؟</strong></div>
+    <p style="font-size: 11px;">
+      <strong>ج:</strong> توفير بورتفوليو احترافي مفتوح المصدر وفائق السرعة لمهندسي الأتمتة والذكاء الاصطناعي والمطورين، يدمج بين الواجهة الجذابة (AR/EN) واستوديو إدارة تفاعلي يعمل بدون كود أو خوادم خلفية معقدة.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><strong>س: كيف يعمل الموقع بدون خادم Backend؟</strong></div>
+    <p style="font-size: 11px;">
+      <strong>ج:</strong> يعتمد على استراتيجية التخزين الثنائي (Dual-Layer Storage Strategy): يعمل محلياً بالكامل عبر <code>localStorage</code> و <code>BroadcastChannel</code>، واختيارياً عبر واجهة REST API المباشرة لقواعد بيانات Firestore السحابية عبر بروتوكول HTTP GET/PATCH الصافي بدون أي SDKs ثقيلة.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><strong>س: ما هو رمز الدخول الافتراضي للوحة التحكم، وكيف يتم تغييره؟</strong></div>
+    <p style="font-size: 11px;">
+      <strong>ج:</strong> الرمز الافتراضي هو <code>1234</code>. يمكن للمستخدم تغييره في أي لحظة من داخل لوحة التحكم بالضغط على زر <strong>⚙️ الإعدادات</strong> في أعلى الصفحة وكتابة الرمز الجديد، أو عبر تعديل السطر 13 في ملف <code>config.js</code>.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><strong>س: هل يتطلب الموقع أي اشتراك مدفوع أو بطاقة ائتمان؟</strong></div>
+    <p style="font-size: 11px;">
+      <strong>ج:</strong> لا نهائياً! استضافة GitHub Pages مجانية مدى الحياة، ولوحة التحكم مدمجة محلياً، وقاعدة بيانات Firebase (إذا رغب المستخدم بتفعيلها) تقع بالكامل ضمن الباقة المجانية الدائمة (Free Spark Plan).
+    </p>
   </div>
 
   <!-- FOOTER -->
   <div class="footer">
-    <span>دليل التشغيل والنشر الشامل v2.0 • تم الإنشاء بواسطة المهندس: أحمد حامد الشرباصي</span>
-    <span>GitHub: https://github.com/el-shrabasy/interactive-portfolio</span>
+    <span>Interactive Developer Portfolio & Admin Studio v2.0 • Created by Ahmed Hamed Elshrabasy</span>
+    <span>GitHub: github.com/el-shrabasy/interactive-portfolio</span>
+    <span>Open-Source Under MIT License</span>
   </div>
 
 </body>
