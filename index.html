@@ -1577,12 +1577,6 @@
               <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i>
             </a>
 
-            <!-- Download Official CV Button in Hero -->
-            <a href="Ahmed_Hamed_Elshrabasy_CV.pdf" download="Ahmed_Hamed_Elshrabasy_CV.pdf" onclick="downloadOfficialCv(event)" class="btn btn-glass" title="Download Official CV (PDF)" id="heroCvDownloadBtn">
-              <i data-lucide="file-down" style="width: 18px; height: 18px;"></i>
-              <span data-i18n="hero_download_cv_btn">Download CV</span>
-            </a>
-
             <!-- Print Clean Portfolio Button in Hero -->
             <button onclick="window.print()" class="btn btn-glass" title="Print Clean Portfolio PDF">
               <i data-lucide="printer" style="width: 18px; height: 18px;"></i>
@@ -2738,8 +2732,6 @@
       const cvTarget = (p && p.cvUrl) ? p.cvUrl : 'Ahmed_Hamed_Elshrabasy_CV.pdf';
       const topCv = document.getElementById('topCvDownloadBtn');
       if (topCv) topCv.href = cvTarget;
-      const heroCv = document.getElementById('heroCvDownloadBtn');
-      if (heroCv) heroCv.href = cvTarget;
 
       // About
       document.getElementById('aboutMeP1').textContent = isAr && p.aboutMeAr ? p.aboutMeAr : p.aboutMe;
