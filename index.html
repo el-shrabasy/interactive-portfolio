@@ -1503,7 +1503,7 @@
 
       <div class="nav-actions">
         <!-- Top bar Official CV PDF download -->
-        <a href="Ahmed_Hamed_Elshrabasy_CV.pdf" target="_blank" download="Ahmed_Hamed_Elshrabasy_CV.pdf" class="btn btn-glass btn-sm" id="topCvDownloadBtn" title="Download Official CV (PDF)">
+        <a href="Ahmed_Hamed_Elshrabasy_CV.pdf" download="Ahmed_Hamed_Elshrabasy_CV.pdf" onclick="downloadOfficialCv(event)" class="btn btn-glass btn-sm" id="topCvDownloadBtn" title="Download Official CV (PDF)">
           <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
           <span class="cv-text-long" data-i18n="nav_download_cv">Official CV</span>
           <span class="cv-text-short" style="display:none;">CV</span>
@@ -1575,6 +1575,12 @@
             <a href="#projects" class="btn btn-primary">
               <span data-i18n="hero_explore_btn">Explore Projects</span>
               <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i>
+            </a>
+
+            <!-- Download Official CV Button in Hero -->
+            <a href="Ahmed_Hamed_Elshrabasy_CV.pdf" download="Ahmed_Hamed_Elshrabasy_CV.pdf" onclick="downloadOfficialCv(event)" class="btn btn-glass" title="Download Official CV (PDF)" id="heroCvDownloadBtn">
+              <i data-lucide="file-down" style="width: 18px; height: 18px;"></i>
+              <span data-i18n="hero_download_cv_btn">Download CV</span>
             </a>
 
             <!-- Print Clean Portfolio Button in Hero -->
@@ -2529,6 +2535,7 @@
         btn_get_in_touch: "Get in Touch",
         hero_greeting: "Hi, I'm",
         hero_explore_btn: "Explore Projects",
+        hero_download_cv_btn: "Download CV",
         hero_print_btn: "Print Portfolio",
         about_eyebrow: "About Me",
         about_heading_1: "Engineering Mindset Applied to",
@@ -2587,6 +2594,7 @@
         btn_get_in_touch: "تواصل معي",
         hero_greeting: "مرحباً، أنا",
         hero_explore_btn: "استعراض المشاريع",
+        hero_download_cv_btn: "تحميل السيرة الذاتية (CV)",
         hero_print_btn: "طباعة البورتفوليو",
         about_eyebrow: "نبذة عني",
         about_heading_1: "عقلية هندسية تسخر",
@@ -2726,6 +2734,12 @@
       if (p.currentLocation) {
         document.getElementById('contactLocationText').textContent = isAr && p.currentLocationAr ? p.currentLocationAr : p.currentLocation;
       }
+
+      const cvTarget = (p && p.cvUrl) ? p.cvUrl : 'Ahmed_Hamed_Elshrabasy_CV.pdf';
+      const topCv = document.getElementById('topCvDownloadBtn');
+      if (topCv) topCv.href = cvTarget;
+      const heroCv = document.getElementById('heroCvDownloadBtn');
+      if (heroCv) heroCv.href = cvTarget;
 
       // About
       document.getElementById('aboutMeP1').textContent = isAr && p.aboutMeAr ? p.aboutMeAr : p.aboutMe;
@@ -3108,6 +3122,39 @@
       e.preventDefault();
       alert(currentLang === 'ar' ? 'شكراً لتواصلك! سيتم الرد عليك في أقرب وقت.' : 'Thank you for your message! I will respond promptly.');
       e.target.reset();
+    }
+
+    async function downloadOfficialCv(e) {
+      if (e) e.preventDefault();
+      const fileName = 'Ahmed_Hamed_Elshrabasy_CV.pdf';
+      const fileUrl = (data && data.personal && data.personal.cvUrl) ? data.personal.cvUrl : fileName;
+
+      try {
+        const response = await fetch(fileUrl, { cache: 'no-cache' });
+        if (!response.ok) throw new Error('Fetch failed');
+        const blob = await response.blob();
+        const pdfBlob = new Blob([blob], { type: 'application/pdf' });
+        const blobUrl = window.URL.createObjectURL(pdfBlob);
+
+        const tempLink = document.createElement('a');
+        tempLink.style.display = 'none';
+        tempLink.href = blobUrl;
+        tempLink.setAttribute('download', fileName);
+        document.body.appendChild(tempLink);
+        tempLink.click();
+
+        setTimeout(() => {
+          document.body.removeChild(tempLink);
+          window.URL.revokeObjectURL(blobUrl);
+        }, 1000);
+      } catch (err) {
+        const fallbackLink = document.createElement('a');
+        fallbackLink.href = fileUrl;
+        fallbackLink.setAttribute('download', fileName);
+        document.body.appendChild(fallbackLink);
+        fallbackLink.click();
+        document.body.removeChild(fallbackLink);
+      }
     }
 
     document.addEventListener('DOMContentLoaded', init);
