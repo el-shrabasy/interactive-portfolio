@@ -2,3 +2,4 @@
 .firebase
 .DS_Store
 Thumbs.db
+*.webp
