@@ -126,9 +126,9 @@ const PORTFOLIO_CONFIG = {
 
 **أحمد حامد الشرباصي (Ahmed Hamed El-shrabasy)**  
 *AI Automation Specialist & Systems Developer | Physical Therapy Graduate*  
-* 💼 **LinkedIn:** [linkedin.com/in/ahmed-elshrabasy](https://linkedin.com/in/ahmed-elshrabasy)
-* 🐙 **GitHub:** [github.com/el-shrabasy](https://github.com/el-shrabasy)
-* 🌐 **Portfolio:** [el-shrabasy.github.io/interactive-portfolio](https://el-shrabasy.github.io/interactive-portfolio/)
+* 💼 **LinkedIn:** [ahmed-elshrabasy](https://linkedin.com/in/ahmed-elshrabasy)
+* 🐙 **GitHub:** [el-shrabasy](https://github.com/el-shrabasy)
+* 🌐 **Portfolio:** [ahmed-elshrabasy-portfolio](https://ahmed-elshrabasy-portfolio.web.app/)
 
 ---
 
