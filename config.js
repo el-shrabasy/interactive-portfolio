@@ -16,8 +16,8 @@ const PORTFOLIO_CONFIG = {
   // Leave empty ("") for 100% Zero-Cloud / Offline mode (uses localStorage & JSON backup).
   // Or enter your own Firebase project credentials to enable cloud sync:
   firebase: {
-    projectId: "", // e.g. "my-portfolio-project"
-    apiKey: ""     // e.g. "AIzaSy..."
+    projectId: "ahmed-elshrabasy-portfolio",
+    apiKey: "AIzaSyB3SiK2EHgiSBTAQsFGmz8cwghSxHnpQzw"
   }
 };
 
