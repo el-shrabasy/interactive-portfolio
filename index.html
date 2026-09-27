@@ -1896,7 +1896,8 @@
     "availabilityAr": "متاح للمشاريع المتقدمة والفرص الوظيفية",
     "experienceYears": "2+ Years in Automation & Systems",
     "profileImage": "profile.jpg",
-    "cvUrl": "Ahmed_Hamed_Elshrabasy_CV.pdf"
+    "cvUrl": "Ahmed_Hamed_Elshrabasy_CV.pdf",
+    "cvFileName": "Ahmed_Hamed_Elshrabasy_CV.pdf"
   },
   "contact": {
     "email": "Ahmed.edu.pt12@gmail.com",
@@ -2731,7 +2732,10 @@
 
       const cvTarget = (p && p.cvUrl) ? p.cvUrl : 'Ahmed_Hamed_Elshrabasy_CV.pdf';
       const topCv = document.getElementById('topCvDownloadBtn');
-      if (topCv) topCv.href = cvTarget;
+      if (topCv) {
+        topCv.href = cvTarget;
+        topCv.download = p.cvFileName || ((p.fullName ? p.fullName.trim().replace(/\s+/g, '_') : 'Candidate') + '_CV.pdf');
+      }
 
       // About
       document.getElementById('aboutMeP1').textContent = isAr && p.aboutMeAr ? p.aboutMeAr : p.aboutMe;
@@ -3118,9 +3122,47 @@
 
     async function downloadOfficialCv(e) {
       if (e) e.preventDefault();
-      const fileName = 'Ahmed_Hamed_Elshrabasy_CV.pdf';
-      const fileUrl = (data && data.personal && data.personal.cvUrl) ? data.personal.cvUrl : fileName;
+      const p = (data && data.personal) ? data.personal : {};
+      const fallbackName = (p.fullName ? p.fullName.trim().replace(/\s+/g, '_') : 'Candidate') + '_CV.pdf';
+      const fileName = p.cvFileName || fallbackName;
+      const fileUrl = (p && p.cvUrl) ? p.cvUrl : 'Ahmed_Hamed_Elshrabasy_CV.pdf';
 
+      // 1. Direct external web links (e.g. Google Drive, OneDrive, external URL)
+      if (/^https?:\/\//i.test(fileUrl)) {
+        window.open(fileUrl, '_blank');
+        return;
+      }
+
+      // 2. Base64 Data URL (uploaded directly via Admin Studio)
+      if (fileUrl.startsWith('data:application/pdf') || fileUrl.startsWith('data:;base64')) {
+        try {
+          const arr = fileUrl.split(',');
+          const mime = (arr[0].match(/:(.*?);/) || [])[1] || 'application/pdf';
+          const bstr = atob(arr[1]);
+          let n = bstr.length;
+          const u8arr = new Uint8Array(n);
+          while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+          }
+          const blob = new Blob([u8arr], { type: mime });
+          const blobUrl = window.URL.createObjectURL(blob);
+          const tempLink = document.createElement('a');
+          tempLink.style.display = 'none';
+          tempLink.href = blobUrl;
+          tempLink.setAttribute('download', fileName);
+          document.body.appendChild(tempLink);
+          tempLink.click();
+          setTimeout(() => {
+            document.body.removeChild(tempLink);
+            window.URL.revokeObjectURL(blobUrl);
+          }, 1000);
+          return;
+        } catch (err) {
+          console.warn('Base64 data URL conversion fallback:', err);
+        }
+      }
+
+      // 3. Local relative file path
       try {
         const response = await fetch(fileUrl, { cache: 'no-cache' });
         if (!response.ok) throw new Error('Fetch failed');
@@ -3143,6 +3185,7 @@
         const fallbackLink = document.createElement('a');
         fallbackLink.href = fileUrl;
         fallbackLink.setAttribute('download', fileName);
+        fallbackLink.target = '_blank';
         document.body.appendChild(fallbackLink);
         fallbackLink.click();
         document.body.removeChild(fallbackLink);

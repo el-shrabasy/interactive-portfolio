@@ -704,7 +704,8 @@
         "availabilityAr": "متاح للمشاريع المتقدمة والفرص الوظيفية",
         "experienceYears": "2+ Years in Automation & Systems",
         "profileImage": "profile.jpg",
-        "cvUrl": "Ahmed_Hamed_Elshrabasy_CV.pdf"
+        "cvUrl": "Ahmed_Hamed_Elshrabasy_CV.pdf",
+        "cvFileName": "Ahmed_Hamed_Elshrabasy_CV.pdf"
       },
       "contact": {
         "email": "Ahmed.edu.pt12@gmail.com",
@@ -1326,7 +1327,7 @@
         save: 'حفظ التعديلات سحابياً',
         backup: 'نسخة احتياطية',
         restore: 'استرجاع',
-        tabPersonal: 'البيانات والصورة',
+        tabPersonal: 'البيانات والصورة والـ CV',
         tabStats: 'أرقام البطاقة الـ 4',
         tabBadges: 'الشارات المعلقة',
         tabSummary: 'الملخص المهني',
@@ -1350,7 +1351,7 @@
         save: 'Save to Cloud',
         backup: 'Backup JSON',
         restore: 'Restore',
-        tabPersonal: 'Personal & Profile',
+        tabPersonal: 'Personal, Photo & CV',
         tabStats: 'Hero Card 4 Stats',
         tabBadges: 'Floating Badges',
         tabSummary: 'Summary (5 Items)',
@@ -1487,7 +1488,7 @@
       const title = document.getElementById('drawerTitle');
 
       if (tabId === 'personal') {
-        title.textContent = 'البيانات الشخصية والصورة التعريفية';
+        title.textContent = adminLang === 'ar' ? 'البيانات الشخصية والصورة والـ CV' : 'Personal Profile, Picture & CV';
         const p = data.personal || {};
         body.innerHTML = `
           <div style="background:var(--bg-surface-elevated); padding:1.25rem; border-radius:12px; margin-bottom:1.25rem; border:1px solid var(--border-card);">
@@ -1513,6 +1514,27 @@
               </div>
             </div>
           </div>
+          <!-- CV Management Section -->
+          <div style="background:var(--bg-surface-elevated); padding:1.25rem; border-radius:12px; margin-bottom:1.25rem; border:1px solid var(--border-card);">
+            <label style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+              <strong style="color:var(--accent-cyan); font-size:0.95rem;">📄 ملف السيرة الذاتية (CV / Resume PDF)</strong>
+              <span style="font-size:0.75rem; color:var(--text-tertiary);">الزر في أعلى الموقع يحمل هذا الملف مباشرة</span>
+            </label>
+            <div>
+              <div class="form-group" style="margin-bottom:0.5rem;">
+                <input type="text" id="dp_cvUrl" value="${p.cvUrl || 'Ahmed_Hamed_Elshrabasy_CV.pdf'}" class="form-input" oninput="if (!data.personal) data.personal = {}; data.personal.cvUrl=this.value; updateCvStatusPreview();" placeholder="رابط الملف المباشر، Google Drive، أو ارفع ملف PDF...">
+              </div>
+              <div id="cvStatusBadge" style="font-size:0.82rem; margin-bottom:0.75rem; color:var(--text-secondary); display:flex; align-items:center; gap:0.5rem; min-height:22px;"></div>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                <label class="btn btn-sm btn-primary" style="cursor:pointer; margin:0; display:inline-flex; align-items:center; gap:0.35rem;">
+                  <span>📄 اختيار ملف PDF من جهازك</span>
+                  <input type="file" id="cvFileInput" accept="application/pdf,.pdf" style="display:none;" onchange="handleCvUpload(event)">
+                </label>
+                <button type="button" class="btn btn-sm btn-glass" onclick="previewCurrentCv()">👁️ معاينة / فتح الـ CV</button>
+                <button type="button" class="btn btn-sm" style="background:transparent; border:1px solid var(--border-card); color:var(--text-secondary);" onclick="restoreDefaultCv()">استعادة الافتراضي</button>
+              </div>
+            </div>
+          </div>
           <div class="form-row">
             <div class="form-group"><label>الاسم بالإنجليزية</label><input type="text" id="dp_fullName" value="${p.fullName || ''}" class="form-input"></div>
             <div class="form-group"><label>الاسم بالعربية</label><input type="text" id="dp_fullNameAr" value="${p.fullNameAr || ''}" class="form-input"></div>
@@ -1532,6 +1554,7 @@
             <div class="form-group"><label>حالة التوفر (AR)</label><input type="text" id="dp_availAr" value="${p.availabilityAr || ''}" class="form-input"></div>
           </div>
         `;
+        setTimeout(updateCvStatusPreview, 10);
       } else if (tabId === 'stats') {
         title.textContent = 'أرقام بطاقة الصورة الأربعة';
         let stHtml = '';
@@ -2038,6 +2061,102 @@
       reader.readAsDataURL(file);
     }
 
+    function handleCvUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
+        alert(adminLang === 'ar' ? 'يرجى اختيار ملف بصيغة PDF فقط.' : 'Please select a PDF file.');
+        return;
+      }
+
+      if (file.size > 8 * 1024 * 1024) {
+        alert(adminLang === 'ar' ? 'حجم الملف كبير جداً (أكثر من 8 ميجابايت). يُفضل استخدام ملف أصغر أو وضع رابط خارجي (Google Drive).' : 'File is too large (>8MB). Please use a smaller PDF or provide a direct link.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const base64Pdf = e.target.result;
+        const input = document.getElementById('dp_cvUrl');
+        if (input) input.value = base64Pdf;
+        if (!data.personal) data.personal = {};
+        data.personal.cvUrl = base64Pdf;
+        data.personal.cvFileName = file.name;
+
+        updateCvStatusPreview();
+
+        localStorage.setItem('portfolio_cache', JSON.stringify(data));
+        try {
+          const bc = new BroadcastChannel('portfolio_sync');
+          bc.postMessage({ type: 'DATA_UPDATED', data: data });
+        } catch (err) { }
+
+        showToast(adminLang === 'ar' ? '✓ تم رفع وتحديث ملف الـ CV بنجاح!' : '✓ CV PDF uploaded and linked successfully!');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function previewCurrentCv() {
+      const p = (data && data.personal) ? data.personal : {};
+      const url = p.cvUrl || 'Ahmed_Hamed_Elshrabasy_CV.pdf';
+      if (url.startsWith('data:application/pdf') || url.startsWith('data:;base64')) {
+        try {
+          const arr = url.split(',');
+          const mime = (arr[0].match(/:(.*?);/) || [])[1] || 'application/pdf';
+          const bstr = atob(arr[1]);
+          let n = bstr.length;
+          const u8arr = new Uint8Array(n);
+          while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+          }
+          const blob = new Blob([u8arr], { type: mime });
+          const blobUrl = window.URL.createObjectURL(blob);
+          window.open(blobUrl, '_blank');
+          return;
+        } catch (err) {
+          console.warn('Blob preview error:', err);
+        }
+      }
+      window.open(url, '_blank');
+    }
+
+    function restoreDefaultCv() {
+      const def = 'Ahmed_Hamed_Elshrabasy_CV.pdf';
+      const input = document.getElementById('dp_cvUrl');
+      if (input) input.value = def;
+      if (!data.personal) data.personal = {};
+      data.personal.cvUrl = def;
+      delete data.personal.cvFileName;
+      updateCvStatusPreview();
+
+      localStorage.setItem('portfolio_cache', JSON.stringify(data));
+      try {
+        const bc = new BroadcastChannel('portfolio_sync');
+        bc.postMessage({ type: 'DATA_UPDATED', data: data });
+      } catch (err) { }
+
+      showToast(adminLang === 'ar' ? 'تم استعادة ملف CV الافتراضي' : 'Default CV restored');
+    }
+
+    function updateCvStatusPreview() {
+      const badge = document.getElementById('cvStatusBadge');
+      if (!badge) return;
+      const p = (data && data.personal) ? data.personal : {};
+      const url = p.cvUrl || '';
+      if (!url || url === 'Ahmed_Hamed_Elshrabasy_CV.pdf') {
+        badge.innerHTML = '<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#94a3b8;"></span> <span style="color:var(--text-secondary);">' + (adminLang === 'ar' ? 'الملف الافتراضي المرفق (Ahmed_Hamed_Elshrabasy_CV.pdf)' : 'Default attached file (Ahmed_Hamed_Elshrabasy_CV.pdf)') + '</span>';
+      } else if (url.startsWith('data:application/pdf') || url.startsWith('data:;base64')) {
+        const sizeKb = Math.round((url.length * 3) / 4 / 1024);
+        badge.innerHTML = '<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#10b981;"></span> <span style="color:#10b981; font-weight:600;">' + (adminLang === 'ar' ? ('ملف PDF مدمج ومرفوع مباشرة (' + (p.cvFileName || 'ملف السيرة الذاتية') + ' ~ ' + sizeKb + ' KB)') : ('Direct embedded PDF (' + (p.cvFileName || 'Custom CV') + ' ~ ' + sizeKb + ' KB)')) + '</span>';
+      } else if (/^https?:\/\//i.test(url)) {
+        badge.innerHTML = '<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#38bdf8;"></span> <span style="color:#38bdf8;">' + (adminLang === 'ar' ? 'رابط سحابي خارجي مباشر (مثل Google Drive أو OneDrive)' : 'Direct cloud link (Google Drive / OneDrive)') + '</span>';
+      } else {
+        badge.innerHTML = '<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#f59e0b;"></span> <span style="color:#f59e0b;">' + (adminLang === 'ar' ? ('مسار ملف محلي: ' + url) : ('Local file path: ' + url)) + '</span>';
+      }
+    }
+
+
     function addProjectItem() {
       if (!data.projects) data.projects = [];
       data.projects.push({
@@ -2126,6 +2245,9 @@
         data.personal.availabilityAr = document.getElementById('dp_availAr').value;
         if (document.getElementById('dp_profileImage')) {
           data.personal.profileImage = document.getElementById('dp_profileImage').value;
+        }
+        if (document.getElementById('dp_cvUrl')) {
+          data.personal.cvUrl = document.getElementById('dp_cvUrl').value.trim();
         }
       } else if (activeDrawerTab === 'roi') {
         if (!data.addedValue) data.addedValue = {};
